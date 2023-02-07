@@ -1,8 +1,14 @@
-﻿using SledgePlus.WPF.ViewModels.Base;
+﻿using Microsoft.Extensions.Hosting;
+using SledgePlus.WPF.ViewModels.Base;
 
 namespace SledgePlus.WPF.ViewModels.UserControls
 {
-    internal class AuthenticationViewModel : ViewModel
+    internal sealed class AuthenticationViewModel : ViewModel
     {
+        public AuthenticationViewModel(IHost host)
+        {
+            Height = 360;
+            Width  = 200;
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SledgePlus.Data
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public AppDbContext()

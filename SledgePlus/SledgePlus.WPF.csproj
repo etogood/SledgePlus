@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Base\" />
+    <Folder Include="Commands\OnButtonClick\" />
     <Folder Include="Stores\Navigation\" />
     <Folder Include="Stores\Login\" />
   </ItemGroup>
