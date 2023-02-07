@@ -1,9 +1,7 @@
-﻿using System.Windows;
-
-namespace SledgePlus
+﻿namespace SledgePlus.WPF.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
