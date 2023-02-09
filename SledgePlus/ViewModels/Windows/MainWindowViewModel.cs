@@ -5,42 +5,41 @@ using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
 using SledgePlus.WPF.ViewModels.Base;
 
-namespace SledgePlus.WPF.ViewModels.Windows
+namespace SledgePlus.WPF.ViewModels.Windows;
+
+internal class MainWindowViewModel : ViewModel
 {
-    internal class MainWindowViewModel : ViewModel
+    private readonly INavigationStore _navigationStore;
+    private readonly ILoginStore _loginStore;
+    private readonly IWindowPropertiesStore _windowPropertiesStore;
+
+    public ViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+
+    public MainWindowViewModel(IHost host)
     {
-        private readonly INavigationStore _navigationStore;
-        private readonly ILoginStore _loginStore;
-        private readonly IWindowPropertiesStore _windowPropertiesStore;
+        _navigationStore = host.Services.GetRequiredService<INavigationStore>();
+        _loginStore = host.Services.GetRequiredService<ILoginStore>();
+        _windowPropertiesStore = host.Services.GetRequiredService<IWindowPropertiesStore>();
 
-        public ViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+        _loginStore.IsLoggedIn = false;
 
-        public MainWindowViewModel(IHost host)
-        {
-            _navigationStore = host.Services.GetRequiredService<INavigationStore>();
-            _loginStore = host.Services.GetRequiredService<ILoginStore>();
-            _windowPropertiesStore = host.Services.GetRequiredService<IWindowPropertiesStore>();
+        _windowPropertiesStore.HeightChanged += OnHeightChanged;
+        _windowPropertiesStore.WidthChanged += OnWidthChanged;
+    }
 
-            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-            _loginStore.IsLoggedIn = false;
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentViewModel));
+    }
 
-            _windowPropertiesStore.HeightChanged += OnHeightChanged;
-            _windowPropertiesStore.WidthChanged += OnWidthChanged;
-        }
+    private void OnHeightChanged()
+    {
+        OnPropertyChanged(nameof(Height));
+    }
 
-        private void OnCurrentViewModelChanged()
-        {
-            OnPropertyChanged(nameof(CurrentViewModel));
-        }
-
-        private void OnHeightChanged()
-        {
-            OnPropertyChanged(nameof(Height));
-        }
-
-        private void OnWidthChanged()
-        {
-            OnPropertyChanged(nameof(Width));
-        }
+    private void OnWidthChanged()
+    {
+        OnPropertyChanged(nameof(Width));
     }
 }

@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace SledgePlus.WPF.ViewModels.Base
+namespace SledgePlus.WPF.ViewModels.Base;
+
+public class ViewModel : INotifyPropertyChanged
 {
-    public class ViewModel : INotifyPropertyChanged
-    {
-        #region INotifyPropertyChanged implementation
+    #region INotifyPropertyChanged implementation
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -25,25 +25,24 @@ namespace SledgePlus.WPF.ViewModels.Base
 
         #endregion
 
-        #region Default properties
+    #region Default properties
 
-        private uint _width = 1280U;
+    private uint _width = 1280U;
 
-        public uint Width
-        {
-            get => _width;
-            set => Set(ref _width, value);
-        }
-
-
-        private uint _height = 720U;
-
-        public uint Height
-        {
-            get => _height;
-            set => Set(ref _height, value);
-        }
-
-        #endregion
+    public uint Width
+    {
+        get => _width;
+        set => Set(ref _width, value);
     }
+
+
+    private uint _height = 720U;
+
+    public uint Height
+    {
+        get => _height;
+        set => Set(ref _height, value);
+    }
+
+    #endregion
 }

@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 
+using SledgePlus.WPF.Models.Math;
+
 namespace SledgePlus.WPF.Models.DataServices;
 
 public class UsersService : IDataServices<User>
@@ -54,8 +56,8 @@ public class UsersService : IDataServices<User>
     {
         var user = GetByLogin(login);
         if (user == null)
-            throw new DuplicateWaitObjectException();
-        if (password != user.Password)                                                  //TODO: Password hashing
+            throw new DuplicateWaitObjectException();                                       //TODO: Create own Exceptions
+        if (Cryptography.VerifyHashedPassword(user.Password, password))
             throw new DataMisalignedException();
         return user;
     }
