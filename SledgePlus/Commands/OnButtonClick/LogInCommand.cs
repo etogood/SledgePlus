@@ -27,6 +27,10 @@ public class LogInCommand : Command
 
     public override void Execute(object? parameter)
     {
-        var vm = _mediator.Get(typeof(AuthenticationViewModel));
+        var vm = _mediator.Get(typeof(AuthenticationViewModel)) as AuthenticationViewModel;
+        
+        var user = _userServices.LogIn(vm.Login, vm.Password);
+        if (user == null) MessageBox.Show("user null"); //TODO: Error msg
+        _loginStore.CurrentUser = user;
     }
 }

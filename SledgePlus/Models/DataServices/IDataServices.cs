@@ -13,4 +13,6 @@ public interface IDataServices<T>
     Task Update(T oldEntity, T newEntity);
 
     Task<IEnumerable<T>> GetAll();
+
+    public User LogIn(string login, string password);
 }

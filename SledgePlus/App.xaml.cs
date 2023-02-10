@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using MySql.Data.MySqlClient;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.OnButtonClick;
@@ -59,7 +59,14 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         await _host.StartAsync();
-        await _host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
+        try
+        {
+            await _host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
+        }
+        catch (MySqlException)
+        {
+            MessageBox.Show("db connection failed"); //TODO: Error msg
+        }
         _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel = _host.Services.GetRequiredService<AuthenticationViewModel>();
 
         MainWindow = _host.Services.GetRequiredService<MainWindow>();
