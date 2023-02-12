@@ -1,10 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using MySql.Data.MySqlClient;
+
+using WPFGlobalExceptionHandling;
+
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
+
 using SledgePlus.WPF.Commands.OnButtonClick;
+using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Math;
@@ -17,13 +23,13 @@ using SledgePlus.WPF.Views.Windows;
 
 namespace SledgePlus.WPF;
 
-public partial class App : Application
+public partial class App : Application, IWPFGlobalExceptionHandler
 {
-    private static IHost _host = null!;
+    private static IHost _host = CreateHostBuilder().Build();
 
     public App()
     {
-        _host = CreateHostBuilder().Build();
+        this.UseGlobalExceptionHandling();
     }
 
     private static IHostBuilder CreateHostBuilder(string[]? args = null) => Host.CreateDefaultBuilder(args)
@@ -56,17 +62,27 @@ public partial class App : Application
                 services.AddScoped<AuthenticationViewModel>();
             });
 
+    public void HandleException(Exception e)
+    {
+        _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel.Message = e switch
+        {
+            IncorrectLoginException => "Не верный логин",
+            IncorrectPasswordException => "Не верный пароль",
+            ArgumentNullException => "Не допускается пустое значение",
+            MySqlException => "Ошибка подключения к базе даных",
+            _ => "Неизвестная ошибка"
+        };
+    }
+
+    public void HandleUnrecoverableException(Exception e)
+    {
+        
+    }
+
     protected override async void OnStartup(StartupEventArgs e)
     {
         await _host.StartAsync();
-        try
-        {
-            await _host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
-        }
-        catch (MySqlException)
-        {
-            MessageBox.Show("db connection failed"); //TODO: Error msg
-        }
+        await _host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
         _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel = _host.Services.GetRequiredService<AuthenticationViewModel>();
 
         MainWindow = _host.Services.GetRequiredService<MainWindow>();
@@ -82,4 +98,6 @@ public partial class App : Application
         _host.Dispose();
         base.OnExit(e);
     }
+
+    
 }

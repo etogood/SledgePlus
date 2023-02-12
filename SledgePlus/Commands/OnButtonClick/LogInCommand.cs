@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
@@ -28,7 +29,6 @@ public class LogInCommand : Command
     public override void Execute(object? parameter)
     {
         var vm = _mediator.Get(typeof(AuthenticationViewModel)) as AuthenticationViewModel;
-        
         var user = _userServices.LogIn(vm.Login, vm.Password);
         if (user == null) MessageBox.Show("user null"); //TODO: Error msg
         _loginStore.CurrentUser = user;

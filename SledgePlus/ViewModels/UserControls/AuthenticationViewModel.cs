@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SledgePlus.WPF.Commands.OnButtonClick;
@@ -25,13 +26,13 @@ internal sealed class AuthenticationViewModel : ViewModel
             set => Set(ref _password, value);
         }
 
-        #endregion
+    #endregion
 
     public AuthenticationViewModel(IHost host)
     {
         Height = 360;
         Width  = 200;
-
+        Color = Brushes.Black;
         LogInCommand = host.Services.GetRequiredService<LogInCommand>();
     }
 }

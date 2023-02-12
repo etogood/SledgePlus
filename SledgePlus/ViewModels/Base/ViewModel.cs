@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
 
 namespace SledgePlus.WPF.ViewModels.Base;
 
@@ -45,4 +48,25 @@ public class ViewModel : INotifyPropertyChanged
     }
 
     #endregion
+
+    #region Messages
+
+    private string _message;
+    public string Message
+    {
+        get => _message;
+        set => Set(ref _message, value);
+    }
+
+    private SolidColorBrush _color;
+    public SolidColorBrush Color
+    {
+        get => _color;
+        set => Set(ref _color, value);
+    }
+
+    public bool HasMessage => !string.IsNullOrEmpty(_message);
+
+    #endregion
+
 }
