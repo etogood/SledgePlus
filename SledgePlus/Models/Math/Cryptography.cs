@@ -29,21 +29,21 @@ public class Cryptography
 
     public static bool VerifyHashedPassword(string? hashedPassword, string password)
     {
-        byte[] buffer4;
+        string? buffer4;
 
         if (hashedPassword == null) return false;
         if (password == null) throw new ArgumentNullException("password");
 
-        var src = Convert.FromBase64String(hashedPassword);
+        var src = hashedPassword;
         if ((src.Length != 0x31) || (src[0] != 0)) return false;
 
         var dst = new byte[0x10];
-        Buffer.BlockCopy(src, 1, dst, 0, 0x10);
+        Buffer.BlockCopy(src.ToCharArray(), 1, dst, 0, 0x10);
         var buffer3 = new byte[0x20];
-        Buffer.BlockCopy(src, 0x11, buffer3, 0, 0x20);
+        Buffer.BlockCopy(src.ToCharArray(), 0x11, buffer3, 0, 0x20);
         using (Rfc2898DeriveBytes bytes = new(password, dst, 0x3e8))
         {
-            buffer4 = bytes.GetBytes(0x20);
+            buffer4 = bytes.GetBytes(0x20).ToString();
         }
 
         return Equals(buffer3, buffer4);
