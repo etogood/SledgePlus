@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
-using SledgePlus.WPF.ViewModels.Base;
 
 namespace SledgePlus.WPF.ViewModels.Windows;
 
@@ -26,6 +26,9 @@ internal class MainWindowViewModel : ViewModel
 
         _windowPropertiesStore.HeightChanged += OnHeightChanged;
         _windowPropertiesStore.WidthChanged += OnWidthChanged;
+
+        Height = 400;
+        Width = 600;
     }
 
     private void OnCurrentViewModelChanged()

@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SledgePlus.WPF.Views.UserControls" 
-             mc:Ignorable="d" 
-             d:DesignHeight="{Binding Height}" d:DesignWidth="{Binding Width}" Background="AliceBlue">
+             mc:Ignorable="d" Background="AliceBlue" 
+             d:DesignHeight="{Binding Height, UpdateSourceTrigger=PropertyChanged}" MaxHeight="{Binding Height, UpdateSourceTrigger=PropertyChanged}" MinHeight="{Binding Height, UpdateSourceTrigger=PropertyChanged}"
+             d:DesignWidth="{Binding Width, UpdateSourceTrigger=PropertyChanged}" MaxWidth="{Binding Height, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding Height, UpdateSourceTrigger=PropertyChanged}">
     <StackPanel>
         <Label Content="Авторизация" FontSize="30" HorizontalAlignment="Center"/>
-        <TextBlock Text="{Binding Message}" Foreground="{Binding Color}" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto"/>
+        <TextBlock Text="{Binding Message}" Foreground="Black" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto"/>
         <TextBox HorizontalAlignment="Center" Width="auto" MinWidth="200" Margin="0 10 0 0"
                  Style="{StaticResource TextBoxPlaceHolder}" Tag="Login" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" >
             <TextBox.InputBindings>
@@ -21,6 +22,12 @@
                     <KeyBinding Key="Return" Command="{Binding LogInCommand}" />
                 </TextBox.InputBindings>
         </TextBox>
-        <Button Height="30" HorizontalAlignment="Center" Content="Войти" Width="auto" MinWidth="200" Margin="10" Command="{Binding LogInCommand}"/>
+        <StackPanel MaxWidth="210">
+            <Button Height="30" HorizontalAlignment="Center" Content="Войти" Width="auto" MinWidth="200" Margin="0 10 0 0" Command="{Binding LogInCommand}"/>
+            <Grid>
+                <Button Content="Зарегистрироваться" FontSize="10" HorizontalAlignment="Left" Style="{StaticResource HyperlinkStyledButton}" Command="{Binding ToSignInCommand}"/>
+                <Button Content="Забыли пароль? X" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource HyperlinkStyledButton}" Command="{Binding ToSignInCommand}"/>
+            </Grid>
+        </StackPanel>
     </StackPanel>
 </UserControl>

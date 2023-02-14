@@ -6,7 +6,7 @@ namespace SledgePlus.WPF.Stores.Navigation;
 
 public class NavigationStore : INavigationStore
 {
-    private ViewModel _currentViewModel = new ViewModel();
+    private ViewModel _currentViewModel = null!;
 
     public ViewModel CurrentViewModel
     {

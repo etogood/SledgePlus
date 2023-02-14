@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
@@ -18,7 +16,7 @@ public class ViewModel : INotifyPropertyChanged
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public bool Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        protected bool Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
@@ -30,7 +28,7 @@ public class ViewModel : INotifyPropertyChanged
 
     #region Default properties
 
-    private uint _width = 1280U;
+    private uint _width;
 
     public uint Width
     {
@@ -39,33 +37,13 @@ public class ViewModel : INotifyPropertyChanged
     }
 
 
-    private uint _height = 720U;
+    private uint _height;
 
     public uint Height
     {
         get => _height;
         set => Set(ref _height, value);
     }
-
-    #endregion
-
-    #region Messages
-
-    private string _message;
-    public string Message
-    {
-        get => _message;
-        set => Set(ref _message, value);
-    }
-
-    private SolidColorBrush _color;
-    public SolidColorBrush Color
-    {
-        get => _color;
-        set => Set(ref _color, value);
-    }
-
-    public bool HasMessage => !string.IsNullOrEmpty(_message);
 
     #endregion
 

@@ -7,10 +7,15 @@
         xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls"
         xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls"
         mc:Ignorable="d"
-        Title="SledgePlus" Height="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}">
+        Title="SledgePlus" 
+        Height="{Binding Height, UpdateSourceTrigger=PropertyChanged}" MinHeight="{Binding Height}" MaxHeight="{Binding Height}" 
+        Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding Width}" MaxWidth="{Binding Width}">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
             <v:AuthenticationUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SignInViewModel}">
+            <v:SignInUserControl/>
         </DataTemplate>
     </Window.Resources>
     <StackPanel>

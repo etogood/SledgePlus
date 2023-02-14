@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\Base\" />
-    <Folder Include="Commands\OnButtonClick\" />
     <Folder Include="Models\Math\" />
     <Folder Include="Stores\Navigation\" />
     <Folder Include="Stores\Login\" />

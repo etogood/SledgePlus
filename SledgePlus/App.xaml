@@ -37,6 +37,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
             <Style x:Key="DatePickerPlaceHolder" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource {x:Type DatePicker}}">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -69,6 +70,20 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style TargetType="Button" x:Key="HyperlinkStyledButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock Foreground="DodgerBlue"
+                                       Text="{TemplateBinding Content}"
+                                       TextDecorations="Underline" 
+                                       Cursor="Hand" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

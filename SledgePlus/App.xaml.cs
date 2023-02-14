@@ -49,6 +49,7 @@ public partial class App : Application, IWPFGlobalExceptionHandler
 
                 // Commands
                 services.AddSingleton<LogInCommand>();
+                services.AddSingleton<ToSignInCommand>();
 
                 // Models
                 services.AddSingleton<Cryptography>();
@@ -59,12 +60,14 @@ public partial class App : Application, IWPFGlobalExceptionHandler
 
                 // ViewModels
                 services.AddSingleton<MainWindowViewModel>();
+                services.AddTransient<MessageViewModel>();
                 services.AddScoped<AuthenticationViewModel>();
+                services.AddScoped<SignInViewModel>();
             });
 
     public void HandleException(Exception e)
     {
-        _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel.Message = e switch
+        _host.Services.GetRequiredService<MessageViewModel>().Message = e switch
         {
             IncorrectLoginException => "Не верный логин",
             IncorrectPasswordException => "Не верный пароль",

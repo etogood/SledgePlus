@@ -56,7 +56,7 @@ public class UsersService : IDataServices<User>
     {
         var user = GetByLogin(login);
         if (user == null)
-            throw new IncorrectLoginException();                                       //TODO: Create own Exceptions
+            throw new IncorrectLoginException();
         if (!Cryptography.VerifyHashedPassword(user.Password, password))
             throw new IncorrectPasswordException();
         return user;

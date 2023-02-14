@@ -15,4 +15,6 @@ public interface IDataServices<T>
     Task<IEnumerable<T>> GetAll();
 
     public User LogIn(string login, string password);
+
+    public void Dispose();
 }
