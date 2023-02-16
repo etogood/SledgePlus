@@ -4,7 +4,6 @@ namespace SledgePlus.WPF.Stores.Login;
 
 public class LoginStore : ILoginStore
 {
-
     private User? _currentUser;
 
     public User? CurrentUser
@@ -17,7 +16,6 @@ public class LoginStore : ILoginStore
             if (value == null) _isLoggedIn = false;
         }
     }
-
 
     private bool _isLoggedIn;
 

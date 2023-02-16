@@ -34,7 +34,7 @@ public class Cryptography
         byte[] buffer4;
         byte[] src = Convert.FromBase64String(hashedPassword);
         if ((src.Length != 0x31) || (src[0] != 0)) throw new ArgumentNullException();
-        
+
         byte[] dst = new byte[0x10];
         Buffer.BlockCopy(src, 1, dst, 0, 0x10);
         byte[] buffer3 = new byte[0x20];
@@ -60,7 +60,6 @@ public class Cryptography
         var upperChars = new Regex(@"[A-Z]+");
 
         return hasNumber.IsMatch(password)
-               && upperChars.IsMatch(password)
-               && password.Any(char.IsPunctuation);
+               && upperChars.IsMatch(password);
     }
 }

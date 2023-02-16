@@ -16,7 +16,6 @@ public class WindowPropertiesStore : IWindowPropertiesStore
 
     public event Action? HeightChanged;
 
-
     private uint _width;
 
     public uint Width
@@ -28,5 +27,6 @@ public class WindowPropertiesStore : IWindowPropertiesStore
             WidthChanged?.Invoke();
         }
     }
+
     public event Action? WidthChanged;
 }

@@ -76,6 +76,4 @@ public partial class App
         Host.Dispose();
         base.OnExit(e);
     }
-
-    
 }

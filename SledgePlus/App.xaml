@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Converters -->
-            <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
             <!-- Styles -->
             <Style x:Key="TextBoxPlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -20,7 +20,7 @@
                                                 UpdateSourceTrigger=PropertyChanged}"
                                          x:Name="textSource"
                                          Background="Transparent"
-                                         Panel.ZIndex="2" IsTabStop="False"/>
+                                         Panel.ZIndex="2" IsTabStop="False" />
                                 <TextBox Text="{TemplateBinding Tag}" IsEnabled="False"
                                          Background="{TemplateBinding Background}"
                                          Panel.ZIndex="1" BorderBrush="Transparent"
@@ -54,7 +54,7 @@
                                                 UpdateSourceTrigger=PropertyChanged}"
                                          x:Name="textSource"
                                          Background="Transparent"
-                                         Panel.ZIndex="2" IsTabStop="False"/>
+                                         Panel.ZIndex="2" IsTabStop="False" />
                                 <TextBox Text="{TemplateBinding Tag}" IsEnabled="False"
                                          Background="{TemplateBinding Background}"
                                          Panel.ZIndex="1" BorderBrush="Transparent" IsTabStop="False">
@@ -82,13 +82,12 @@
                         <ControlTemplate TargetType="Button">
                             <TextBlock Foreground="DodgerBlue"
                                        Text="{TemplateBinding Content}"
-                                       TextDecorations="Underline" 
+                                       TextDecorations="Underline"
                                        Cursor="Hand" />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

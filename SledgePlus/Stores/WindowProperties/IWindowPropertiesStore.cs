@@ -6,7 +6,6 @@ public interface IWindowPropertiesStore
 
     event Action HeightChanged;
 
-
     public uint Width { get; set; }
 
     event Action WidthChanged;

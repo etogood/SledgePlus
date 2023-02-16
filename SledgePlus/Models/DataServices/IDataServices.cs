@@ -1,6 +1,7 @@
-﻿using SledgePlus.Data.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using SledgePlus.Data.Models;
 
 namespace SledgePlus.WPF.Models.DataServices;
 

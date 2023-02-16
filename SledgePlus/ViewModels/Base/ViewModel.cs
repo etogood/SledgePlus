@@ -8,22 +8,22 @@ public class ViewModel : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged implementation
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+    protected void OnPropertyChanged([CallerMemberName] string name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
 
-        protected bool Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+    protected bool Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
+    }
 
-        #endregion
+    #endregion INotifyPropertyChanged implementation
 
     #region Default properties
 
@@ -35,7 +35,6 @@ public class ViewModel : INotifyPropertyChanged
         set => Set(ref _width, value);
     }
 
-
     private uint _height;
 
     public uint Height
@@ -44,6 +43,5 @@ public class ViewModel : INotifyPropertyChanged
         set => Set(ref _height, value);
     }
 
-    #endregion
-
+    #endregion Default properties
 }

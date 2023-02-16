@@ -1,8 +1,4 @@
-﻿using System;
-
-using SledgePlus.WPF.ViewModels.Base;
-
-namespace SledgePlus.WPF.Stores.Navigation;
+﻿namespace SledgePlus.WPF.Stores.Navigation;
 
 public class NavigationStore : INavigationStore
 {

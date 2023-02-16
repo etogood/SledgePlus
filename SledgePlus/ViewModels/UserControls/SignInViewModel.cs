@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,6 +16,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls
         #region Properties
 
         private string _login;
+
         public string Login
         {
             get => _login;
@@ -22,6 +24,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls
         }
 
         private string _password;
+
         public string Password
         {
             get => _password;
@@ -33,7 +36,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls
             set => ErrorMessageViewModel.Message = value;
         }
 
-        #endregion
+        #endregion Properties
 
         public SignInViewModel(IHost host)
         {

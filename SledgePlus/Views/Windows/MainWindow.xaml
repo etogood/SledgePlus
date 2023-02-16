@@ -12,13 +12,13 @@
         Width="600">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
-            <v:AuthenticationUserControl/>
+            <v:AuthenticationUserControl />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SignInViewModel}">
-            <v:SignInUserControl/>
+            <v:SignInUserControl />
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
-        <ContentControl Content="{Binding CurrentViewModel}" Height="auto"/>
+        <ContentControl Content="{Binding CurrentViewModel}" Height="auto" />
     </StackPanel>
 </Window>
