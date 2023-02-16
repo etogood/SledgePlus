@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using MySql.Data.MySqlClient;
 
 using SledgePlus.Data.Models;
+
 using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
@@ -34,15 +35,9 @@ public class LogInCommand : Command
         try
         {
             var user = _userServices.LogIn(vm.Login, vm.Password);
-
-            if (user == null) throw new UserNotFoundException();
             _loginStore.CurrentUser = user;
 
             _userServices.Dispose();
-        }
-        catch (UserNotFoundException)
-        {
-            vm.ErrorMessage = "Пользователь не найден";
         }
         catch (IncorrectLoginException)
         {

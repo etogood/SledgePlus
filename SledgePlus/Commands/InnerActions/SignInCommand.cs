@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
+using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Models.Math;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -16,9 +18,11 @@ namespace SledgePlus.WPF.Commands.InnerActions
         private readonly IFactory<ViewModel> _viewModelFactory;
         private readonly UsersService _userServices;
         private readonly INavigationStore _navigationStore;
+        private readonly IMapper _mapper;
 
-        public SignInCommand(IHost host)
+        public SignInCommand(IHost host, IMapper mapper)
         {
+            _mapper = mapper;
             _viewModelFactory = host.Services.GetRequiredService<IFactory<ViewModel>>();
             _navigationStore = host.Services.GetRequiredService<INavigationStore>();
             _userServices = (UsersService)host.Services.GetRequiredService<IDataServices<User>>();
@@ -35,12 +39,12 @@ namespace SledgePlus.WPF.Commands.InnerActions
             {
                 if (_userServices.GetByLogin(_viewModel.Login) != null) throw new DuplicateException();
                 var password = Cryptography.HashPassword(_viewModel.Password);
-                var user = new User
+                var user = new UserDTO
                 {
                     Login = _viewModel.Login,
                     Password = password
                 };
-                await _userServices.Create(user);
+                await _userServices.Create(_mapper.Map<User>(user));
                 _navigationStore.CurrentViewModel = _viewModelFactory.Get(typeof(AuthenticationViewModel));
             }
             catch (DuplicateException)

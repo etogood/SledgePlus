@@ -29,6 +29,7 @@ public partial class App
             {
                 // Database
                 services.AddDbContext<AppDbContext>();
+                services.AddAutoMapper(typeof(App));
 
                 // Stores
                 services.AddSingleton<INavigationStore, NavigationStore>();
