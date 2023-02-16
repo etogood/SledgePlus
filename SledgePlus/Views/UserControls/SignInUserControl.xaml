@@ -8,9 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Label Content="Регистрация" FontSize="30" HorizontalAlignment="Center"/>
-        <TextBlock Text="" Foreground="{Binding Color}" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto"/>
-        <TextBox Style="{StaticResource TextBoxPlaceHolder}" Tag="Login" Width="auto" MaxWidth="200"/>
-        <TextBox Style="{StaticResource TextBoxPlaceHolder}" Tag="Password" Width="auto" MaxWidth="200"/>
-        <Button Command="{Binding LogInCommand}" Height="30" HorizontalAlignment="Center" Content="Зарегистрироваться" Width="auto" MinWidth="200" Margin="0 10 0 0" />
+        <TextBlock DataContext="{Binding ErrorMessageViewModel}" Text="{Binding Message}"
+                   Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Foreground="DarkRed" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto"/>
+        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Login" Width="auto" MaxWidth="200"/>
+        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Password" Width="auto" MaxWidth="200"/>
+        <Button Command="{Binding SignInCommand}" Height="30" HorizontalAlignment="Center" Content="Зарегистрироваться" Width="auto" MinWidth="200" Margin="0 10 0 0" />
     </StackPanel>
 </UserControl>

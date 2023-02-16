@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace SledgePlus.WPF.Models.Math;
 
@@ -12,7 +13,7 @@ public class Cryptography
 
         if (password == null)
         {
-            throw new ArgumentNullException("password");
+            throw new ArgumentNullException("Не допускается пустое значение");
         }
 
         using (Rfc2898DeriveBytes bytes = new(password, 0x10, 0x3e8))
@@ -51,5 +52,15 @@ public class Cryptography
         if (b1 == null || b2 == null) return false;
         if (b1.Length != b2.Length) return false;
         return !b1.Where((t, i) => t != b2[i]).Any();
+    }
+
+    public static bool PasswordValidation(string password)
+    {
+        var hasNumber = new Regex(@"[0-9]+");
+        var upperChars = new Regex(@"[A-Z]+");
+
+        return hasNumber.IsMatch(password)
+               && upperChars.IsMatch(password)
+               && password.Any(char.IsPunctuation);
     }
 }

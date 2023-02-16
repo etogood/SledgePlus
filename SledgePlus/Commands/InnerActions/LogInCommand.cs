@@ -10,7 +10,7 @@ using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls;
 
-namespace SledgePlus.WPF.Commands.OnButtonClick;
+namespace SledgePlus.WPF.Commands.InnerActions;
 
 public class LogInCommand : Command
 {

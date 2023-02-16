@@ -24,7 +24,7 @@ public class UsersService : IDataServices<User>
 
     public async Task Create(User user)
     {
-        await _context.Users!.AddAsync(user);
+        await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
     }
 
@@ -37,13 +37,13 @@ public class UsersService : IDataServices<User>
 
     public async Task Delete(User user)
     {
-        _context.Users?.Remove(user);
+        _context.Users.Remove(user);
         await _context.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<User>> GetAll()
     {
-        IEnumerable<User> users = await _context.Users!.ToListAsync();
+        IEnumerable<User> users = await _context.Users.ToListAsync();
         return users;
     }
 
@@ -56,9 +56,9 @@ public class UsersService : IDataServices<User>
     {
         var user = GetByLogin(login);
         if (user == null)
-            throw new IncorrectLoginException();
+            throw new IncorrectLoginException("Не верный логин");
         if (!Cryptography.VerifyHashedPassword(user.Password, password))
-            throw new IncorrectPasswordException();
+            throw new IncorrectPasswordException("Не верный пароль");
         return user;
     }
 

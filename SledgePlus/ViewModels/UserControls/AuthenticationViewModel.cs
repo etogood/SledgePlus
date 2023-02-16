@@ -2,7 +2,9 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SledgePlus.WPF.Commands.OnButtonClick;
+
+using SledgePlus.WPF.Commands.InnerActions;
+using SledgePlus.WPF.Commands.Navigation;
 
 namespace SledgePlus.WPF.ViewModels.UserControls;
 

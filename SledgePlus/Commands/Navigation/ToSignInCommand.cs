@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
 
-namespace SledgePlus.WPF.Commands.OnButtonClick;
+namespace SledgePlus.WPF.Commands.Navigation;
 
 public class ToSignInCommand : Command
 {

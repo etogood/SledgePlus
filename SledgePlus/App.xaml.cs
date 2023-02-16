@@ -5,7 +5,8 @@ using Microsoft.Extensions.Hosting;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 
-using SledgePlus.WPF.Commands.OnButtonClick;
+using SledgePlus.WPF.Commands.InnerActions;
+using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Math;
@@ -39,6 +40,7 @@ public partial class App
 
                 // Commands
                 services.AddSingleton<LogInCommand>();
+                services.AddSingleton<SignInCommand>();
                 services.AddSingleton<ToSignInCommand>();
 
                 // Models
