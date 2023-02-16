@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace SledgePlus.WPF.ViewModels.Base;
+﻿namespace SledgePlus.WPF.ViewModels.Base;
 
 public class MessageViewModel : ViewModel
 {
@@ -8,15 +6,12 @@ public class MessageViewModel : ViewModel
     public string Message
     {
         get => _message;
-        set => Set(ref _message, value);
+        set
+        {
+            Set(ref _message, value);
+            OnPropertyChanged(nameof(HasMessage));
+        }
     }
 
-    private SolidColorBrush _color = Brushes.Black;
-    public SolidColorBrush Color
-    {
-        get => _color;
-        set => Set(ref _color, value);
-    }
-
-    public bool HasMessage => !string.IsNullOrEmpty(_message);
+    public bool HasMessage => !string.IsNullOrEmpty(Message);
 }

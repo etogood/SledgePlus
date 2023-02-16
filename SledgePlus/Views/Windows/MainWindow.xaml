@@ -8,8 +8,8 @@
         xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls"
         mc:Ignorable="d"
         Title="SledgePlus" 
-        Height="{Binding Height, UpdateSourceTrigger=PropertyChanged}" MinHeight="{Binding Height}" MaxHeight="{Binding Height}" 
-        Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding Width}" MaxWidth="{Binding Width}">
+        Height="400"
+        Width="600">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
             <v:AuthenticationUserControl/>

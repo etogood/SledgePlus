@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using System.Windows.Media;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,17 +8,11 @@ namespace SledgePlus.WPF.ViewModels.UserControls;
 
 internal sealed class AuthenticationViewModel : ViewModel
 {
-    private MessageViewModel _messageViewModel;
 
     public ICommand LogInCommand { get; }
     public ICommand ToSignInCommand { get; }
 
-
-    public string Message
-    {
-        get => _messageViewModel.Message; 
-        set => _messageViewModel.Message = value;
-    }
+    public MessageViewModel ErrorMessageViewModel { get; }
 
     #region Properties
 
@@ -36,6 +29,12 @@ internal sealed class AuthenticationViewModel : ViewModel
             get => _password;
             set => Set(ref _password, value);
         }
+
+        public string ErrorMessage
+        {
+            set => ErrorMessageViewModel.Message = value;
+        }
+
     #endregion
 
 
@@ -45,6 +44,6 @@ internal sealed class AuthenticationViewModel : ViewModel
         Width  = 200;
         LogInCommand = host.Services.GetRequiredService<LogInCommand>();
         ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
-        _messageViewModel = host.Services.GetRequiredService<MessageViewModel>();
+        ErrorMessageViewModel = host.Services.GetRequiredService<MessageViewModel>();
     }
 }

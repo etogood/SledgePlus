@@ -2,15 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using MySql.Data.MySqlClient;
-
-using WPFGlobalExceptionHandling;
-
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 
 using SledgePlus.WPF.Commands.OnButtonClick;
-using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Math;
@@ -23,16 +18,11 @@ using SledgePlus.WPF.Views.Windows;
 
 namespace SledgePlus.WPF;
 
-public partial class App : Application, IWPFGlobalExceptionHandler
+public partial class App
 {
-    private static IHost _host = CreateHostBuilder().Build();
+    private static readonly IHost Host = CreateHostBuilder().Build();
 
-    public App()
-    {
-        this.UseGlobalExceptionHandling();
-    }
-
-    private static IHostBuilder CreateHostBuilder(string[]? args = null) => Host.CreateDefaultBuilder(args)
+    private static IHostBuilder CreateHostBuilder(string[]? args = null) => Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
         .ConfigureServices(
             services =>
             {
@@ -59,37 +49,20 @@ public partial class App : Application, IWPFGlobalExceptionHandler
                 services.AddSingleton<MainWindow>();
 
                 // ViewModels
-                services.AddSingleton<MainWindowViewModel>();
                 services.AddTransient<MessageViewModel>();
+                services.AddSingleton<MainWindowViewModel>();
                 services.AddScoped<AuthenticationViewModel>();
                 services.AddScoped<SignInViewModel>();
             });
 
-    public void HandleException(Exception e)
-    {
-        _host.Services.GetRequiredService<MessageViewModel>().Message = e switch
-        {
-            IncorrectLoginException => "Не верный логин",
-            IncorrectPasswordException => "Не верный пароль",
-            ArgumentNullException => "Не допускается пустое значение",
-            MySqlException => "Ошибка подключения к базе даных",
-            _ => "Неизвестная ошибка"
-        };
-    }
-
-    public void HandleUnrecoverableException(Exception e)
-    {
-        
-    }
-
     protected override async void OnStartup(StartupEventArgs e)
     {
-        await _host.StartAsync();
-        await _host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
-        _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel = _host.Services.GetRequiredService<AuthenticationViewModel>();
+        await Host.StartAsync();
+        await Host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
+        Host.Services.GetRequiredService<INavigationStore>().CurrentViewModel = Host.Services.GetRequiredService<AuthenticationViewModel>();
 
-        MainWindow = _host.Services.GetRequiredService<MainWindow>();
-        MainWindow.DataContext = _host.Services.GetRequiredService<MainWindowViewModel>();
+        MainWindow = Host.Services.GetRequiredService<MainWindow>();
+        MainWindow.DataContext = Host.Services.GetRequiredService<MainWindowViewModel>();
         MainWindow.Show();
 
         base.OnStartup(e);
@@ -97,8 +70,8 @@ public partial class App : Application, IWPFGlobalExceptionHandler
 
     protected override async void OnExit(ExitEventArgs e)
     {
-        await _host.StopAsync();
-        _host.Dispose();
+        await Host.StopAsync();
+        Host.Dispose();
         base.OnExit(e);
     }
 
