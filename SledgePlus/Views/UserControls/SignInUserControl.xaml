@@ -11,8 +11,8 @@
         <TextBlock DataContext="{Binding ErrorMessageViewModel}" Text="{Binding Message}"
                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
                    Foreground="DarkRed" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto" />
-        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Login" Width="auto" MaxWidth="200" />
-        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Password" Width="auto" MaxWidth="200" />
+        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Логин*" Width="auto" MaxWidth="200" />
+        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Пароль*" Width="auto" MaxWidth="200" Margin="0 10 0 0"/>
         <Button Command="{Binding SignInCommand}" Height="30" HorizontalAlignment="Center" Content="Зарегистрироваться" Width="auto" MinWidth="200" Margin="0 10 0 0" />
     </StackPanel>
 </UserControl>

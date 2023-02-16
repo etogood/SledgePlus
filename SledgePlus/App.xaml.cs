@@ -35,7 +35,7 @@ public partial class App
                 services.AddSingleton<INavigationStore, NavigationStore>();
                 services.AddSingleton<ILoginStore, LoginStore>();
                 services.AddScoped<IWindowPropertiesStore, WindowPropertiesStore>();
-
+                    
                 // Mediators
                 services.AddSingleton<IFactory<ViewModel>, ViewModelFactory>();
 
