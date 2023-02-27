@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-            <wpf:HTMLViewControl Uri="pack://application:,,,/Views/IDE/editor/index.html"/>
+            <wpf:HTMLViewControl Uri="pack://application:,,,/Views/IDE/editor/index.html" Height="400"/>
     </StackPanel>
 </UserControl>

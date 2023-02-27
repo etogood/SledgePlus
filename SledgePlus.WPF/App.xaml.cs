@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+using Neutronium.JavascriptFramework.Vue;
+using Neutronium.WebBrowserEngine.Awesomium;
+using Neutronium.WPF;
+
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 
@@ -77,6 +81,10 @@ public partial class App
         MainWindow.DataContext = Host.Services.GetRequiredService<MainWindowViewModel>();
         MainWindow.Show();
 
+        var engine = HTMLEngineFactory.Engine;
+        engine.RegisterHTMLEngine(new AwesomiumWPFWebWindowFactory());
+        engine.RegisterJavaScriptFramework(new VueSessionInjectorV2());
+
         base.OnStartup(e);
     }
 
@@ -84,6 +92,8 @@ public partial class App
     {
         await Host.StopAsync();
         Host.Dispose();
+        HTMLEngineFactory.Engine.Dispose();
+
         base.OnExit(e);
     }
 }
