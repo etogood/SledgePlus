@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
@@ -13,10 +14,20 @@ internal class MainWindowViewModel : ViewModel
     private readonly ILoginStore _loginStore;
     private readonly IWindowPropertiesStore _windowPropertiesStore;
 
+    public ICommand ToIDECommand { get; }
+    public ICommand ToLearningMenuCommand { get; }
+    public ICommand ToPersonalAccountCommand { get; }
+    public ICommand CloseApplicationCommand { get; }
+
     public ViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
     public MainWindowViewModel(IHost host)
     {
+        ToIDECommand = host.Services.GetRequiredService<ToIDECommand>();
+        ToLearningMenuCommand = host.Services.GetRequiredService<ToLearningMenuCommand>();
+        ToPersonalAccountCommand = host.Services.GetRequiredService<ToPersonalAccountCommand>();
+        CloseApplicationCommand = host.Services.GetRequiredService<CloseApplicationCommand>();
+
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
         _windowPropertiesStore = host.Services.GetRequiredService<IWindowPropertiesStore>();

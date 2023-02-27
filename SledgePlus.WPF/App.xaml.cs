@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
@@ -40,9 +39,15 @@ public partial class App
                 services.AddSingleton<IFactory<ViewModel>, ViewModelFactory>();
 
                 // Commands
+                services.AddSingleton<CloseApplicationCommand>();
+
                 services.AddSingleton<LogInCommand>();
                 services.AddSingleton<SignInCommand>();
+
                 services.AddSingleton<ToSignInCommand>();
+                services.AddSingleton<ToIDECommand>();
+                services.AddSingleton<ToLearningMenuCommand>();
+                services.AddSingleton<ToPersonalAccountCommand>();
 
                 // Models
                 services.AddSingleton<Cryptography>();
@@ -55,7 +60,11 @@ public partial class App
                 services.AddTransient<MessageViewModel>();
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddScoped<AuthenticationViewModel>();
+                services.AddScoped<UserMenuViewModel>();
                 services.AddScoped<SignInViewModel>();
+                services.AddScoped<PersonalAccountViewModel>();
+                services.AddScoped<IDEViewModel>();
+                services.AddScoped<LearningMenuViewModel>();
             });
 
     protected override async void OnStartup(StartupEventArgs e)

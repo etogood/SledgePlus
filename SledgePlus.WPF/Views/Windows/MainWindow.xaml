@@ -1,0 +1,48 @@
+﻿<Window x:Class="SledgePlus.WPF.Views.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls"
+        xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls"
+        mc:Ignorable="d" 
+        Title="SledgePlus" WindowStartupLocation="CenterScreen"
+        Height="500" Width="800" 
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
+            <v:AuthenticationUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SignInViewModel}">
+            <v:SignInUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:IDEViewModel}">
+            <v:IDEUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:LearningMenuViewModel}">
+            <v:LearningMenuUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:UserMenuViewModel}">
+            <v:UserMenuUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PersonalAccountViewModel}">
+            <v:PersonalAccountUserCommand/>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal"  Height="50" DockPanel.Dock="Left" HorizontalAlignment="Left">
+                <Button Width="140" Height="40" Content="Обучение" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToLearningMenuCommand}"/>
+                <Button Width="140" Height="40" Content="Практика" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToIDECommand}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="50" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <Button Width="140" Height="30" Content="Личный кабинет" FontSize="10" Margin="0 0 0 0"
+                        Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ToPersonalAccountCommand}"/>
+                <Button Width="120" Height="30" Content="Выйти и закрыть" Margin="10 0 10 0"
+                        Background="Red" BorderBrush="Red" FontSize="10" Command="{Binding CloseApplicationCommand}" Cursor="Hand" />
+            </StackPanel>
+        </DockPanel>
+        <Line StrokeThickness="1" Stroke="LightSlateGray" X1="800" />
+        <ContentControl Content="{Binding CurrentViewModel}" Height="auto" />
+    </StackPanel>
+</Window>

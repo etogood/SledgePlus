@@ -5,7 +5,6 @@ using Microsoft.Extensions.Hosting;
 
 using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Commands.Navigation;
-
 namespace SledgePlus.WPF.ViewModels.UserControls;
 
 internal sealed class AuthenticationViewModel : ViewModel
