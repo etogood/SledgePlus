@@ -1,3 +1,0 @@
-[submodule "Vendor/sandstone-ide"]
-	path = SledgePlus.WPF/Views/IDE
-	url = https://github.com/SandstoneHPC/sandstone-ide
