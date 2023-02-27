@@ -1,0 +1,3 @@
+[submodule "SledgePlus.WPF/Views/IDE"]
+	path = SledgePlus.WPF/Views/IDE
+	url = https://github.com/Allwin12/Text-editor-with-syntax-highlighting-using-HTML-and-Javascript
