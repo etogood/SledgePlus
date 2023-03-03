@@ -9,6 +9,7 @@ using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Stores.Login;
+using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
@@ -18,12 +19,14 @@ public class LogInCommand : Command
     private readonly ILoginStore _loginStore;
     private readonly IFactory<ViewModel> _viewModelFactory;
     private readonly IDataServices<User> _userServices;
+    private readonly INavigationStore _navigationStore;
 
     public LogInCommand(IHost host)
     {
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
         _viewModelFactory = host.Services.GetRequiredService<IFactory<ViewModel>>();
         _userServices = host.Services.GetRequiredService<IDataServices<User>>();
+        _navigationStore = host.Services.GetRequiredService<INavigationStore>();
     }
 
     public override bool CanExecute(object? parameter) => true;
@@ -36,6 +39,8 @@ public class LogInCommand : Command
         {
             var user = _userServices.LogIn(vm.Login, vm.Password);
             _loginStore.CurrentUser = user;
+
+            _navigationStore.CurrentViewModel = _viewModelFactory.Get(typeof(WelcomeViewModel));
 
             _userServices.Dispose();
         }

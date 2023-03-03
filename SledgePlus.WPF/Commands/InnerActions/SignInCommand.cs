@@ -7,7 +7,7 @@ using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.DTOs;
-using SledgePlus.WPF.Models.Math;
+using SledgePlus.WPF.Models.Text;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
 
@@ -30,7 +30,7 @@ namespace SledgePlus.WPF.Commands.InnerActions
 
         public override bool CanExecute(object? parameter) =>
             ((SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel))).CanExecute()
-            && Cryptography.PasswordValidation(((SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel))).Password);
+            && Text.PasswordValidation(((SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel))).Password);
 
         public override async void Execute(object? parameter)
         {

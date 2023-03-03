@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="SledgePlus.WPF.Views.UserControls.IDEUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SledgePlus.WPF.Views.UserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <avalonEdit:TextEditor SyntaxHighlighting="C++" FontFamily="Consolas" FontSize="10pt" Height="450" Document="{Binding CodeDocument}"/>
-    </DockPanel>
+             d:DesignHeight="400" d:DesignWidth="800">
+    <StackPanel>
+        <avalonEdit:TextEditor BorderBrush="DarkGray" Margin="10" SyntaxHighlighting="C++" FontFamily="Cascadia Code" FontSize="10pt" Height="330" Document="{Binding CodeDocument}"/>
+        <Button Content="Compile and start" Command="{Binding CompileCodeCommand}" Cursor="Hand"/>
+    </StackPanel>
 </UserControl>

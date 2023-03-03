@@ -8,7 +8,7 @@ using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.Math;
+using SledgePlus.WPF.Models.Text;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
@@ -43,6 +43,7 @@ public partial class App
 
                 services.AddSingleton<LogInCommand>();
                 services.AddSingleton<SignInCommand>();
+                services.AddSingleton<CompileCodeCommand>();
 
                 services.AddSingleton<ToSignInCommand>();
                 services.AddSingleton<ToIDECommand>();
@@ -50,7 +51,6 @@ public partial class App
                 services.AddSingleton<ToPersonalAccountCommand>();
 
                 // Models
-                services.AddSingleton<Cryptography>();
                 services.AddSingleton<IDataServices<User>, UsersService>();
 
                 // Views
@@ -64,6 +64,7 @@ public partial class App
                 services.AddScoped<SignInViewModel>();
                 services.AddScoped<PersonalAccountViewModel>();
                 services.AddScoped<IDEViewModel>();
+                services.AddScoped<WelcomeViewModel>();
                 services.AddScoped<LearningMenuViewModel>();
             });
 

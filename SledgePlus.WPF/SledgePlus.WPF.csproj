@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\Base\" />
-    <Folder Include="Models\Math\" />
+    <Folder Include="Models\Text\" />
     <Folder Include="Models\Converters\" />
     <Folder Include="Stores\Navigation\" />
     <Folder Include="Stores\Login\" />

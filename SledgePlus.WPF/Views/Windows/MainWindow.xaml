@@ -10,6 +10,9 @@
         Height="500" Width="800" 
         ResizeMode="NoResize">
     <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:WelcomeViewModel}">
+            <v:WelcomeUserControl/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
             <v:AuthenticationUserControl/>
         </DataTemplate>
@@ -32,7 +35,7 @@
     <StackPanel>
         <DockPanel>
             <StackPanel Orientation="Horizontal"  Height="50" DockPanel.Dock="Left" HorizontalAlignment="Left">
-                <Button Width="140" Height="40" Content="Обучение" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToLearningMenuCommand}"/>
+                <Button Width="140" Height="40" Content="Обучение" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToLearningMenuCommand}" Cursor="Hand"/>
                 <Button Width="140" Height="40" Content="Практика" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToIDECommand}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="50" DockPanel.Dock="Right" HorizontalAlignment="Right">

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;
-using SledgePlus.WPF.Models.Math;
+using SledgePlus.WPF.Models.Text;
 
 namespace SledgePlus.WPF.Models.DataServices;
 

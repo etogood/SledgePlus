@@ -20,6 +20,7 @@ public class ViewModelFactory : IFactory<ViewModel>
         if (t == typeof(LearningMenuViewModel)) return _host.Services.GetRequiredService<LearningMenuViewModel>();
         if (t == typeof(PersonalAccountViewModel)) return _host.Services.GetRequiredService<PersonalAccountViewModel>();
         if (t == typeof(UserMenuViewModel)) return _host.Services.GetRequiredService<UserMenuViewModel>();
+        if (t == typeof(WelcomeViewModel)) return _host.Services.GetRequiredService<WelcomeViewModel>();
 
         throw new NotImplementedException("ViewModel Type");
     }

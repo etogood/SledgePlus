@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Stores.Navigation;

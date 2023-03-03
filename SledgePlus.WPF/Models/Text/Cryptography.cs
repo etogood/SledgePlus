@@ -2,9 +2,9 @@
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
-namespace SledgePlus.WPF.Models.Math;
+namespace SledgePlus.WPF.Models.Text;
 
-public class Cryptography
+public static class Cryptography
 {
     public static string HashPassword(string password)
     {
@@ -52,14 +52,5 @@ public class Cryptography
         if (b1 == null || b2 == null) return false;
         if (b1.Length != b2.Length) return false;
         return !b1.Where((t, i) => t != b2[i]).Any();
-    }
-
-    public static bool PasswordValidation(string password)
-    {
-        var hasNumber = new Regex(@"[0-9]+");
-        var upperChars = new Regex(@"[A-Z]+");
-
-        return hasNumber.IsMatch(password)
-               && upperChars.IsMatch(password);
     }
 }

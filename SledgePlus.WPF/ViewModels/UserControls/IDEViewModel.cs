@@ -1,12 +1,16 @@
-﻿using System.IO;
-using System.Windows.Shapes;
+﻿using System.Windows.Input;
 
 using ICSharpCode.AvalonEdit.Document;
+using Microsoft.Extensions.DependencyInjection;
+
+using SledgePlus.WPF.Commands.InnerActions;
+using SledgePlus.WPF.Models.Text;
 
 namespace SledgePlus.WPF.ViewModels.UserControls;
 
 public class IDEViewModel : ViewModel
 {
+    public ICommand CompileCodeCommand { get; }
 
     private TextDocument _codeDocument;
     public TextDocument CodeDocument
@@ -17,26 +21,12 @@ public class IDEViewModel : ViewModel
 
     public IDEViewModel(IHost host)
     {
+        CompileCodeCommand = host.Services.GetRequiredService<CompileCodeCommand>();
+
         CodeDocument = new TextDocument
         {
             FileName = "temp_code",
-            Text = ReadTemplate()
+            Text = Text.ReadText()
         };
-    }
-
-    private static string? ReadTemplate()
-    {
-        var sr = new StreamReader(Directory.GetCurrentDirectory() + "/Templates/cpp_template.txt");
-        var text = string.Empty;
-        string? line;
-
-        do
-        {
-            line = sr.ReadLine();
-            text += "\n" + line;
-        } while (line != null);
-
-        sr.Close();
-        return text;
     }
 }
