@@ -79,4 +79,36 @@
         <requires eq="gcc-core-%-mingw32-bin.tar" />
         <requires eq="mingw32-libstdc++-%-mingw32-dll-6.tar" />
     </installed>
+    <installed tarname="libgmpxx-6.1.2-2-mingw32-dll-4.tar.xz">
+        <requires eq="libgmp-%-mingw32-dll-10.tar" />
+        <requires eq="libgcc-*-mingw32-dll-1.tar" />
+    </installed>
+    <installed tarname="gmp-6.1.2-2-mingw32-dev.tar.xz">
+        <requires eq="mingw32-libgmpxx-%-mingw32-dll-4.tar" />
+        <requires eq="mingw32-libgmp-%-mingw32-dll-10.tar" />
+    </installed>
+    <installed tarname="mpfr-3.1.5-2-mingw32-dev.tar.xz">
+        <requires eq="gmp-*-mingw32-dev.tar" />
+        <requires eq="mingw32-libmpfr-%-mingw32-dll-4.tar" />
+    </installed>
+    <installed tarname="mpc-1.0.3-1-mingw32-dev.tar.xz">
+        <requires eq="mingw32-libmpc-%-mingw32-dll-3.tar" />
+        <requires ge="mpfr-3.1.5-1-mingw32-dev.tar" />
+    </installed>
+    <installed tarname="mpc-1.0.3-1-mingw32-doc.tar">
+        <download tarname="none" />
+    </installed>
+    <installed tarname="mpc-1.0.3-1-mingw32-info.tar.xz" />
+    <installed tarname="mpc-1.0.3-1-mingw32-lic.tar.xz" />
+    <installed tarname="isl-0.18-1-mingw32-dev.tar.xz">
+        <requires eq="libisl-%-mingw32-dll-15.tar" />
+        <requires ge="gmp-*-mingw32-dev.tar" />
+    </installed>
+    <installed tarname="isl-0.18-1-mingw32-doc.tar.xz" />
+    <installed tarname="isl-0.18-1-mingw32-lic.tar.xz" />
+    <installed tarname="gmp-6.1.2-1-mingw32-doc.tar">
+        <download tarname="none" />
+    </installed>
+    <installed tarname="gmp-6.1.2-2-mingw32-lic.tar.xz" />
+    <installed tarname="gmp-6.1.2-2-mingw32-info.tar.xz" />
 </sysroot>
