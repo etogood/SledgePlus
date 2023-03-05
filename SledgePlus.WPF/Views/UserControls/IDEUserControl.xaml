@@ -4,10 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+             xmlns:terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="800">
     <StackPanel>
-        <avalonEdit:TextEditor BorderBrush="DarkGray" Margin="10" SyntaxHighlighting="C++" FontFamily="Cascadia Code" FontSize="10pt" Height="330" Document="{Binding CodeDocument}"/>
-        <Button Content="Compile and start" Command="{Binding CompileCodeCommand}" Cursor="Hand"/>
+        <Grid Height="330">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <avalonEdit:TextEditor Grid.Row="0" BorderBrush="DarkGray" SyntaxHighlighting="C++" FontFamily="Cascadia Code" FontSize="10pt" Document="{Binding CodeDocument}"/>
+            <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Grid.Row="1" ShowsPreview="False"/>
+            <terminal:Terminal VerticalScrollBarVisibility="Visible" Grid.Row="2"/>
+
+        </Grid>
+        <Button Height="35" Content="Compile and start" Command="{Binding CompileCodeCommand}" Cursor="Hand"/>
+
     </StackPanel>
+
 </UserControl>

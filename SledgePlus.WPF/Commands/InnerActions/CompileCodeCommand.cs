@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.WPF.Factories;
@@ -21,12 +22,26 @@ public class CompileCodeCommand : Command
     {
         var text = ((IDEViewModel)_viewModelFactory.Get(typeof(IDEViewModel))).CodeDocument.Text;
 
+        try
+        {
+            File.Delete(Directory.GetCurrentDirectory() + @"\MinGW\bin_n\__temp_program.exe");
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
         using (var fs = File.Create(Directory.GetCurrentDirectory() + @"\__temp_code.cpp"))
         {
             var info = new UTF8Encoding(true).GetBytes(text);
             fs.Write(info, 0, info.Length);
         }
 
-        System.Diagnostics.Process.Start("cmd.exe", "/C" + @"MinGW\bin\g++.exe __temp_code.cpp");
+        var compiling = new Process();
+        compiling.StartInfo.FileName = "cmd.exe";
+        compiling.StartInfo.Arguments = "/K" + @"MinGW\bin_n\compile.bat";
+        compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        compiling.StartInfo.CreateNoWindow = true;
+        compiling.Start();
     }
 }

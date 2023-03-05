@@ -16,6 +16,7 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.7.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Simple.Wpf.Terminal" Version="2.3.53" />
   </ItemGroup>
 
   <ItemGroup>
