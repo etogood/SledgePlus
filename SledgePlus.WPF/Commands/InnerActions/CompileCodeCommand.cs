@@ -24,7 +24,7 @@ public class CompileCodeCommand : Command
 
         try
         {
-            File.Delete(Directory.GetCurrentDirectory() + @"\MinGW\bin_n\__temp_program.exe");
+            File.Delete(Directory.GetCurrentDirectory() + @"\MinGW\bin\__temp_program.exe");
         }
         catch (Exception)
         {
@@ -39,7 +39,7 @@ public class CompileCodeCommand : Command
 
         var compiling = new Process();
         compiling.StartInfo.FileName = "cmd.exe";
-        compiling.StartInfo.Arguments = "/K" + @"MinGW\bin_n\compile.bat";
+        compiling.StartInfo.Arguments = "/K" + @"MinGW\bin\compile.bat";
         compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
         compiling.StartInfo.CreateNoWindow = true;
         compiling.Start();
