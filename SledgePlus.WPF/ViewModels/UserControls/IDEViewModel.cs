@@ -35,7 +35,7 @@ public class IDEViewModel : ViewModel
     public IDEViewModel(IHost host)
     {
         CompileCodeCommand = host.Services.GetRequiredService<CompileCodeCommand>();
-
+        Entries = new ObservableCollection<string?>();
         CodeDocument = new TextDocument
         {
             FileName = "temp_code",
