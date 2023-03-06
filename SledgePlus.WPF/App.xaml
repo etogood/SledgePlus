@@ -5,8 +5,8 @@
              xmlns:conv="clr-namespace:SledgePlus.WPF.Models.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
-        <ResourceDictionary>
-
+        <ResourceDictionary xmlns:terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal">
+            
             <!-- Material Design -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
@@ -97,6 +97,17 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style x:Key="TerminalStyle"
+                   TargetType="{x:Type terminal:Terminal}"
+                   BasedOn="{x:Null}">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontFamily" Value="Cascadia Code"/>
+                <Setter Property="ItemsMargin" Value="5"/>
+                <Setter Property="ItemHeight" Value="10"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

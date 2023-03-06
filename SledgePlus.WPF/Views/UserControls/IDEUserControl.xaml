@@ -10,14 +10,14 @@
     <StackPanel>
         <Grid Height="330">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <avalonEdit:TextEditor Grid.Row="0" BorderBrush="DarkGray" SyntaxHighlighting="C++" FontFamily="Cascadia Code" FontSize="10pt" Document="{Binding CodeDocument}"/>
             <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Grid.Row="1" ShowsPreview="False"/>
-            <terminal:Terminal VerticalScrollBarVisibility="Visible" Grid.Row="2"/>
+            <terminal:Terminal VerticalScrollBarVisibility="Visible" Grid.Row="2" ItemsSource="{Binding Entries}" Style="{StaticResource TerminalStyle}" Prompt=">"/>
 
         </Grid>
         <Button Height="35" Content="Compile and start" Command="{Binding CompileCodeCommand}" Cursor="Hand"/>

@@ -20,7 +20,7 @@ public class CompileCodeCommand : Command
 
     public override void Execute(object? parameter)
     {
-        var text = ((IDEViewModel)_viewModelFactory.Get(typeof(IDEViewModel))).CodeDocument.Text;
+        var vm = ((IDEViewModel)_viewModelFactory.Get(typeof(IDEViewModel)));
 
         try
         {
@@ -33,15 +33,15 @@ public class CompileCodeCommand : Command
 
         using (var fs = File.Create(Directory.GetCurrentDirectory() + @"\__temp_code.cpp"))
         {
-            var info = new UTF8Encoding(true).GetBytes(text);
+            var info = new UTF8Encoding(true).GetBytes(vm.CodeDocument.Text);
             fs.Write(info, 0, info.Length);
         }
 
         var compiling = new Process();
         compiling.StartInfo.FileName = "cmd.exe";
         compiling.StartInfo.Arguments = "/K" + @"MinGW\bin\compile.bat";
-        compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-        compiling.StartInfo.CreateNoWindow = true;
+        //compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        //compiling.StartInfo.CreateNoWindow = true;
         compiling.Start();
     }
 }
