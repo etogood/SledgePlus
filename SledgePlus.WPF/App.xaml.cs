@@ -13,6 +13,7 @@ using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
 using SledgePlus.WPF.ViewModels.UserControls;
+using SledgePlus.WPF.ViewModels.UserControls.Custom;
 using SledgePlus.WPF.ViewModels.Windows;
 using SledgePlus.WPF.Views.Windows;
 
@@ -66,6 +67,8 @@ public partial class App
                 services.AddScoped<IDEViewModel>();
                 services.AddScoped<WelcomeViewModel>();
                 services.AddScoped<LearningMenuViewModel>();
+
+                services.AddScoped<LessonItemViewModel>();
             });
 
     protected override async void OnStartup(StartupEventArgs e)

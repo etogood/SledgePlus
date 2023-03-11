@@ -3,10 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SledgePlus.WPF.Views.UserControls"
+             xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls.Custom"
+             xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls.Custom"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="400" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:LessonItemViewModel}">
+            <v:LessonItem/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ScrollViewer Height="400" VerticalScrollBarVisibility="Visible" CanContentScroll="False" PanningRatio="0.001">
+        <StackPanel IsItemsHost="False">
+            <Expander Header="Базовые концепты">
+                <StackPanel Orientation="Horizontal" CanVerticallyScroll="True">
+                    <ItemsControl ItemsSource="{Binding BasicConceptsItems}" Height="auto">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="4"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:LessonItem Margin="5"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Expander>
+            <Expander Header="епты">
+                <StackPanel Orientation="Horizontal" CanVerticallyScroll="True" >
+                    <ItemsControl ItemsSource="{Binding BasicConceptsItems}" Height="auto">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="4"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:LessonItem Margin="5"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Бонцепты">
+                <StackPanel Orientation="Horizontal" CanVerticallyScroll="True" >
+                    <ItemsControl ItemsSource="{Binding BasicConceptsItems}" Height="auto">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="4"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:LessonItem Margin="5"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
