@@ -69,6 +69,7 @@ public partial class App
                 services.AddScoped<LearningMenuViewModel>();
 
                 services.AddScoped<LessonItemViewModel>();
+                services.AddScoped<ExpanderLessonItemViewModel>();
             });
 
     protected override async void OnStartup(StartupEventArgs e)

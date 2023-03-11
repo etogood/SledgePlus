@@ -20,7 +20,7 @@
             <Setter Property="Foreground" Value="Gray"/>
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal" CanVerticallyScroll="True">
+    <StackPanel>
         <Button Height="100" Width="170" Style="{DynamicResource MaterialDesignFlatButton}" Background="LightGray" Cursor="Hand" >
             <TextBlock Height="90" Width="150" TextWrapping="Wrap">
                 <Label Content="{Binding Label}" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>

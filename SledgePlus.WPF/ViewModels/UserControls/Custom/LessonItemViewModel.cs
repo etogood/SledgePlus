@@ -19,6 +19,7 @@ public class LessonItemViewModel : ViewModel
 
     public LessonItemViewModel(IHost host)
     {
-        
+        Label = "NO_LABEL";
+        Description = "NO_DESCRIPTION";
     }
 }

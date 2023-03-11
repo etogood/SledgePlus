@@ -5,53 +5,60 @@ namespace SledgePlus.WPF.ViewModels.UserControls;
 
 public class LearningMenuViewModel : ViewModel
 {
-    private ObservableCollection<LessonItemViewModel> _basicConceptsItems;
-    public ObservableCollection<LessonItemViewModel> BasicConceptsItems
+    private ObservableCollection<ExpanderLessonItemViewModel> _sections;
+    public ObservableCollection<ExpanderLessonItemViewModel> Sections
     {
-        get => _basicConceptsItems;
-        set => Set(ref _basicConceptsItems, value);
+        get => _sections;
+        set => Set(ref _sections, value);
     }
 
     public LearningMenuViewModel(IHost host)
     {
-        BasicConceptsItems = new ObservableCollection<LessonItemViewModel>
-        {
-            new(host)
-            {
-                Label = "1.1 Лекция",
-                Description = "Добро пожаловать в C++"
-            },
+        Sections = new ObservableCollection<ExpanderLessonItemViewModel>();
 
-            new(host)
+        Sections.Add(new ExpanderLessonItemViewModel(host)
+        {
+            Header = "Базовые концепты",
+            InnerItems = new ObservableCollection<LessonItemViewModel>
             {
-                Label = "1.2 Практика",
-                Description = "Не добро пожаловать в C++"
-            },
-            new(host)
-            {
-                Label = "1.3 Лекция",
-                Description = "АААААААААА Не добро пожаловать в C++"
-            },
-            new(host)
-            {
-                Label = "1.3 Лекция",
-                Description = "АААААААААА Не добро пожаловать в C++"
-            },
-            new(host)
-            {
-                Label = "1.3 Лекция",
-                Description = "АААААААААА Не добро пожаловать в C++"
-            },
-            new(host)
-            {
-                Label = "1.3 Лекция",
-                Description = "АААААААААА Не добро пожаловать в C++"
-            },
-            new(host)
-            {
-                Label = "1.3 Лекция",
-                Description = "АААААААААА Не добро пожаловать в C++"
-            },
-        };
+                new(host)
+                {
+                    Label = "1.1 Лекция",
+                    Description = "Добро пожаловать в C++"
+                },
+
+                new(host)
+                {
+                    Label = "1.2 Практика",
+                    Description = "Не добро пожаловать в C++"
+                },
+                new(host)
+                {
+                    Label = "1.3 Лекция",
+                    Description = "АААААААААА Не добро пожаловать в C++"
+                },
+                new(host)
+                {
+                    Label = "1.3 Лекция",
+                    Description = "АААААААААА Не добро пожаловать в C++"
+                },
+                new(host)
+                {
+                    Label = "1.3 Лекция",
+                    Description = "АААААААААА Не добро пожаловать в C++"
+                },
+                new(host)
+                {
+                    Label = "1.3 Лекция",
+                    Description = "АААААААААА Не добро пожаловать в C++"
+                },
+                new(host)
+                {
+                    Label = "1.3 Лекция",
+                    Description = "АААААААААА Не добро пожаловать в C++"
+                },
+            }
+        });
+
     }
 }
