@@ -15,5 +15,14 @@ public class AutoMapperProfile : Profile
 
         CreateMap<Group, GroupDTO>();
         CreateMap<GroupDTO, Group>();
+
+        CreateMap<Lesson, LessonDTO>();
+        CreateMap<LessonDTO, Lesson>();
+
+        CreateMap<Section, SectionDTO>();
+        CreateMap<SectionDTO, Section>();
+
+        CreateMap<SectionLesson, SectionLessonDTO>();
+        CreateMap<SectionLessonDTO, SectionLesson>();
     }
 }

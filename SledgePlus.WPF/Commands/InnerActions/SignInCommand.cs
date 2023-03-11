@@ -42,7 +42,9 @@ namespace SledgePlus.WPF.Commands.InnerActions
                 var user = new UserDTO
                 {
                     Login = _viewModel.Login,
-                    Password = password
+                    Password = password,
+                    RoleId = 1,
+                    GroupId = 1
                 };
                 await _userServices.Create(_mapper.Map<User>(user));
                 _navigationStore.CurrentViewModel = _viewModelFactory.Get(typeof(AuthenticationViewModel));

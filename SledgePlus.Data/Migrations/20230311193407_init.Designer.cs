@@ -10,8 +10,8 @@ using SledgePlus.Data;
 namespace SledgePlus.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230216172411_group")]
-    partial class group
+    [Migration("20230311193407_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,28 @@ namespace SledgePlus.Data.Migrations
                     b.ToTable("Group");
                 });
 
+            modelBuilder.Entity("SledgePlus.Data.Models.Lesson", b =>
+                {
+                    b.Property<int>("LessonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsPractice")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LessonDescription")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LessonName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("LessonId");
+
+                    b.ToTable("Lessons");
+                });
+
             modelBuilder.Entity("SledgePlus.Data.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
@@ -52,6 +74,42 @@ namespace SledgePlus.Data.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("SledgePlus.Data.Models.Section", b =>
+                {
+                    b.Property<int>("SectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("SectionHeader")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("SectionId");
+
+                    b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("SledgePlus.Data.Models.SectionLesson", b =>
+                {
+                    b.Property<int>("SectionLessonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SectionLessonId");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("SectionsLessons");
                 });
 
             modelBuilder.Entity("SledgePlus.Data.Models.User", b =>
@@ -92,6 +150,25 @@ namespace SledgePlus.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SledgePlus.Data.Models.SectionLesson", b =>
+                {
+                    b.HasOne("SledgePlus.Data.Models.Lesson", "Lesson")
+                        .WithMany()
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SledgePlus.Data.Models.Section", "Section")
+                        .WithMany()
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lesson");
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("SledgePlus.Data.Models.User", b =>

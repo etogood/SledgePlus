@@ -1,10 +1,15 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using SledgePlus.Data;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
 
 namespace SledgePlus.WPF.ViewModels.UserControls;
 
 public class LearningMenuViewModel : ViewModel
 {
+    private readonly AppDbContext _appDbContext;
+
     private ObservableCollection<ExpanderLessonItemViewModel> _sections;
     public ObservableCollection<ExpanderLessonItemViewModel> Sections
     {
@@ -14,51 +19,18 @@ public class LearningMenuViewModel : ViewModel
 
     public LearningMenuViewModel(IHost host)
     {
+        _appDbContext = host.Services.GetRequiredService<AppDbContext>();
         Sections = new ObservableCollection<ExpanderLessonItemViewModel>();
 
-        Sections.Add(new ExpanderLessonItemViewModel(host)
+        foreach (var section in _appDbContext.Sections)
         {
-            Header = "Базовые концепты",
-            InnerItems = new ObservableCollection<LessonItemViewModel>
+            Sections.Add(new ExpanderLessonItemViewModel(host)
             {
-                new(host)
-                {
-                    Label = "1.1 Лекция",
-                    Description = "Добро пожаловать в C++"
-                },
+                Header = section.SectionHeader,
+                InnerItems = new ObservableCollection<LessonItemViewModel>() //TODO: THIS query from db
+            });
+        }
 
-                new(host)
-                {
-                    Label = "1.2 Практика",
-                    Description = "Не добро пожаловать в C++"
-                },
-                new(host)
-                {
-                    Label = "1.3 Лекция",
-                    Description = "АААААААААА Не добро пожаловать в C++"
-                },
-                new(host)
-                {
-                    Label = "1.3 Лекция",
-                    Description = "АААААААААА Не добро пожаловать в C++"
-                },
-                new(host)
-                {
-                    Label = "1.3 Лекция",
-                    Description = "АААААААААА Не добро пожаловать в C++"
-                },
-                new(host)
-                {
-                    Label = "1.3 Лекция",
-                    Description = "АААААААААА Не добро пожаловать в C++"
-                },
-                new(host)
-                {
-                    Label = "1.3 Лекция",
-                    Description = "АААААААААА Не добро пожаловать в C++"
-                },
-            }
-        });
-
+        _appDbContext.Dispose();
     }
 }
