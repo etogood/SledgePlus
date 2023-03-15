@@ -21,8 +21,5 @@ public class AutoMapperProfile : Profile
 
         CreateMap<Section, SectionDTO>();
         CreateMap<SectionDTO, Section>();
-
-        CreateMap<SectionLesson, SectionLessonDTO>();
-        CreateMap<SectionLessonDTO, SectionLesson>();
     }
 }
