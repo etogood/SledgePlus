@@ -1,4 +1,7 @@
-﻿namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
+﻿using SledgePlus.WPF.Commands.Base;
+using System.Windows.Input;
+
+namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
 
 public class LessonItemViewModel : ViewModel
 {
@@ -16,10 +19,18 @@ public class LessonItemViewModel : ViewModel
         set => Set(ref _description, value);
     }
 
+    private ICommand? _command;
+
+    public ICommand? Command
+    {
+        get { return _command; }
+        set { _command = value; }
+    }
 
     public LessonItemViewModel(IHost host)
     {
         Label = "NO_LABEL";
         Description = "NO_DESCRIPTION";
+        Command = null;
     }
 }

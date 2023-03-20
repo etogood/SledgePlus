@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
+using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
 
 namespace SledgePlus.WPF.ViewModels.UserControls;
@@ -21,6 +22,7 @@ public class LearningMenuViewModel : ViewModel
     public LearningMenuViewModel(IHost host)
     {
         _appDbContext = host.Services.GetRequiredService<AppDbContext>();
+
         Sections = new ObservableCollection<ExpanderLessonItemViewModel>();
 
         foreach (var section in _appDbContext.Sections.ToList())
@@ -32,7 +34,8 @@ public class LearningMenuViewModel : ViewModel
                 innerItems.Add(new LessonItemViewModel(host)
                 {
                     Label = lesson.LessonName,
-                    Description = lesson.LessonDescription
+                    Description = lesson.LessonDescription,
+                    Command = new OpenLessonDocument(host, lesson.LessonDocumentName)
                 });
             }
 

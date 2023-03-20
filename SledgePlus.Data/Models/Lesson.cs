@@ -11,6 +11,7 @@ public class Lesson
 
     public string LessonName { get; set; }
     public string LessonDescription { get; set; }
+    public string LessonDocumentName { get; set; }
     public bool IsPractice { get; set; }
 
     [ForeignKey("SectionId")]

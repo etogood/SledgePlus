@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Text;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.ViewModels.UserControls;
 
@@ -20,7 +22,7 @@ public class CompileCodeCommand : Command
 
     public override void Execute(object? parameter)
     {
-        var vm = ((IDEViewModel)_viewModelFactory.Get(typeof(IDEViewModel)));
+        var vm = (IDEViewModel)_viewModelFactory.Get(typeof(IDEViewModel));
 
         try
         {
@@ -41,8 +43,8 @@ public class CompileCodeCommand : Command
         var compiling = new Process();
         compiling.StartInfo.FileName = "cmd.exe";
         compiling.StartInfo.Arguments = "/K" + @"MinGW\bin\compile.bat";
-        //compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-        //compiling.StartInfo.CreateNoWindow = true;
+        compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        compiling.StartInfo.CreateNoWindow = true;
         compiling.Start();
     }
 }

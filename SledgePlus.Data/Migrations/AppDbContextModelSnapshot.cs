@@ -46,6 +46,10 @@ namespace SledgePlus.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("LessonDocumentName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("LessonName")
                         .IsRequired()
                         .HasColumnType("longtext");

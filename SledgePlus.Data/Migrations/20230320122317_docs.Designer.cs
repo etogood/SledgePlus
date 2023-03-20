@@ -10,8 +10,8 @@ using SledgePlus.Data;
 namespace SledgePlus.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230315121231_lesson_fix")]
-    partial class lesson_fix
+    [Migration("20230320122317_docs")]
+    partial class docs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,10 @@ namespace SledgePlus.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LessonDescription")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LessonDocumentName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
