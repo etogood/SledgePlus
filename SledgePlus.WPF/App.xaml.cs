@@ -41,6 +41,7 @@ public partial class App
 
                 // Commands
                 services.AddSingleton<CloseApplicationCommand>();
+                services.AddSingleton<QuitAccountCommand>();
 
                 services.AddSingleton<LogInCommand>();
                 services.AddSingleton<SignInCommand>();
@@ -57,7 +58,7 @@ public partial class App
                 // Views
                 services.AddSingleton<MainWindow>();
 
-                // ViewModels          
+                // ViewModels
                 services.AddTransient<MessageViewModel>();
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddScoped<AuthenticationViewModel>();

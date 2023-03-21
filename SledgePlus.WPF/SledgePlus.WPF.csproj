@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Base\" />
     <Folder Include="Models\Text\" />
     <Folder Include="Models\Converters\" />
     <Folder Include="Stores\Navigation\" />

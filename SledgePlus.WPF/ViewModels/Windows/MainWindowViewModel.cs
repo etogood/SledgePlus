@@ -17,7 +17,7 @@ internal class MainWindowViewModel : ViewModel
     public ICommand ToIDECommand { get; }
     public ICommand ToLearningMenuCommand { get; }
     public ICommand ToPersonalAccountCommand { get; }
-    public ICommand CloseApplicationCommand { get; }
+    public ICommand QuitAccountCommand { get; }
 
     public ViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
@@ -26,7 +26,7 @@ internal class MainWindowViewModel : ViewModel
         ToIDECommand = host.Services.GetRequiredService<ToIDECommand>();
         ToLearningMenuCommand = host.Services.GetRequiredService<ToLearningMenuCommand>();
         ToPersonalAccountCommand = host.Services.GetRequiredService<ToPersonalAccountCommand>();
-        CloseApplicationCommand = host.Services.GetRequiredService<CloseApplicationCommand>();
+        QuitAccountCommand = host.Services.GetRequiredService<QuitAccountCommand>();
 
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
