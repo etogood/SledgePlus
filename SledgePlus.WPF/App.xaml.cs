@@ -8,7 +8,6 @@ using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.Text;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;

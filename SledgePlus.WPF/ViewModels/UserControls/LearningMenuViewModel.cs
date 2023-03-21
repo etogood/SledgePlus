@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
 using SledgePlus.WPF.Commands.InnerActions;
@@ -42,7 +41,7 @@ public class LearningMenuViewModel : ViewModel
             Sections.Add(new ExpanderLessonItemViewModel(host)
             {
                 Header = section.SectionHeader,
-                InnerItems = innerItems                                     //TODO: THIS query from db
+                InnerItems = innerItems
             });
         }
 

@@ -19,7 +19,7 @@ namespace SledgePlus.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=de2000.iaasdns.com;user=ilya;password=krh_xwj3rjx3HYX.yjb;database=ilya_SledgePlus;");
+            optionsBuilder.UseMySQL("server=de2000.iaasdns.com;user=ilya;password=krh_xwj3rjx3HYX.yjb;database=ilya_SledgePlus; Charset=utf8;");
         }
     }
 }

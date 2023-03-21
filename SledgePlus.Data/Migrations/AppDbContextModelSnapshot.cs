@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MySql.EntityFrameworkCore.Extensions;
 using SledgePlus.Data;
 
 #nullable disable
@@ -17,6 +18,8 @@ namespace SledgePlus.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySQLModelBuilderExtensions.HasCharSet(modelBuilder, "utf8_unicode_ci");
 
             modelBuilder.Entity("SledgePlus.Data.Models.Group", b =>
                 {

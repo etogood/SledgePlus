@@ -10,7 +10,7 @@ namespace SledgePlus.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySQL:Charset", "utf8_unicode_ci");
 
             migrationBuilder.CreateTable(
                 name: "Group",
@@ -24,23 +24,7 @@ namespace SledgePlus.Data.Migrations
                 {
                     table.PrimaryKey("PK_Group", x => x.GroupId);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Lessons",
-                columns: table => new
-                {
-                    LessonId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    LessonName = table.Column<string>(type: "longtext", nullable: false),
-                    LessonDescription = table.Column<string>(type: "longtext", nullable: false),
-                    IsPractice = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lessons", x => x.LessonId);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySQL:Charset", "utf8_unicode_ci");
 
             migrationBuilder.CreateTable(
                 name: "Roles",
@@ -55,7 +39,7 @@ namespace SledgePlus.Data.Migrations
                 {
                     table.PrimaryKey("PK_Roles", x => x.RoleId);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySQL:Charset", "utf8_unicode_ci");
 
             migrationBuilder.CreateTable(
                 name: "Sections",
@@ -69,7 +53,7 @@ namespace SledgePlus.Data.Migrations
                 {
                     table.PrimaryKey("PK_Sections", x => x.SectionId);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySQL:Charset", "utf8_unicode_ci");
 
             migrationBuilder.CreateTable(
                 name: "Users",
@@ -101,43 +85,35 @@ namespace SledgePlus.Data.Migrations
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySQL:Charset", "utf8_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "SectionsLessons",
+                name: "Lessons",
                 columns: table => new
                 {
-                    SectionLessonId = table.Column<int>(type: "int", nullable: false)
+                    LessonId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     SectionId = table.Column<int>(type: "int", nullable: false),
-                    LessonId = table.Column<int>(type: "int", nullable: false)
+                    LessonName = table.Column<string>(type: "longtext", nullable: false),
+                    LessonDescription = table.Column<string>(type: "longtext", nullable: false),
+                    LessonDocumentName = table.Column<string>(type: "longtext", nullable: false),
+                    IsPractice = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SectionsLessons", x => x.SectionLessonId);
+                    table.PrimaryKey("PK_Lessons", x => x.LessonId);
                     table.ForeignKey(
-                        name: "FK_SectionsLessons_Lessons_LessonId",
-                        column: x => x.LessonId,
-                        principalTable: "Lessons",
-                        principalColumn: "LessonId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SectionsLessons_Sections_SectionId",
+                        name: "FK_Lessons_Sections_SectionId",
                         column: x => x.SectionId,
                         principalTable: "Sections",
                         principalColumn: "SectionId",
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySQL:Charset", "utf8_unicode_ci");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SectionsLessons_LessonId",
-                table: "SectionsLessons",
-                column: "LessonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SectionsLessons_SectionId",
-                table: "SectionsLessons",
+                name: "IX_Lessons_SectionId",
+                table: "Lessons",
                 column: "SectionId");
 
             migrationBuilder.CreateIndex(
@@ -154,13 +130,10 @@ namespace SledgePlus.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SectionsLessons");
+                name: "Lessons");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Lessons");
 
             migrationBuilder.DropTable(
                 name: "Sections");
