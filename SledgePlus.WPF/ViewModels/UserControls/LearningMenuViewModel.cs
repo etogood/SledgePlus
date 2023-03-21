@@ -44,7 +44,5 @@ public class LearningMenuViewModel : ViewModel
                 InnerItems = innerItems
             });
         }
-
-        _appDbContext.Dispose();
     }
 }

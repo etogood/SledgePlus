@@ -13,6 +13,7 @@ using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
 using SledgePlus.WPF.ViewModels.UserControls;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 using SledgePlus.WPF.ViewModels.Windows;
 using SledgePlus.WPF.Views.Windows;
 
@@ -34,7 +35,7 @@ public partial class App
                 services.AddSingleton<INavigationStore, NavigationStore>();
                 services.AddSingleton<ILoginStore, LoginStore>();
                 services.AddScoped<IWindowPropertiesStore, WindowPropertiesStore>();
-                    
+                
                 // Mediators
                 services.AddSingleton<IFactory<ViewModel>, ViewModelFactory>();
 
@@ -56,7 +57,7 @@ public partial class App
                 // Views
                 services.AddSingleton<MainWindow>();
 
-                // ViewModels
+                // ViewModels          
                 services.AddTransient<MessageViewModel>();
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddScoped<AuthenticationViewModel>();
@@ -69,6 +70,10 @@ public partial class App
 
                 services.AddScoped<LessonItemViewModel>();
                 services.AddScoped<ExpanderLessonItemViewModel>();
+
+                services.AddSingleton<StudentPanelViewModel>();
+                services.AddSingleton<ModeratorPanelViewModel>();
+                services.AddSingleton<AdminPanelViewModel>();
             });
 
     protected override async void OnStartup(StartupEventArgs e)

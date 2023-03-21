@@ -3,10 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SledgePlus.WPF.Views.UserControls"
+             xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls.UserPanels"
+             xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls.UserPanels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Background="AliceBlue">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:StudentPanelViewModel}">
+            <v:StudentPanelUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ModeratorPanelViewModel}">
+            <v:ModeratorPanelUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AdminPanelViewModel}">
+            <v:AdminPanelUserControl/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
+        <Label Content="Личный кабинет" HorizontalAlignment="Center" FontSize="25"/>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Label Content="Фамилия" FontWeight="DemiBold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label Content="Имя" FontWeight="DemiBold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label Content="Отчество" FontWeight="DemiBold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <Label Content="Группа" FontWeight="DemiBold"/>
+            </StackPanel>
+
+            <Line Stroke="Black" StrokeThickness="1" Y1="100" Grid.RowSpan="4" HorizontalAlignment="Right" VerticalAlignment="Stretch" Stretch="Fill"/>
+
+            <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Surname}"/>
+            <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Name}"/>
+            <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Patronymic}"/>
+            <Label Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Group}"/>
+        </Grid>
+        <Line X1="800" Stroke="Black" />
+        <ContentControl Margin="10" Content="{Binding UserPanel}" Height="270"/>
+    </StackPanel>
 </UserControl>

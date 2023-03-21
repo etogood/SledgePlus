@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;

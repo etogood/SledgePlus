@@ -1,4 +1,5 @@
-﻿using SledgePlus.Data.Models;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using SledgePlus.Data.Models;
 
 namespace SledgePlus.WPF.Stores.Login;
 

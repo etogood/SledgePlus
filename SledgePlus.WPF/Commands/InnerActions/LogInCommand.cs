@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 using MySql.Data.MySqlClient;
 
@@ -42,7 +41,6 @@ public class LogInCommand : Command
 
             _navigationStore.CurrentViewModel = _viewModelFactory.Get(typeof(WelcomeViewModel));
 
-            _userServices.Dispose();
         }
         catch (IncorrectLoginException)
         {

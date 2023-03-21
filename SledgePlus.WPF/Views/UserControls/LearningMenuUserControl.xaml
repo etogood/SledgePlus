@@ -11,8 +11,8 @@
         <DataTemplate DataType="{x:Type vm:ExpanderLessonItemViewModel}">
             <v:ExpanderLessonItem/>
         </DataTemplate>
-        
     </UserControl.Resources>
+    
     <ScrollViewer Height="400" VerticalScrollBarVisibility="Visible" CanContentScroll="False" PanningRatio="0.001">
         <StackPanel IsItemsHost="False">
             <ItemsControl ItemsSource="{Binding Sections}" Height="Auto">
