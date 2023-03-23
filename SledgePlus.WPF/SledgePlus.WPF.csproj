@@ -24,10 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Navigation\UserPanels\" />
     <Folder Include="Models\Text\" />
     <Folder Include="Models\Converters\" />
     <Folder Include="Stores\Navigation\" />
     <Folder Include="Stores\Login\" />
+    <Folder Include="ViewModels\UserControls\UserPanels\ModeratorPanels\" />
+    <Folder Include="Views\UserControls\UserPanels\AdminPanels\" />
   </ItemGroup>
 
   <ItemGroup>

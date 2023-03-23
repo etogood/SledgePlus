@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls.UserPanels.ModeratorPanels"
+             xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels"
              mc:Ignorable="d" 
              d:DesignHeight="270" d:DesignWidth="780">
-    <Grid>
-        <Label Content="moderp"/>
-    </Grid>
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:UsersTableViewModel}">
+            <v:UsersTableUserControl/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Margin="10">
+            <Button Content="Пользователи" Width="150" Command="{Binding ToUsersTableCommand}" Cursor="Hand"/>
+        </StackPanel>
+        <ContentControl Content="{Binding CurrentPanel}" Width="610"/>
+    </StackPanel>
 </UserControl>

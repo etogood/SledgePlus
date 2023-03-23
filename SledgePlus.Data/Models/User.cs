@@ -15,6 +15,8 @@ public class User
     public string Surname { get; set; } = string.Empty;
     public string? Patronymic { get; set; } = string.Empty;
 
+    public string Fullname => Surname + ' ' + Name + ' ' + Patronymic;
+
     [ForeignKey("RoleId")]
     public Role Role { get; set; }
     [ForeignKey("GroupId")]
