@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels"
+             xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:IndexConverter x:Key="IndexConverter"/>
+    </UserControl.Resources>
     <StackPanel>
-        <DataGrid ItemsSource="{Binding Users}" ColumnWidth="auto" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Users}" ColumnWidth="auto" AutoGenerateColumns="False" AlternatingRowBackground="LightGray">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="№ п/п" Binding="{Binding UserId}"/>
+                <DataGridTextColumn Header="№" ClipboardContentBinding="{x:Null}" Binding="{Binding Converter={StaticResource IndexConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"/>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding Fullname}"/>
                 <DataGridComboBoxColumn Header="Группа" SelectedValueBinding="{Binding GroupId}" SelectedValuePath="GroupId" DisplayMemberPath="GroupName">
                     <DataGridComboBoxColumn.ElementStyle>

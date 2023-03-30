@@ -24,7 +24,7 @@ namespace SledgePlus.WPF.Commands.InnerActions
             _mapper = mapper;
             _viewModelFactory = host.Services.GetRequiredService<IFactory<ViewModel>>();
             _navigationStore = host.Services.GetRequiredService<INavigationStore>();
-            _userServices = (UsersService)host.Services.GetRequiredService<IDataServices<User>>();
+            _userServices = (UsersService)host.Services.GetRequiredService<IDataServices<UserDTO>>();
         }
 
         public override bool CanExecute(object? parameter) =>
@@ -45,7 +45,7 @@ namespace SledgePlus.WPF.Commands.InnerActions
                     RoleId = 1,
                     GroupId = 1
                 };
-                await _userServices.Create(_mapper.Map<User>(user));
+                await _userServices.Create(_mapper.Map<UserDTO>(user));
                 _navigationStore.CurrentViewModel = _viewModelFactory.Get(typeof(AuthenticationViewModel));
             }
             catch (DuplicateException)

@@ -1,12 +1,13 @@
 ﻿using SledgePlus.Data.Models;
+using SledgePlus.WPF.Models.DTOs;
 
 namespace SledgePlus.WPF.Stores.Login;
 
 public class LoginStore : ILoginStore
 {
-    private User? _currentUser;
+    private UserDTO? _currentUser;
 
-    public User? CurrentUser
+    public UserDTO? CurrentUser
     {
         get => _currentUser;
         set

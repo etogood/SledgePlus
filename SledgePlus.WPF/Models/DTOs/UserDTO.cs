@@ -10,4 +10,10 @@ public class UserDTO
     public string Name { get; set; } = string.Empty;
     public string Surname { get; set; } = string.Empty;
     public string? Patronymic { get; set; } = string.Empty;
+    public string Fullname { get; set; } = string.Empty;
+
+    public string GroupGroupName { get; set; }
+
+    public string RoleRoleName { get; set; }
+    public string RoleRolePreferences { get; set; }
 }

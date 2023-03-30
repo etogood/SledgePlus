@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using SledgePlus.Data.Models;
+using SledgePlus.WPF.Models.DTOs;
 
 namespace SledgePlus.WPF.Models.DataServices;
 
@@ -15,7 +16,7 @@ public interface IDataServices<T>
 
     Task<IEnumerable<T>> GetAll();
 
-    public User LogIn(string login, string password);
+    public UserDTO LogIn(string login, string password);
 
     public void Dispose();
 }

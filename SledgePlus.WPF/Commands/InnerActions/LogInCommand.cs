@@ -7,6 +7,7 @@ using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
+using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -17,14 +18,14 @@ public class LogInCommand : Command
 {
     private readonly ILoginStore _loginStore;
     private readonly IFactory<ViewModel> _viewModelFactory;
-    private readonly IDataServices<User> _userServices;
+    private readonly IDataServices<UserDTO> _userServices;
     private readonly INavigationStore _navigationStore;
 
     public LogInCommand(IHost host)
     {
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
         _viewModelFactory = host.Services.GetRequiredService<IFactory<ViewModel>>();
-        _userServices = host.Services.GetRequiredService<IDataServices<User>>();
+        _userServices = host.Services.GetRequiredService<IDataServices<UserDTO>>();
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
     }
 

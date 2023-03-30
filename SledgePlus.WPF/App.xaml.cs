@@ -9,6 +9,7 @@ using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.Commands.Navigation.UserPanels;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
+using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
@@ -57,7 +58,7 @@ public partial class App
                 services.AddSingleton<ToUsersTableCommand>();
 
                 // Models
-                services.AddSingleton<IDataServices<User>, UsersService>();
+                services.AddSingleton<IDataServices<UserDTO>, UsersService>();
 
                 // Views
                 services.AddSingleton<MainWindow>();
