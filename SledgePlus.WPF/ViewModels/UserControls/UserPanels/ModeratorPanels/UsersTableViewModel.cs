@@ -26,6 +26,22 @@ public class UsersTableViewModel : ViewModel
 		set => Set(ref _users, value);
 	}
 
+	private ObservableCollection<Group> _groups;
+
+	public ObservableCollection<Group> Groups
+	{
+		get => _groups;
+		set => Set(ref _groups, value);
+	}
+
+	private ObservableCollection<Role> _roles;
+
+	public ObservableCollection<Role> Roles
+	{
+		get => _roles;
+		set => Set(ref _roles, value);
+	}
+
     #endregion Properties
 
 	public UsersTableViewModel(IHost host)
@@ -35,5 +51,7 @@ public class UsersTableViewModel : ViewModel
         Users = new ObservableCollection<User>(_appDbContext.Users
             .Include(x => x.Role)
             .Include(x => x.Group));
+        Groups = new ObservableCollection<Group>(_appDbContext.Groups);
+        Roles = new ObservableCollection<Role>(_appDbContext.Roles);
     }
 }

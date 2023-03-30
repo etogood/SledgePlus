@@ -30,7 +30,7 @@ namespace SledgePlus.Data.Migrations
 
                     b.HasKey("GroupId");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("SledgePlus.Data.Models.Lesson", b =>
