@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="240" d:DesignWidth="600">
     <UserControl.Resources>
         <converters:IndexConverter x:Key="IndexConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <DataGrid ItemsSource="{Binding Users}" ColumnWidth="auto" AutoGenerateColumns="False" AlternatingRowBackground="LightGray">
+        <DataGrid Width="580" Height="230" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" CanUserAddRows="True" CanUserDeleteRows="False" VerticalScrollBarVisibility="Visible" ColumnWidth="auto" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" ClipboardContentBinding="{x:Null}" Binding="{Binding Converter={StaticResource IndexConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"/>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding Fullname}"/>

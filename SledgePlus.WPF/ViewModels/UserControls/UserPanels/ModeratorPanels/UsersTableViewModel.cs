@@ -2,10 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using AutoMapper;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
+
 using SledgePlus.WPF.Models.DTOs;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
@@ -15,9 +18,12 @@ public class UsersTableViewModel : ViewModel
     private readonly AppDbContext _appDbContext;
     private readonly IMapper _mapper;
 
-	#region Properties
+    #region Properties
 
-	private ObservableCollection<UserDTO> _users;
+    public ICommand AddUserRowCommand { get; set; }
+    public ICommand DeleteUserRowCommand { get; set; }
+
+    private ObservableCollection<UserDTO> _users;
 
 	public ObservableCollection<UserDTO> Users
     {
@@ -41,9 +47,17 @@ public class UsersTableViewModel : ViewModel
 		set => Set(ref _roles, value);
 	}
 
+
+    private UserDTO? _selectedRow;
+    public UserDTO? SelectedRow
+    {
+        get => _selectedRow;
+        set => Set(ref _selectedRow, value);
+    }
+
     #endregion Properties
 
-	public UsersTableViewModel(IHost host)
+    public UsersTableViewModel(IHost host)
     {
         _appDbContext = host.Services.GetRequiredService<AppDbContext>();
         _mapper = host.Services.GetRequiredService<IMapper>();
