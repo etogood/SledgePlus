@@ -4,13 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
+             xmlns:custom="clr-namespace:SledgePlus.WPF.Views.UserControls.Custom"
              mc:Ignorable="d" 
-             d:DesignHeight="240" d:DesignWidth="600">
+             d:DesignHeight="220" d:DesignWidth="600">
     <UserControl.Resources>
         <converters:IndexConverter x:Key="IndexConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <DataGrid Width="580" Height="230" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" CanUserAddRows="True" CanUserDeleteRows="False" VerticalScrollBarVisibility="Visible" ColumnWidth="auto" AutoGenerateColumns="False">
+        <Button Width="580" Content="Сохранить"/>
+        <custom:UsersDataGrid Width="580" Height="180" Style="{DynamicResource MaterialDesignDataGrid}"
+                               ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                               CanUserAddRows="False" CanUserDeleteRows="False" 
+                               VerticalScrollBarVisibility="Visible" ColumnWidth="auto" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" ClipboardContentBinding="{x:Null}" Binding="{Binding Converter={StaticResource IndexConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"/>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding Fullname}"/>
@@ -39,6 +45,6 @@
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
             </DataGrid.Columns>
-        </DataGrid>
+        </custom:UsersDataGrid>
     </StackPanel>
 </UserControl>

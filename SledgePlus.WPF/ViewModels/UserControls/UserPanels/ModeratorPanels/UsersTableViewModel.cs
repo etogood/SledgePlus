@@ -55,6 +55,15 @@ public class UsersTableViewModel : ViewModel
         set => Set(ref _selectedRow, value);
     }
 
+    private ObservableCollection<UserDTO> _changedUsers;
+                
+    public ObservableCollection<UserDTO> ChangedUsers
+    {
+        get => _changedUsers;
+        set => Set(ref _changedUsers, value);
+    }
+
+
     #endregion Properties
 
     public UsersTableViewModel(IHost host)
