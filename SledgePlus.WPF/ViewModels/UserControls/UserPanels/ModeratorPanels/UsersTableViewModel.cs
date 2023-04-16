@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
-
+using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Models.DTOs;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
@@ -20,12 +20,11 @@ public class UsersTableViewModel : ViewModel
 
     #region Properties
 
-    public ICommand AddUserRowCommand { get; set; }
-    public ICommand DeleteUserRowCommand { get; set; }
+    public ICommand SaveUsersListCommand { get; set; }
 
-    private ObservableCollection<UserDTO> _users;
+    private ObservableCollection<User> _users;
 
-	public ObservableCollection<UserDTO> Users
+	public ObservableCollection<User> Users
     {
         get => _users;
 		set => Set(ref _users, value);
@@ -55,9 +54,9 @@ public class UsersTableViewModel : ViewModel
         set => Set(ref _selectedRow, value);
     }
 
-    private ObservableCollection<UserDTO> _changedUsers;
+    private ObservableCollection<User> _changedUsers;
                 
-    public ObservableCollection<UserDTO> ChangedUsers
+    public ObservableCollection<User> ChangedUsers
     {
         get => _changedUsers;
         set => Set(ref _changedUsers, value);
@@ -71,9 +70,11 @@ public class UsersTableViewModel : ViewModel
         _appDbContext = host.Services.GetRequiredService<AppDbContext>();
         _mapper = host.Services.GetRequiredService<IMapper>();
 
-        Users = new ObservableCollection<UserDTO>(_mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(_appDbContext.Users
+        SaveUsersListCommand = host.Services.GetRequiredService<SaveUsersListCommand>();
+
+        Users = new ObservableCollection<User>(_appDbContext.Users
             .Include(x => x.Role)
-            .Include(x => x.Group)));
+            .Include(x => x.Group));
         Groups = new ObservableCollection<GroupDTO>(_mapper.Map<IEnumerable<Group>, IEnumerable<GroupDTO>>(_appDbContext.Groups));
         Roles = new ObservableCollection<RoleDTO>(_mapper.Map<IEnumerable<Role>, IEnumerable<RoleDTO>>(_appDbContext.Roles));
     }

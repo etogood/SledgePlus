@@ -11,7 +11,7 @@
         <converters:IndexConverter x:Key="IndexConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <Button Width="580" Content="Сохранить"/>
+        <Button Width="580" Content="Сохранить" Command="{Binding SaveUsersListCommand}"/>
         <custom:UsersDataGrid Width="580" Height="180" Style="{DynamicResource MaterialDesignDataGrid}"
                                ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"

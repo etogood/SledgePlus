@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using SledgePlus.Data.Models;
 using SledgePlus.WPF.Models.DTOs;
 
 namespace SledgePlus.WPF.Views.UserControls.Custom;
@@ -12,22 +13,22 @@ public class UsersDataGrid : DataGrid
         SelectionChanged += DataGridCustom_SelectionChanged;
     }
 
-    void DataGridCustom_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void DataGridCustom_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        ItemsList = new ObservableCollection<UserDTO>((ObservableCollection<UserDTO>)Items.SourceCollection);
+        ItemsList = new ObservableCollection<User>((ObservableCollection<User>)Items.SourceCollection);
     }
     #region ItemsListProperty
 
-    public IEnumerable<UserDTO> ItemsList
+    public IEnumerable<User> ItemsList
     {
-        get => (IEnumerable<UserDTO>)GetValue(ItemsListProperty);
+        get => (IEnumerable<User>)GetValue(ItemsListProperty);
         set => SetValue(ItemsListProperty, value);
     }
 
     public static readonly DependencyProperty ItemsListProperty =
         DependencyProperty.Register(
             nameof(ItemsList), 
-            typeof(IEnumerable<UserDTO>), 
+            typeof(IEnumerable<User>), 
             typeof(UsersDataGrid), 
             new PropertyMetadata(null));
 
