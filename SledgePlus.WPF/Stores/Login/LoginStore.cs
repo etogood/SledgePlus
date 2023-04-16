@@ -5,9 +5,9 @@ namespace SledgePlus.WPF.Stores.Login;
 
 public class LoginStore : ILoginStore
 {
-    private UserDTO? _currentUser;
+    private User? _currentUser;
 
-    public UserDTO? CurrentUser
+    public User? CurrentUser
     {
         get => _currentUser;
         set

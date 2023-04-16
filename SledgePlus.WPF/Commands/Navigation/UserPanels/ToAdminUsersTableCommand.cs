@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
-using SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels.AdminPanels;
 
 namespace SledgePlus.WPF.Commands.Navigation.UserPanels;
 
-public class ToUsersTableCommand : Command
+public class ToAdminUsersTableCommand : Command
 {
     private readonly IHost _host;
 
-    public ToUsersTableCommand(IHost host)
+    public ToAdminUsersTableCommand(IHost host)
     {
         _host = host;
     }
@@ -17,7 +17,7 @@ public class ToUsersTableCommand : Command
 
     public override void Execute(object? parameter)
     {
-        _host.Services.GetRequiredService<ModeratorPanelViewModel>().CurrentPanel =
+        _host.Services.GetRequiredService<AdminPanelViewModel>().CurrentPanel =
             _host.Services.GetRequiredService<UsersTableViewModel>();
     }
 }

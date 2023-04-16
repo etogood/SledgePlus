@@ -56,9 +56,9 @@ public class PersonalAccountViewModel : ViewModel
         Surname = store.CurrentUser.Surname;
         Name = store.CurrentUser.Name;
         Patronymic = store.CurrentUser.Patronymic;
-        Group = store.CurrentUser.GroupGroupName;
+        Group = store.CurrentUser.Group.GroupName;
 
-        var role = store.CurrentUser.RoleRolePreferences;
+        var role = store.CurrentUser.Role.RolePreferences;
         if (role.Contains('a') || role.Contains('A')) UserPanel = host.Services.GetRequiredService<AdminPanelViewModel>();
         else if (role.Contains('m') || role.Contains('M')) UserPanel = host.Services.GetRequiredService<ModeratorPanelViewModel>();
         else UserPanel = host.Services.GetRequiredService<StudentPanelViewModel>();

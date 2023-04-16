@@ -6,7 +6,7 @@ namespace SledgePlus.WPF.Stores.Login;
 
 public interface ILoginStore
 {
-    public UserDTO? CurrentUser { get; set; }
+    public User? CurrentUser { get; set; }
 
     bool IsLoggedIn { get; set; }
 

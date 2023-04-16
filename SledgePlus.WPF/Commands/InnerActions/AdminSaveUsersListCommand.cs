@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Models.DataServices;
@@ -7,14 +7,14 @@ using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Models.Enumerators;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls;
-using SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels.AdminPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
-public class SaveUsersListCommand : Command
+public class AdminSaveUsersListCommand : Command
 {
     private readonly IHost _host;
-    public SaveUsersListCommand(IHost host)
+    public AdminSaveUsersListCommand(IHost host)
     {
         _host = host;
     }
@@ -32,9 +32,9 @@ public class SaveUsersListCommand : Command
                   string.IsNullOrWhiteSpace(vmChangedUser.Surname) ||
                   string.IsNullOrWhiteSpace(vmChangedUser.Name) ||
                   string.IsNullOrWhiteSpace(vmChangedUser.RoleId.ToString())))
-            context.Users.Update(vmChangedUser);
-        }
 
+                context.Users.Update(vmChangedUser);
+        }
         context.SaveChanges();
 
         var uservm = _host.Services.GetRequiredService<AuthenticationViewModel>();

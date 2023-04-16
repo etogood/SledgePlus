@@ -3,20 +3,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
-
 using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.Commands.Navigation.UserPanels;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.Stores.WindowProperties;
 using SledgePlus.WPF.ViewModels.UserControls;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
-using SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
 using SledgePlus.WPF.ViewModels.Windows;
 using SledgePlus.WPF.Views.Windows;
 
@@ -38,7 +35,7 @@ public partial class App
                 services.AddSingleton<INavigationStore, NavigationStore>();
                 services.AddSingleton<ILoginStore, LoginStore>();
                 services.AddScoped<IWindowPropertiesStore, WindowPropertiesStore>();
-                
+
                 // Mediators
                 services.AddSingleton<IFactory<ViewModel>, ViewModelFactory>();
 
@@ -50,6 +47,8 @@ public partial class App
                 services.AddSingleton<SignInCommand>();
                 services.AddSingleton<CompileCodeCommand>();
                 services.AddSingleton<SaveUsersListCommand>();
+                services.AddSingleton<AdminSaveUsersListCommand>();
+                services.AddSingleton<RemoveUserRowCommand>();
 
                 services.AddSingleton<ToSignInCommand>();
                 services.AddSingleton<ToIDECommand>();
@@ -57,9 +56,10 @@ public partial class App
                 services.AddSingleton<ToPersonalAccountCommand>();
 
                 services.AddSingleton<ToUsersTableCommand>();
+                services.AddSingleton<ToAdminUsersTableCommand>();
 
                 // Models
-                services.AddSingleton<IDataServices<UserDTO>, UsersService>();
+                services.AddSingleton<IDataServices<User>, UsersService>();
 
                 // Views
                 services.AddSingleton<MainWindow>();
@@ -70,7 +70,7 @@ public partial class App
                 services.AddScoped<AuthenticationViewModel>();
                 services.AddScoped<UserMenuViewModel>();
                 services.AddScoped<SignInViewModel>();
-                services.AddScoped<PersonalAccountViewModel>();
+                services.AddTransient<PersonalAccountViewModel>();
                 services.AddScoped<IDEViewModel>();
                 services.AddScoped<WelcomeViewModel>();
                 services.AddScoped<LearningMenuViewModel>();
@@ -81,7 +81,8 @@ public partial class App
                 services.AddSingleton<StudentPanelViewModel>();
                 services.AddSingleton<ModeratorPanelViewModel>();
                 services.AddSingleton<AdminPanelViewModel>();
-                services.AddSingleton<UsersTableViewModel>();
+                services.AddSingleton<ViewModels.UserControls.UserPanels.AdminPanels.UsersTableViewModel>();
+                services.AddSingleton<ViewModels.UserControls.UserPanels.ModeratorPanels.UsersTableViewModel>();
             });
 
     protected override async void OnStartup(StartupEventArgs e)

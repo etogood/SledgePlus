@@ -1,8 +1,10 @@
 ﻿using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
-
+using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
+using SledgePlus.WPF.Models.DTOs;
+using SledgePlus.WPF.Stores.Login;
 
 namespace SledgePlus.WPF.ViewModels.UserControls
 {
@@ -29,6 +31,16 @@ namespace SledgePlus.WPF.ViewModels.UserControls
             get => _password;
             set => Set(ref _password, value);
         }
+
+        private User _currentUser;
+        public User CurrentUser
+        {
+            get => _currentUser;
+            set => Set(ref _currentUser, value);
+        }
+
+        public string UserData => CurrentUser.Surname + ' ' + CurrentUser.Name + ' ' + CurrentUser.Patronymic + ' ' +
+                                  CurrentUser.Group.GroupName;
 
         public string ErrorMessage
         {

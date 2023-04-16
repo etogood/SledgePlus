@@ -27,10 +27,6 @@
         </TextBox>
         <StackPanel MaxWidth="210">
             <Button Height="30" HorizontalAlignment="Center" Content="Войти" Width="auto" MinWidth="200" Margin="0 10 0 0" Command="{Binding LogInCommand}" />
-            <Grid>
-                <Button Content="Зарегистрироваться" FontSize="10" HorizontalAlignment="Left" Style="{StaticResource HyperlinkStyledButton}" Command="{Binding ToSignInCommand}" />
-                <Button Content="Забыли пароль? X" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource HyperlinkStyledButton}" Command="{Binding ToSignInCommand}" />
-            </Grid>
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -23,6 +23,6 @@ public class ToPersonalAccountCommand : Command
     public override void Execute(object? parameter)
     {
         _navigationStore.CurrentViewModel = 
-            _host.Services.CreateScope().ServiceProvider.GetRequiredService<PersonalAccountViewModel>();
+            _host.Services.GetRequiredService<PersonalAccountViewModel>();
     }
 }

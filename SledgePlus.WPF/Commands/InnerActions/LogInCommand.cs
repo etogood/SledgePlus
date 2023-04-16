@@ -18,14 +18,14 @@ public class LogInCommand : Command
 {
     private readonly ILoginStore _loginStore;
     private readonly IFactory<ViewModel> _viewModelFactory;
-    private readonly IDataServices<UserDTO> _userServices;
+    private readonly IDataServices<User> _userServices;
     private readonly INavigationStore _navigationStore;
 
     public LogInCommand(IHost host)
     {
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
         _viewModelFactory = host.Services.GetRequiredService<IFactory<ViewModel>>();
-        _userServices = host.Services.GetRequiredService<IDataServices<UserDTO>>();
+        _userServices = host.Services.GetRequiredService<IDataServices<User>>();
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
     }
 
