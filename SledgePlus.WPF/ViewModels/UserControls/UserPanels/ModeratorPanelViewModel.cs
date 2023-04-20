@@ -1,12 +1,11 @@
-﻿using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
-using SledgePlus.WPF.Commands.Navigation.UserPanels;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 public class ModeratorPanelViewModel : ViewModel
 {
-    public ICommand ToUsersTableCommand { get; set; }
 
     private ViewModel _currentPanel;
 
@@ -18,6 +17,6 @@ public class ModeratorPanelViewModel : ViewModel
 
     public ModeratorPanelViewModel(IHost host)
     {
-        ToUsersTableCommand = host.Services.GetRequiredService<ToUsersTableCommand>();
+        CurrentPanel = host.Services.GetRequiredService<UsersTableViewModel>();
     }
 }
