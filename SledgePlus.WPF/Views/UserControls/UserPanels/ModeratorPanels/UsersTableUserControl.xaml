@@ -6,11 +6,9 @@
              xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
              xmlns:custom="clr-namespace:SledgePlus.WPF.Views.UserControls.Custom"
              mc:Ignorable="d" 
-             d:DesignHeight="220" d:DesignWidth="780">
+             d:DesignHeight="220" d:DesignWidth="780"
              Background="{DynamicResource MaterialDesignDarkBackground}"
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             mc:Ignorable="d"
-             d:DesignHeight="220" d:DesignWidth="600">
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}">
     <UserControl.Resources>
         <converters:IndexConverter x:Key="IndexConverter" />
     </UserControl.Resources>

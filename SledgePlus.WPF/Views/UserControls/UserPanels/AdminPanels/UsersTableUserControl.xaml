@@ -10,8 +10,6 @@
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d"
              d:DesignHeight="220" d:DesignWidth="600">
-             mc:Ignorable="d" 
-             d:DesignHeight="220" d:DesignWidth="780">
     <UserControl.Resources>
         <converters:IndexConverter x:Key="IndexConverter" />
     </UserControl.Resources>
