@@ -9,7 +9,7 @@
         Background="{DynamicResource MaterialDesignDarkBackground}"
         mc:Ignorable="d"
         Title="SledgePlus" WindowStartupLocation="CenterScreen"
-        Height="500" Width="800">
+        MinHeight="500" MinWidth="800">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:WelcomeViewModel}">
             <v:WelcomeUserControl />
@@ -33,20 +33,26 @@
             <v:PersonalAccountUserCommand />
         </DataTemplate>
     </Window.Resources>
-    <StackPanel>
-        <DockPanel>
-            <StackPanel Orientation="Horizontal"  Height="50" DockPanel.Dock="Left" HorizontalAlignment="Left">
-                <Button Width="140" Height="40" Content="Обучение" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToLearningMenuCommand}" Cursor="Hand" />
-                <Button Width="140" Height="40" Content="Практика" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToIDECommand}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="50" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <Button Width="140" Height="30" Content="Личный кабинет" FontSize="10" Margin="0 0 0 0"
-                        Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ToPersonalAccountCommand}" />
-                <Button Width="120" Height="30" Content="Выйти" Margin="10 0 10 0"
-                        FontSize="10" Command="{Binding QuitAccountCommand}" Cursor="Hand" />
-            </StackPanel>
-        </DockPanel>
-        <Line StrokeThickness="1" Stroke="LightSlateGray" X1="800" />
-        <ContentControl Content="{Binding CurrentViewModel}" Height="auto" />
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal"  Height="50" DockPanel.Dock="Left" HorizontalAlignment="Left">
+                    <Button Width="140" Height="40" Content="Обучение" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToLearningMenuCommand}" Cursor="Hand" />
+                    <Button Width="140" Height="40" Content="Практика" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10 0 0 0" Command="{Binding ToIDECommand}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="50" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button Width="140" Height="30" Content="Личный кабинет" FontSize="10" Margin="0 0 0 0"
+                            Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ToPersonalAccountCommand}" />
+                    <Button Width="120" Height="30" Content="Выйти" Margin="10 0 10 0"
+                            FontSize="10" Command="{Binding QuitAccountCommand}" Cursor="Hand" />
+                </StackPanel>
+            </DockPanel>
+            <Line StrokeThickness="1" Stroke="LightSlateGray" X1="800" />
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" Height="auto" />
+    </Grid>
 </Window>

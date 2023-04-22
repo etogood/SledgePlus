@@ -20,40 +20,46 @@
             <v:AdminPanelUserControl />
         </DataTemplate>
     </UserControl.Resources>
-    <StackPanel>
-        <Label Content="Личный кабинет" HorizontalAlignment="Center" FontSize="25" />
-        <Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                <Label Content="Фамилия" FontWeight="DemiBold" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                <Label Content="Имя" FontWeight="DemiBold" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
-                <Label Content="Отчество" FontWeight="DemiBold" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
-                <Label Content="Группа" FontWeight="DemiBold" />
-            </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Label Content="Личный кабинет" HorizontalAlignment="Center" FontSize="25" />
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                    <Label Content="Фамилия" FontWeight="DemiBold" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                    <Label Content="Имя" FontWeight="DemiBold" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+                    <Label Content="Отчество" FontWeight="DemiBold" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                    <Label Content="Группа" FontWeight="DemiBold" />
+                </StackPanel>
 
-            <Line Stroke="Black" StrokeThickness="1" Y1="100" Grid.RowSpan="4" HorizontalAlignment="Right" VerticalAlignment="Stretch" Stretch="Fill" />
+                <Line Stroke="Black" StrokeThickness="1" Y1="100" Grid.Row="0" Grid.RowSpan="4" HorizontalAlignment="Right" VerticalAlignment="Stretch" Stretch="Fill" />
 
-            <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Surname}" />
-            <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Name}" />
-            <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Patronymic}" />
-            <Label Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Group}" />
-        </Grid>
-        <Line X1="800" Stroke="Black" />
-        <ContentControl Margin="10" Content="{Binding UserPanel}" Height="auto" MinHeight="220" />
-    </StackPanel>
+                <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Surname}" />
+                <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Name}" />
+                <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Patronymic}" />
+                <Label Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Group}" />
+            </Grid>
+            <Line X1="800" Stroke="Black" />
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding UserPanel}" Height="auto"/>
+    </Grid>
 </UserControl>
