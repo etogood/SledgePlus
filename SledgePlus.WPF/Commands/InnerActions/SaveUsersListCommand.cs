@@ -6,7 +6,7 @@ using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Enumerators;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls;
-using SledgePlus.WPF.ViewModels.UserControls.UserPanels.ModeratorPanels;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
@@ -23,7 +23,7 @@ public class SaveUsersListCommand : Command
 
     public override void Execute(object? parameter)
     {
-        var vm = _host.Services.GetRequiredService<UsersTableViewModel>();
+        var vm = _host.Services.GetRequiredService<ModeratorPanelViewModel>();
         var context = _host.Services.GetRequiredService<AppDbContext>();
 
         foreach (var vmChangedUser in vm.ChangedUsers)

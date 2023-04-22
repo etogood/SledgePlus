@@ -2,7 +2,7 @@
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
-using SledgePlus.WPF.ViewModels.UserControls.UserPanels.AdminPanels;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
@@ -19,7 +19,7 @@ public class RemoveUserRowCommand : Command
 
     public override void Execute(object? parameter)
     {
-        var vm = _host.Services.GetRequiredService<UsersTableViewModel>();
+        var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
         try
         {
             var index = vm.Users.IndexOf(parameter as User ?? throw new Exception());

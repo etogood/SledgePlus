@@ -3,22 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls.UserPanels.AdminPanels"
-             xmlns:adminPanels="clr-namespace:SledgePlus.WPF.Views.UserControls.UserPanels.AdminPanels"
+             xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
+             xmlns:custom="clr-namespace:SledgePlus.WPF.Views.UserControls.Custom"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="{DynamicResource MaterialDesignDarkBackground}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d"
-             d:DesignHeight="270" d:DesignWidth="780">
+             d:DesignHeight="220" d:DesignWidth="780">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:UsersTableViewModel}">
-            <adminPanels:UsersTableUserControl />
-        </DataTemplate>
+        <converters:IndexConverter x:Key="IndexConverter" />
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
-        <ContentControl Content="{Binding CurrentPanel}" Width="780"/>
-        <StackPanel Margin="10">
-            <Button Content="Пользователи" Width="150" Command="{Binding ToAdminUsersTableCommand}" Cursor="Hand" />
-        </StackPanel>
-        <ContentControl Content="{Binding CurrentPanel}" Width="610" />
+    <StackPanel>
+        <custom:UsersDataGrid Width="auto" Height="auto" MaxHeight="190" Style="{DynamicResource MaterialDesignDataGrid}" FontSize="10"
+                               ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                               CanUserAddRows="True" CanUserDeleteRows="False"
+                               VerticalScrollBarVisibility="Visible" ColumnWidth="auto" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" Header="№" ClipboardContentBinding="{x:Null}" Binding="{Binding Converter={StaticResource IndexConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}" />
+                <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" Header="Фамилия" Binding="{Binding Surname}" />
+                <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" Header="Имя" Binding="{Binding Name}" />
+                <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" Header="Отчество" Binding="{Binding Patronymic}" />
+                <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Groups}" IsEditable="True" Header="Группа" SelectedValueBinding="{Binding GroupId}" SelectedValuePath="GroupId" DisplayMemberPath="GroupName"/>
+                <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Roles}" IsEditable="True" Header="Роль" SelectedValueBinding="{Binding RoleId}" SelectedValuePath="RoleId" DisplayMemberPath="RoleName"/>
+                <DataGridTemplateColumn Header="Авторизация">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="20" Height="20" Content="+" Command="{Binding Path=DataContext.ToSignInCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Удалить">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="20" Height="20" Content="x" Command="{Binding Path=DataContext.RemoveUserRowCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </custom:UsersDataGrid>
+        <Button Width="auto" Content="Сохранить" Command="{Binding SaveUsersListCommand}" Cursor="Hand"/>
     </StackPanel>
 </UserControl>

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls"
         xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="{DynamicResource MaterialDesignDarkBackground}"
         mc:Ignorable="d"
         Title="SledgePlus" WindowStartupLocation="CenterScreen"
-        Height="500" Width="800"
-        ResizeMode="NoResize">
+        Height="500" Width="800">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:WelcomeViewModel}">
             <v:WelcomeUserControl />
@@ -43,7 +43,7 @@
                 <Button Width="140" Height="30" Content="Личный кабинет" FontSize="10" Margin="0 0 0 0"
                         Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ToPersonalAccountCommand}" />
                 <Button Width="120" Height="30" Content="Выйти" Margin="10 0 10 0"
-                        Background="Red" BorderBrush="Red" FontSize="10" Command="{Binding QuitAccountCommand}" Cursor="Hand" />
+                        FontSize="10" Command="{Binding QuitAccountCommand}" Cursor="Hand" />
             </StackPanel>
         </DockPanel>
         <Line StrokeThickness="1" Stroke="LightSlateGray" X1="800" />

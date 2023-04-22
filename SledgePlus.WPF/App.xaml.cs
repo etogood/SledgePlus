@@ -5,7 +5,6 @@ using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Commands.Navigation;
-using SledgePlus.WPF.Commands.Navigation.UserPanels;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Stores.Login;
@@ -55,9 +54,6 @@ public partial class App
                 services.AddSingleton<ToLearningMenuCommand>();
                 services.AddSingleton<ToPersonalAccountCommand>();
 
-                services.AddSingleton<ToUsersTableCommand>();
-                services.AddSingleton<ToAdminUsersTableCommand>();
-
                 // Models
                 services.AddSingleton<IDataServices<User>, UsersService>();
 
@@ -81,8 +77,6 @@ public partial class App
                 services.AddSingleton<StudentPanelViewModel>();
                 services.AddSingleton<ModeratorPanelViewModel>();
                 services.AddSingleton<AdminPanelViewModel>();
-                services.AddSingleton<ViewModels.UserControls.UserPanels.AdminPanels.UsersTableViewModel>();
-                services.AddSingleton<ViewModels.UserControls.UserPanels.ModeratorPanels.UsersTableViewModel>();
             });
 
     protected override async void OnStartup(StartupEventArgs e)
