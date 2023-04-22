@@ -1,9 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Models.Enumerators;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -14,10 +13,12 @@ namespace SledgePlus.WPF.Commands.InnerActions;
 public class AdminSaveUsersListCommand : Command
 {
     private readonly IHost _host;
+
     public AdminSaveUsersListCommand(IHost host)
     {
         _host = host;
     }
+
     public override bool CanExecute(object? parameter) => true;
 
     public override void Execute(object? parameter)
@@ -40,6 +41,5 @@ public class AdminSaveUsersListCommand : Command
         var uservm = _host.Services.GetRequiredService<AuthenticationViewModel>();
         var user = _host.Services.GetRequiredService<IDataServices<User>>().LogIn(uservm.Login, uservm.Password);
         _host.Services.GetRequiredService<ILoginStore>().CurrentUser = user;
-
     }
 }

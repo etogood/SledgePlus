@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+
 using SledgePlus.Data.Models;
-using SledgePlus.WPF.Models.DTOs;
 
 namespace SledgePlus.WPF.Views.UserControls.Custom;
 
@@ -17,6 +17,7 @@ public class UsersDataGrid : DataGrid
     {
         ItemsList = new ObservableCollection<User>((ObservableCollection<User>)Items.SourceCollection);
     }
+
     #region ItemsListProperty
 
     public IEnumerable<User> ItemsList
@@ -27,10 +28,10 @@ public class UsersDataGrid : DataGrid
 
     public static readonly DependencyProperty ItemsListProperty =
         DependencyProperty.Register(
-            nameof(ItemsList), 
-            typeof(IEnumerable<User>), 
-            typeof(UsersDataGrid), 
+            nameof(ItemsList),
+            typeof(IEnumerable<User>),
+            typeof(UsersDataGrid),
             new PropertyMetadata(null));
 
-    #endregion
+    #endregion ItemsListProperty
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -24,7 +23,7 @@ public class ToLearningMenuCommand : Command
 
     public override void Execute(object? parameter)
     {
-        _navigationStore.CurrentViewModel = 
+        _navigationStore.CurrentViewModel =
             _host.Services.CreateScope().ServiceProvider.GetRequiredService<LearningMenuViewModel>();
     }
 }

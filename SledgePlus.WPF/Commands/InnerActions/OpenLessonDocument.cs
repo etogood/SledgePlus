@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
 public class OpenLessonDocument : Command
 {
     private readonly string _document;
+
     public OpenLessonDocument(IHost host, string document)
     {
         _document = document;
@@ -35,6 +30,5 @@ public class OpenLessonDocument : Command
         {
             //TODO: Add to the error vm
         }
-        
     }
 }

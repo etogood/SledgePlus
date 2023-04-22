@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SledgePlus.WPF.Factories;
+
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -18,11 +18,12 @@ public class ToPersonalAccountCommand : Command
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
     }
+
     public override bool CanExecute(object? parameter) => _loginStore.IsLoggedIn;
 
     public override void Execute(object? parameter)
     {
-        _navigationStore.CurrentViewModel = 
+        _navigationStore.CurrentViewModel =
             _host.Services.GetRequiredService<PersonalAccountViewModel>();
     }
 }

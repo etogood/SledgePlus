@@ -39,7 +39,6 @@ public class CompileCodeCommand : Command
             fs.Write(info, 0, info.Length);
         }
 
-
         var compiling = new Process();
         compiling.StartInfo.FileName = "cmd.exe";
         compiling.StartInfo.Arguments = "/K" + @"MinGW\bin\compile.bat";

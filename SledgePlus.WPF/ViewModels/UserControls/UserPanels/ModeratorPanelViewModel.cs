@@ -1,5 +1,7 @@
 ﻿using System.Windows.Input;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.WPF.Commands.Navigation.UserPanels;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels;

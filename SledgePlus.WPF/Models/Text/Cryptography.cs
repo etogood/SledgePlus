@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 
 namespace SledgePlus.WPF.Models.Text;
 

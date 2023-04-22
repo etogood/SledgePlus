@@ -1,11 +1,11 @@
-﻿using SledgePlus.WPF.Commands.Base;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
 
 public class LessonItemViewModel : ViewModel
 {
     private string _label;
+
     public string Label
     {
         get => _label;
@@ -13,6 +13,7 @@ public class LessonItemViewModel : ViewModel
     }
 
     private string _description;
+
     public string Description
     {
         get => _description;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.WPF.ViewModels.UserControls;
 
 namespace SledgePlus.WPF.Factories;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
@@ -48,7 +49,7 @@ public class PersonalAccountViewModel : ViewModel
         set => Set(ref _userPanel, value);
     }
 
-    #endregion
+    #endregion Properties
 
     public PersonalAccountViewModel(IHost host)
     {
@@ -62,7 +63,6 @@ public class PersonalAccountViewModel : ViewModel
         if (role.Contains('a') || role.Contains('A')) UserPanel = host.Services.GetRequiredService<AdminPanelViewModel>();
         else if (role.Contains('m') || role.Contains('M')) UserPanel = host.Services.GetRequiredService<ModeratorPanelViewModel>();
         else UserPanel = host.Services.GetRequiredService<StudentPanelViewModel>();
-        
     }
 }
 

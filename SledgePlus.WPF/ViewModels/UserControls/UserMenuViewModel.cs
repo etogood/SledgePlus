@@ -4,6 +4,5 @@ public class UserMenuViewModel : ViewModel
 {
     public UserMenuViewModel(IHost host)
     {
-        
     }
 }

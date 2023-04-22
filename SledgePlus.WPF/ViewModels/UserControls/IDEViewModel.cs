@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 using ICSharpCode.AvalonEdit.Document;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.WPF.Commands.InnerActions;
@@ -13,7 +13,6 @@ namespace SledgePlus.WPF.ViewModels.UserControls;
 public class IDEViewModel : ViewModel
 {
     public ICommand CompileCodeCommand { get; }
-
 
     private TextDocument _codeDocument;
 
@@ -30,7 +29,6 @@ public class IDEViewModel : ViewModel
         get => _entries;
         set => Set(ref _entries, value);
     }
-
 
     public IDEViewModel(IHost host)
     {

@@ -3,7 +3,6 @@
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Models.Enumerators;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -14,10 +13,12 @@ namespace SledgePlus.WPF.Commands.InnerActions;
 public class SaveUsersListCommand : Command
 {
     private readonly IHost _host;
+
     public SaveUsersListCommand(IHost host)
     {
         _host = host;
     }
+
     public override bool CanExecute(object? parameter) => true;
 
     public override void Execute(object? parameter)
@@ -32,7 +33,7 @@ public class SaveUsersListCommand : Command
                   string.IsNullOrWhiteSpace(vmChangedUser.Surname) ||
                   string.IsNullOrWhiteSpace(vmChangedUser.Name) ||
                   string.IsNullOrWhiteSpace(vmChangedUser.RoleId.ToString())))
-            context.Users.Update(vmChangedUser);
+                context.Users.Update(vmChangedUser);
         }
 
         context.SaveChanges();
@@ -40,6 +41,5 @@ public class SaveUsersListCommand : Command
         var uservm = _host.Services.GetRequiredService<AuthenticationViewModel>();
         var user = _host.Services.GetRequiredService<IDataServices<User>>().LogIn(uservm.Login, uservm.Password);
         _host.Services.GetRequiredService<ILoginStore>().CurrentUser = user;
-
     }
 }

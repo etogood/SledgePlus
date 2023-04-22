@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SledgePlus.WPF.Views.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
+             Background="{DynamicResource MaterialDesignDarkBackground}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Label Content="Данные для входа" FontSize="30" HorizontalAlignment="Center" />
-        <TextBlock HorizontalAlignment="Center" Text="{Binding UserData}" Margin="10"/>
+        <TextBlock HorizontalAlignment="Center" Text="{Binding UserData}" Margin="10" />
         <TextBlock DataContext="{Binding ErrorMessageViewModel}" Text="{Binding Message}"
                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
                    Foreground="DarkRed" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto" />
-        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Логин*" Width="auto" MaxWidth="200" />
-        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxPlaceHolder}" Tag="Пароль*" Width="auto" MaxWidth="200" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignTextBox}" Tag="Логин*" Width="auto" MaxWidth="200" />
+        <PasswordBox materialDesign:PasswordBoxAssist.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignRevealPasswordBox}" Width="auto" MaxWidth="200" Margin="0 10 0 0" />
         <Button Command="{Binding SignInCommand}" Height="30" HorizontalAlignment="Center" Content="Зарегистрироваться" Width="auto" MinWidth="200" Margin="0 10 0 0" />
     </StackPanel>
 </UserControl>

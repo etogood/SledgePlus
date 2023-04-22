@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+
 using AutoMapper;
 
 using Microsoft.EntityFrameworkCore;
@@ -24,30 +25,30 @@ public class UsersTableViewModel : ViewModel
 
     private ObservableCollection<User> _users;
 
-	public ObservableCollection<User> Users
+    public ObservableCollection<User> Users
     {
         get => _users;
-		set => Set(ref _users, value);
-	}
+        set => Set(ref _users, value);
+    }
 
-	private ObservableCollection<GroupDTO> _groups;
+    private ObservableCollection<GroupDTO> _groups;
 
-	public ObservableCollection<GroupDTO> Groups
-	{
-		get => _groups;
-		set => Set(ref _groups, value);
-	}
+    public ObservableCollection<GroupDTO> Groups
+    {
+        get => _groups;
+        set => Set(ref _groups, value);
+    }
 
-	private ObservableCollection<RoleDTO> _roles;
+    private ObservableCollection<RoleDTO> _roles;
 
-	public ObservableCollection<RoleDTO> Roles
-	{
-		get => _roles;
-		set => Set(ref _roles, value);
-	}
-
+    public ObservableCollection<RoleDTO> Roles
+    {
+        get => _roles;
+        set => Set(ref _roles, value);
+    }
 
     private User? _selectedRow;
+
     public User? SelectedRow
     {
         get => _selectedRow;
@@ -55,13 +56,12 @@ public class UsersTableViewModel : ViewModel
     }
 
     private ObservableCollection<User> _changedUsers;
-                
+
     public ObservableCollection<User> ChangedUsers
     {
         get => _changedUsers;
         set => Set(ref _changedUsers, value);
     }
-
 
     #endregion Properties
 

@@ -7,7 +7,6 @@ using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -41,7 +40,6 @@ public class LogInCommand : Command
             _loginStore.CurrentUser = user;
 
             _navigationStore.CurrentViewModel = _viewModelFactory.Get(typeof(WelcomeViewModel));
-
         }
         catch (IncorrectLoginException)
         {

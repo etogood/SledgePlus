@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace SledgePlus.WPF.Models.Converters;
 
-public class IndexConverter : IValueConverter 
+public class IndexConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

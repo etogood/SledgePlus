@@ -50,8 +50,8 @@ public class UsersTableViewModel : ViewModel
         set => Set(ref _roles, value);
     }
 
-
     private User? _selectedRow;
+
     public User? SelectedRow
     {
         get => _selectedRow;
@@ -65,7 +65,6 @@ public class UsersTableViewModel : ViewModel
         get => _changedUsers;
         set => Set(ref _changedUsers, value);
     }
-
 
     #endregion Properties
 

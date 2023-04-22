@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SledgePlus.WPF.Views.UserControls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="{DynamicResource MaterialDesignDarkBackground}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d"
              d:DesignHeight="200"
              d:DesignWidth="200">
@@ -13,18 +16,27 @@
                    Text="{Binding Message}"
                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
                    Foreground="DarkRed" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto" />
-        <TextBox HorizontalAlignment="Center" Width="auto" MinWidth="200" Margin="0 10 0 0"
-                 Style="{StaticResource TextBoxPlaceHolder}" Tag="Login" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
+        <TextBox
+            HorizontalAlignment="Center" Width="auto" MinWidth="200" Margin="0 10 0 10" 
+            md:HintAssist.Hint="Логин"
+            md:TransitionAssist.DisableTransitions="True"
+            MaxLength="12"
+            Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TextBox.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding LogInCommand}" />
             </TextBox.InputBindings>
         </TextBox>
-        <TextBox HorizontalAlignment="Center" Width="auto" MinWidth="200" Margin="0 10 0 0"
-                     Style="{StaticResource TextBoxPlaceHolder}" Tag="Password" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
-                <TextBox.InputBindings>
+
+        <PasswordBox HorizontalAlignment="Center" Width="auto" MinWidth="200" Margin="0 10 0 0" 
+                     md:TextFieldAssist.HasClearButton="True"
+                     md:HintAssist.Hint="Пароль"
+                     md:PasswordBoxAssist.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     
+                     Style="{StaticResource MaterialDesignRevealPasswordBox}" >
+                <PasswordBox.InputBindings>
                     <KeyBinding Key="Return" Command="{Binding LogInCommand}" />
-                </TextBox.InputBindings>
-        </TextBox>
+                </PasswordBox.InputBindings>
+        </PasswordBox>
         <StackPanel MaxWidth="210">
             <Button Height="30" HorizontalAlignment="Center" Content="Войти" Width="auto" MinWidth="200" Margin="0 10 0 0" Command="{Binding LogInCommand}" />
         </StackPanel>

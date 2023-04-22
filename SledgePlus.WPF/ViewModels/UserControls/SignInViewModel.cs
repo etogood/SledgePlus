@@ -1,10 +1,9 @@
 ﻿using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
-using SledgePlus.WPF.Models.DTOs;
-using SledgePlus.WPF.Stores.Login;
 
 namespace SledgePlus.WPF.ViewModels.UserControls
 {
@@ -33,6 +32,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls
         }
 
         private User _currentUser;
+
         public User CurrentUser
         {
             get => _currentUser;

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
-using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Models.Text;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;

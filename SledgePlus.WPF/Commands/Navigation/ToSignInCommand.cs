@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.Data.Models;
-using SledgePlus.WPF.Models.DTOs;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
@@ -25,8 +24,8 @@ public class ToSignInCommand : Command
 
     public override void Execute(object? parameter)
     {
-        if (string.IsNullOrEmpty((parameter as User).Surname) || 
-            string.IsNullOrEmpty((parameter as User).Name) || 
+        if (string.IsNullOrEmpty((parameter as User).Surname) ||
+            string.IsNullOrEmpty((parameter as User).Name) ||
             string.IsNullOrEmpty((parameter as User).GroupId.ToString()) ||
             string.IsNullOrEmpty((parameter as User).RoleId.ToString())) return;
         _host.Services.GetRequiredService<SignInViewModel>().CurrentUser = parameter as User;

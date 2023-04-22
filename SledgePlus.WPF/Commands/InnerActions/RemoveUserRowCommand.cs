@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels.AdminPanels;
@@ -8,6 +9,7 @@ namespace SledgePlus.WPF.Commands.InnerActions;
 public class RemoveUserRowCommand : Command
 {
     private readonly IHost _host;
+
     public RemoveUserRowCommand(IHost host)
     {
         _host = host;

@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using SledgePlus.Data;
 using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
@@ -12,6 +14,7 @@ public class LearningMenuViewModel : ViewModel
     private readonly AppDbContext _appDbContext;
 
     private ObservableCollection<ExpanderLessonItemViewModel> _sections;
+
     public ObservableCollection<ExpanderLessonItemViewModel> Sections
     {
         get => _sections;

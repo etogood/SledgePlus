@@ -6,108 +6,27 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary xmlns:terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal">
-            
+
             <!-- Material Design -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Yellow" SecondaryColor="Lime"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Converters -->
             <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
             <!-- Styles -->
-            <Style x:Key="TextBoxPlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TextBox}">
-                            <Grid>
-                                <TextBox Text="{Binding Path=Text,
-                                                RelativeSource={RelativeSource TemplatedParent},
-                                                Mode=TwoWay,
-                                                UpdateSourceTrigger=PropertyChanged}"
-                                         x:Name="textSource"
-                                         Background="Transparent"
-                                         Panel.ZIndex="2" IsTabStop="False" />
-                                <TextBox Text="{TemplateBinding Tag}" IsEnabled="False"
-                                         Background="{TemplateBinding Background}"
-                                         Panel.ZIndex="1" BorderBrush="Transparent"
-                                         IsTabStop="False">
-                                    <TextBox.Style>
-                                        <Style TargetType="{x:Type TextBox}">
-                                            <Setter Property="Foreground" Value="Transparent" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                                    <Setter Property="Foreground" Value="LightGray" />
-                                                    <Setter Property="IsReadOnly" Value="True" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-                                </TextBox>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style x:Key="DatePickerPlaceHolder" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource {x:Type DatePicker}}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type DatePicker}">
-                            <Grid>
-                                <DatePicker Text="{Binding Path=Text,
-                                                RelativeSource={RelativeSource TemplatedParent},
-                                                Mode=TwoWay,
-                                                UpdateSourceTrigger=PropertyChanged}"
-                                         x:Name="textSource"
-                                         Background="Transparent"
-                                         Panel.ZIndex="2" IsTabStop="False" />
-                                <TextBox Text="{TemplateBinding Tag}" IsEnabled="False"
-                                         Background="{TemplateBinding Background}"
-                                         Panel.ZIndex="1" BorderBrush="Transparent" IsTabStop="False">
-                                    <TextBox.Style>
-                                        <Style TargetType="{x:Type TextBox}">
-                                            <Setter Property="Foreground" Value="Transparent" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                                    <Setter Property="Foreground" Value="LightGray" />
-                                                    <Setter Property="IsReadOnly" Value="True" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-                                </TextBox>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style TargetType="Button" x:Key="HyperlinkStyledButton">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <TextBlock Foreground="DodgerBlue"
-                                       Text="{TemplateBinding Content}"
-                                       TextDecorations="Underline"
-                                       Cursor="Hand" />
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
             <Style x:Key="TerminalStyle"
                    TargetType="{x:Type terminal:Terminal}"
                    BasedOn="{x:Null}">
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Background" Value="Black"/>
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="FontFamily" Value="Cascadia Code"/>
-                <Setter Property="ItemsMargin" Value="5"/>
-                <Setter Property="ItemHeight" Value="10"/>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="Black" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontFamily" Value="Cascadia Code" />
+                <Setter Property="ItemsMargin" Value="5" />
+                <Setter Property="ItemHeight" Value="10" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -4,6 +4,5 @@ public class WelcomeViewModel : ViewModel
 {
     public WelcomeViewModel(IHost host)
     {
-        
     }
 }

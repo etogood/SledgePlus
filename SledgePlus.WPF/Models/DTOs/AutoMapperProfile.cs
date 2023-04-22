@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using SledgePlus.Data.Models;
 
 namespace SledgePlus.WPF.Models.DTOs;

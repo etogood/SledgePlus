@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Background="{DynamicResource MaterialDesignDarkBackground}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              d:DesignHeight="400" d:DesignWidth="800">
     <StackPanel>
         <Grid Height="330">
@@ -15,13 +17,10 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <avalonEdit:TextEditor Grid.Row="0" BorderBrush="DarkGray" SyntaxHighlighting="C++" FontFamily="Cascadia Code" FontSize="10pt" Document="{Binding CodeDocument}"/>
-            <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Grid.Row="1" ShowsPreview="False"/>
-            <terminal:Terminal VerticalScrollBarVisibility="Visible" Grid.Row="2" ItemsSource="{Binding Entries}" Style="{StaticResource TerminalStyle}" Prompt=">"/>
-
+            <avalonEdit:TextEditor Grid.Row="0" BorderBrush="DarkGray" SyntaxHighlighting="C++" FontFamily="Cascadia Code" FontSize="10pt" Document="{Binding CodeDocument}" />
+            <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Grid.Row="1" ShowsPreview="False" />
+            <terminal:Terminal VerticalScrollBarVisibility="Visible" Grid.Row="2" ItemsSource="{Binding Entries}" Style="{StaticResource TerminalStyle}" Prompt=">" />
         </Grid>
-        <Button Height="35" Content="Compile and start" Command="{Binding CompileCodeCommand}" Cursor="Hand"/>
-
+        <Button Height="35" Content="Compile and start" Command="{Binding CompileCodeCommand}" Cursor="Hand" />
     </StackPanel>
-
 </UserControl>
