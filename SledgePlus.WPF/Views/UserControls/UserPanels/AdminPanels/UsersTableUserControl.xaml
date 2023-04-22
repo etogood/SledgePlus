@@ -10,11 +10,13 @@
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d"
              d:DesignHeight="220" d:DesignWidth="600">
+             mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="780">
     <UserControl.Resources>
         <converters:IndexConverter x:Key="IndexConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <Button Width="580" Content="Сохранить" Command="{Binding SaveUsersListCommand}" />
+        <Button Width="580" Content="Сохранить" Command="{Binding SaveUsersListCommand}"/>
         <custom:UsersDataGrid Width="580" Height="180" Style="{DynamicResource MaterialDesignDataGrid}" FontSize="10"
                                ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
@@ -52,18 +54,19 @@
                 <DataGridTemplateColumn Header="Авторизация">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Width="20" Height="20" Content="+" Command="{Binding Path=DataContext.ToSignInCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" CommandParameter="{Binding}" />
+                            <Button Width="20" Height="20" Content="+" Command="{Binding Path=DataContext.ToSignInCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Удалить">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Width="20" Height="20" Content="x" Command="{Binding Path=DataContext.RemoveUserRowCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" CommandParameter="{Binding}" />
+                            <Button Width="20" Height="20" Content="x" Command="{Binding Path=DataContext.RemoveUserRowCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </custom:UsersDataGrid>
+        <Button Width="750" Content="Сохранить" Command="{Binding SaveUsersListCommand}"/>
     </StackPanel>
 </UserControl>

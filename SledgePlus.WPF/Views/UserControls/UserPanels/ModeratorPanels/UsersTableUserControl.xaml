@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
              xmlns:custom="clr-namespace:SledgePlus.WPF.Views.UserControls.Custom"
+             mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="780">
              Background="{DynamicResource MaterialDesignDarkBackground}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d"
@@ -13,7 +15,7 @@
         <converters:IndexConverter x:Key="IndexConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <Button Width="580" Content="Сохранить" Command="{Binding SaveUsersListCommand}" />
+        <Button Width="580" Content="Сохранить" Command="{Binding SaveUsersListCommand}"/>
         <custom:UsersDataGrid Width="580" Height="180" Style="{DynamicResource MaterialDesignDataGrid}" FontSize="10"
                                ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
@@ -38,5 +40,6 @@
                 </DataGridComboBoxColumn>
             </DataGrid.Columns>
         </custom:UsersDataGrid>
+        <Button Width="750" Content="Сохранить" Command="{Binding SaveUsersListCommand}"/>
     </StackPanel>
 </UserControl>

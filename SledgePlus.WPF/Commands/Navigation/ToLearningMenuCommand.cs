@@ -23,7 +23,7 @@ public class ToLearningMenuCommand : Command
 
     public override void Execute(object? parameter)
     {
-        _navigationStore.CurrentViewModel =
-            _host.Services.CreateScope().ServiceProvider.GetRequiredService<LearningMenuViewModel>();
+        _navigationStore.CurrentViewModel = 
+            _host.Services.GetRequiredService<LearningMenuViewModel>();
     }
 }

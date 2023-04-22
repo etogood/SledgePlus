@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SledgePlus.WPF.Commands.Navigation.UserPanels;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels.AdminPanels;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
@@ -20,6 +20,6 @@ public class AdminPanelViewModel : ViewModel
 
     public AdminPanelViewModel(IHost host)
     {
-        ToAdminUsersTableCommand = host.Services.GetRequiredService<ToAdminUsersTableCommand>();
+        CurrentPanel = host.Services.GetRequiredService<UsersTableViewModel>();
     }
 }

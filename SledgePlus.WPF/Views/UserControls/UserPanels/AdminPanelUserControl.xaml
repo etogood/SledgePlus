@@ -15,6 +15,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
+        <ContentControl Content="{Binding CurrentPanel}" Width="780"/>
         <StackPanel Margin="10">
             <Button Content="Пользователи" Width="150" Command="{Binding ToAdminUsersTableCommand}" Cursor="Hand" />
         </StackPanel>
