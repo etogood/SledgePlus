@@ -38,9 +38,6 @@ internal class MainWindowViewModel : ViewModel
 
         _windowPropertiesStore.HeightChanged += OnHeightChanged;
         _windowPropertiesStore.WidthChanged += OnWidthChanged;
-
-        Height = 400;
-        Width = 600;
     }
 
     private void OnCurrentViewModelChanged()

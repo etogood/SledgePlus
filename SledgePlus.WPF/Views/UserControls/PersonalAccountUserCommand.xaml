@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls.UserPanels"
              xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls.UserPanels"
-             mc:Ignorable="d" 
-             MinHeight="400" MinWidth="800"
+             mc:Ignorable="d" Height="auto"
              Background="{DynamicResource MaterialDesignDarkBackground}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}">
     <UserControl.Resources>
@@ -23,7 +22,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
             <Label Content="Личный кабинет" HorizontalAlignment="Center" FontSize="25" />
@@ -58,8 +58,8 @@
                 <Label Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Patronymic}" />
                 <Label Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Height="25" Margin="10 0 0 0" Content="{Binding Group}" />
             </Grid>
-            <Line X1="800" Stroke="Black" />
         </StackPanel>
-        <ContentControl Grid.Row="1" Content="{Binding UserPanel}" Height="auto"/>
+        <Rectangle Grid.Row="1" Fill="Black"/>
+        <ContentControl Grid.Row="2" Content="{Binding UserPanel}" Height="auto"/>
     </Grid>
 </UserControl>
