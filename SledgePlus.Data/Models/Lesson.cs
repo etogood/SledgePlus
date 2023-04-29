@@ -8,8 +8,7 @@ public class Lesson
     public int LessonId { get; set; }
 
     public int SectionId { get; set; }
-
-    public string LessonName { get; set; }
+    
     public string LessonDescription { get; set; }
     public string LessonDocumentName { get; set; }
     public bool IsPractice { get; set; }

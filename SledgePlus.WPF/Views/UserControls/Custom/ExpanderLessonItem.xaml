@@ -15,7 +15,7 @@
     </UserControl.Resources>
 
     <Expander Header="{Binding Header}">
-        <ItemsControl x:Name="ItemsControl" ItemsSource="{Binding InnerItems}" Height="Auto">
+        <ItemsControl ItemsSource="{Binding InnerItems}" Height="Auto">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="5"/>
