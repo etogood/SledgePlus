@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Windows.Media;
 using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Stores.Login;
+using SledgePlus.WPF.ViewModels.UserControls;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
@@ -49,7 +51,7 @@ public class OpenLessonDocument : Command
 
             var appDbContext = _host.Services.GetRequiredService<AppDbContext>();
 
-            if (appDbContext.LessonUsers.FirstOrDefault(x => x == lessonUser) == null) return;
+            if (appDbContext.LessonUsers.FirstOrDefault(x => x == lessonUser) != null) return;
 
             appDbContext.LessonUsers.Add(lessonUser);
             await appDbContext.SaveChangesAsync();
