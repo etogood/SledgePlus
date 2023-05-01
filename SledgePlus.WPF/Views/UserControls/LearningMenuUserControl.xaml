@@ -17,6 +17,12 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Visible" CanContentScroll="False" PanningRatio="0.001">
         <StackPanel IsItemsHost="False">
+            <TextBlock DataContext="{Binding ErrorMessageViewModel}" 
+                       Text="{Binding Message}" 
+                       Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Foreground="Red" 
+                       FontFamily="Fira Sans" 
+                       FontSize="10"/>
             <ItemsControl ItemsSource="{Binding Sections}" Height="Auto">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

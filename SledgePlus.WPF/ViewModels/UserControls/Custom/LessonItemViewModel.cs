@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
 
@@ -38,6 +39,7 @@ public class LessonItemViewModel : ViewModel
         set => Set(ref _backgroundColor, value);
     }
 
+    
     public LessonItemViewModel(IHost host)
     {
         Label = "NO_LABEL";

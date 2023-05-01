@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
-using System.Windows.Media;
 using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
@@ -25,6 +25,8 @@ public class OpenLessonDocument : Command
 
     public override async void Execute(object? parameter)
     {
+        var vm = _host.Services.GetRequiredService<LearningMenuViewModel>();
+        vm.ErrorMessage = string.Empty;
         try
         {
             var p = new Process
@@ -36,7 +38,7 @@ public class OpenLessonDocument : Command
             };
             p.Start();
 
-            
+
             var item = parameter as LessonItemViewModel;
             var currentUser = _host.Services.GetRequiredService<ILoginStore>().CurrentUser;
 
@@ -56,9 +58,13 @@ public class OpenLessonDocument : Command
             appDbContext.LessonUsers.Add(lessonUser);
             await appDbContext.SaveChangesAsync();
         }
+        catch (Win32Exception)
+        {
+            vm.ErrorMessage = "Файл не обнаружен, обратитесь к администратору";
+        }
         catch (Exception)
         {
-            //TODO: Add to the error vm
+            vm.ErrorMessage = "Неизвестная ошибка";
         }
     }
 }

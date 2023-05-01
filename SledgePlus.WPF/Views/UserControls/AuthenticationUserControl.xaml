@@ -15,7 +15,7 @@
         <TextBlock DataContext="{Binding ErrorMessageViewModel}"
                    Text="{Binding Message}"
                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   Foreground="DarkRed" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto" />
+                   Foreground="Red" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto" />
         <TextBox
             HorizontalAlignment="Center" Width="auto" MinWidth="200" Margin="0 10 0 10" 
             md:HintAssist.Hint="Логин"

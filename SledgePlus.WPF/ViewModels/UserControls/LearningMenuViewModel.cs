@@ -26,11 +26,20 @@ public class LearningMenuViewModel : ViewModel
         set => Set(ref _sections, value);
     }
 
+    public MessageViewModel ErrorMessageViewModel { get; }
+
+    public string ErrorMessage
+    {
+        set => ErrorMessageViewModel.Message = value;
+    }
+
+
     public LearningMenuViewModel(IHost host)
     {
         _appDbContext = host.Services.GetRequiredService<AppDbContext>();
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
 
+        ErrorMessageViewModel = host.Services.GetRequiredService<MessageViewModel>();
         Sections = new ObservableCollection<ExpanderLessonItemViewModel>();
 
         LabelBuilder labelBuilder = new();
