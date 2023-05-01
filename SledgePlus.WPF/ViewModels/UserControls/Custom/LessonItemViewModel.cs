@@ -1,9 +1,12 @@
 ﻿using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
 
 public class LessonItemViewModel : ViewModel
 {
+    public int Id { get; set; }
+
     private string _label;
 
     public string Label
@@ -28,10 +31,18 @@ public class LessonItemViewModel : ViewModel
         set { _command = value; }
     }
 
+    private Brush _backgroundColor;
+    public Brush BackgroundColor
+    {
+        get => _backgroundColor;
+        set => Set(ref _backgroundColor, value);
+    }
+
     public LessonItemViewModel(IHost host)
     {
         Label = "NO_LABEL";
         Description = "NO_DESCRIPTION";
+        BackgroundColor = new SolidColorBrush(Color.FromRgb(255, 235, 59));
         Command = null;
     }
 }

@@ -10,6 +10,7 @@ namespace SledgePlus.Data
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<LessonUser> LessonUsers { get; set; }
 
         public AppDbContext()
         {
@@ -21,7 +22,7 @@ namespace SledgePlus.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=de2000.iaasdns.com;user=ilya_SledgePlusUser;password=eyhMLsWrw#^d;database=ilya_SledgePlus;Charset=utf8;");
+            optionsBuilder.UseMySQL("server=de2000.iaasdns.com;user=ilya;password=nJts3TQT7UyKRtft6hKB;database=ilya_SledgePlus;Charset=utf8;");
         }
     }
 }

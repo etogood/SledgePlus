@@ -23,7 +23,7 @@
         </Style>
     </UserControl.Resources>
     <StackPanel>
-        <Button Height="100" Width="170" Style="{DynamicResource MaterialDesignFlatButton}" Background="#ffeb3b" Cursor="Hand" Command="{Binding Command}">
+        <Button Height="100" Width="170" Style="{DynamicResource MaterialDesignFlatButton}" Background="{Binding BackgroundColor}" Cursor="Hand" Command="{Binding Command}" CommandParameter="{Binding}">
             <TextBlock Height="90" Width="150" TextWrapping="Wrap">
                 <Label Content="{Binding Label}" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding Description}" Style="{StaticResource DescriptionStyle}" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" />
