@@ -27,6 +27,7 @@ public class UsersService : IDataServices<User>
 
     public async Task Create(User user)
     {
+        if (_appDbContext.Users.FirstOrDefault(user) == null) return; 
         await _appDbContext.Users.AddAsync(user);
         await _appDbContext.SaveChangesAsync();
     }
@@ -51,7 +52,7 @@ public class UsersService : IDataServices<User>
 
     public User? GetByLogin(string login)
     {
-        return _appDbContext.Users.Include(x => x.Group).Include(x => x.Role).FirstOrDefault(x => x.Login == login);
+        return _appDbContext.Users.Include(x => x.Group).Include(x => x.Role).FirstOrDefault(x => string.Equals(login, x.Login));
     }
 
     public User LogIn(string login, string password)

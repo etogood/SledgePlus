@@ -33,23 +33,23 @@ namespace SledgePlus.WPF.Commands.InnerActions
 
         public override async void Execute(object? parameter)
         {
-            var _viewModel = (SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel));
+            var viewModel = (SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel));
             try
             {
-                if (_userServices.GetByLogin(_viewModel.Login) != null) throw new DuplicateException();
-                var password = Cryptography.HashPassword(_viewModel.Password);
-                var user = _viewModel.CurrentUser;
+                if (_userServices.GetByLogin(viewModel.Login) != null) throw new DuplicateException();
+                var password = Cryptography.HashPassword(viewModel.Password);
+                var user = viewModel.CurrentUser;
                 user.Password = password;
-                user.Login = _viewModel.Login;
+                user.Login = viewModel.Login;
                 await _userServices.Update(user);
             }
             catch (DuplicateException)
             {
-                _viewModel.ErrorMessage = "Пользователь с данным логином уже существует";
+                viewModel.ErrorMessage = "Пользователь с данным логином уже существует";
             }
             catch (Exception)
             {
-                _viewModel.ErrorMessage = "Неизвестная ошибка";
+                viewModel.ErrorMessage = "Неизвестная ошибка";
             }
         }
     }

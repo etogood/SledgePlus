@@ -40,6 +40,7 @@ public class SaveUsersListCommand : Command
 
         var uservm = _host.Services.GetRequiredService<AuthenticationViewModel>();
         var user = _host.Services.GetRequiredService<IDataServices<User>>().LogIn(uservm.Login, uservm.Password);
+        
         _host.Services.GetRequiredService<ILoginStore>().CurrentUser = user;
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
-
+using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
 
@@ -11,8 +12,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls
     {
         public ICommand SignInCommand { get; set; }
 
-        public MessageViewModel ErrorMessageViewModel { get; }
-
+        
         #region Properties
 
         private string _login;
@@ -41,6 +41,8 @@ namespace SledgePlus.WPF.ViewModels.UserControls
 
         public string UserData => CurrentUser.Surname + ' ' + CurrentUser.Name + ' ' + CurrentUser.Patronymic + ' ' +
                                   CurrentUser.Group.GroupName;
+
+        public MessageViewModel ErrorMessageViewModel { get; }
 
         public string ErrorMessage
         {

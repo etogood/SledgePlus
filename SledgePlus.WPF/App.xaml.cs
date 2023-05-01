@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
+using MySql.Data.MySqlClient;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
@@ -81,15 +81,25 @@ public partial class App
 
     protected override async void OnStartup(StartupEventArgs e)
     {
-        await Host.StartAsync();
-        await Host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
-        Host.Services.GetRequiredService<INavigationStore>().CurrentViewModel = Host.Services.GetRequiredService<AuthenticationViewModel>();
+        try
+        {
+            await Host.StartAsync();
+            await Host.Services.GetRequiredService<AppDbContext>().Database.MigrateAsync();
+            Host.Services.GetRequiredService<INavigationStore>().CurrentViewModel =
+                Host.Services.GetRequiredService<AuthenticationViewModel>();
+        }
+        catch (MySqlException)
+        {
+            MessageBox.Show("Произошла ошибка при попытке подключения к базе данных, проверьте подключение к сети или обратитесь к системному администратору", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+        }
 
         MainWindow = Host.Services.GetRequiredService<MainWindow>();
         MainWindow.DataContext = Host.Services.GetRequiredService<MainWindowViewModel>();
         MainWindow.Show();
 
         base.OnStartup(e);
+            
+            
     }
 
     protected override async void OnExit(ExitEventArgs e)
