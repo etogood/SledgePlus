@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="SledgePlus.WPF.Views.UserControls.UserPanels.AdminPanelUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:SledgePlus.WPF.Models.Converters"
              xmlns:custom="clr-namespace:SledgePlus.WPF.Views.UserControls.Custom"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="{DynamicResource MaterialDesignDarkBackground}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d" Height="auto">
@@ -14,63 +14,63 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <custom:UsersDataGrid Height="auto" Width="auto" Style="{DynamicResource MaterialDesignDataGrid}" FontSize="10"
-                                  ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
-                                  CanUserAddRows="True" CanUserDeleteRows="False" ColumnWidth="auto" AutoGenerateColumns="False">
+        <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+            <custom:UsersDataGrid VerticalScrollBarVisibility="Disabled" Height="auto" Width="auto" Style="{DynamicResource MaterialDesignDataGrid}" FontSize="10"
+                                      ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewMouseWheel="UIElement_OnPreviewMouseWheel"
+                                      ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                                      CanUserAddRows="True" CanUserDeleteRows="False" ColumnWidth="auto" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
-                                                       Header="№" 
-                                                       ClipboardContentBinding="{x:Null}" 
+                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
+                                                       Header="№"
+                                                       ClipboardContentBinding="{x:Null}"
                                                        Binding="{Binding Converter={StaticResource IndexConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}" />
-                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
-                                                       Header="Фамилия" 
+                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
+                                                       Header="Фамилия"
                                                        MinWidth="50"
                                                        Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" />
-                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
-                                                       Header="Имя" 
+                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
+                                                       Header="Имя"
                                                        MinWidth="50"
                                                        Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
-                                                       Header="Отчество" 
+                    <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
+                                                       Header="Отчество"
                                                        MinWidth="50"
                                                        Binding="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" />
-                    <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Groups}" 
-                                                           IsEditable="True" 
-                                                           Header="Группа" 
+                    <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Groups}"
+                                                           IsEditable="True"
+                                                           Header="Группа"
                                                            MinWidth="50"
-                                                           SelectedValueBinding="{Binding GroupId, UpdateSourceTrigger=PropertyChanged}" 
-                                                           SelectedValuePath="GroupId" 
-                                                           DisplayMemberPath="GroupName"/>
-                    <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Roles}" 
-                                                           IsEditable="True" 
-                                                           Header="Роль" 
+                                                           SelectedValueBinding="{Binding GroupId, UpdateSourceTrigger=PropertyChanged}"
+                                                           SelectedValuePath="GroupId"
+                                                           DisplayMemberPath="GroupName" />
+                    <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Roles}"
+                                                           IsEditable="True"
+                                                           Header="Роль"
                                                            MinWidth="50"
-                                                           SelectedValueBinding="{Binding RoleId, UpdateSourceTrigger=PropertyChanged}" 
-                                                           SelectedValuePath="RoleId" 
-                                                           DisplayMemberPath="RoleName"/>
+                                                           SelectedValueBinding="{Binding RoleId, UpdateSourceTrigger=PropertyChanged}"
+                                                           SelectedValuePath="RoleId"
+                                                           DisplayMemberPath="RoleName" />
                     <DataGridTemplateColumn Header="Авторизация" MinWidth="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Width="auto" 
-                                        Height="auto" 
-                                        Content="+" 
-                                        Command="{Binding Path=DataContext.ToSignInCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" 
-                                        CommandParameter="{Binding}"/>
+                                <Button Width="auto"
+                                        Height="auto"
+                                        Content="+"
+                                        Command="{Binding Path=DataContext.ToSignInCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}"
+                                        CommandParameter="{Binding}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Удалить" MinWidth="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Width="auto" 
-                                        Height="auto" 
-                                        Content="x" 
-                                        Command="{Binding Path=DataContext.RemoveUserRowCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}" 
+                                <Button Width="auto"
+                                        Height="auto"
+                                        Content="x"
+                                        Command="{Binding Path=DataContext.RemoveUserRowCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}"
                                         CommandParameter="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -78,11 +78,11 @@
                 </DataGrid.Columns>
             </custom:UsersDataGrid>
         </ScrollViewer>
-                <Button Grid.Row="1" 
-                    Width="auto" 
-                    Content="Сохранить" 
-                    Command="{Binding SaveUsersListCommand}" 
-                    Cursor="Hand"/>
-
+        <Button Grid.Row="1"
+                Width="auto"
+                Content="Сохранить"
+                Command="{Binding SaveUsersListCommand}"
+                Cursor="Hand"
+                materialDesign:ButtonAssist.CornerRadius="0"/>
     </Grid>
 </UserControl>
