@@ -25,18 +25,25 @@ public class AdminSaveUsersListCommand : Command
     {
         var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
         var context = _host.Services.GetRequiredService<AppDbContext>();
-
-        foreach (var vmChangedUser in vm.ChangedUsers)
+        try
         {
-            if (vmChangedUser.RoleId == 0) vmChangedUser.RoleId = (int)Roles.Student;
-            if (!(string.IsNullOrWhiteSpace(vmChangedUser.GroupId.ToString()) ||
-                  string.IsNullOrWhiteSpace(vmChangedUser.Surname) ||
-                  string.IsNullOrWhiteSpace(vmChangedUser.Name) ||
-                  string.IsNullOrWhiteSpace(vmChangedUser.RoleId.ToString())))
+            foreach (var vmChangedUser in vm.ChangedUsers)
+            {
+                if (vmChangedUser.RoleId == 0) vmChangedUser.RoleId = (int)Roles.Student;
+                if (!(string.IsNullOrWhiteSpace(vmChangedUser.GroupId.ToString()) ||
+                      string.IsNullOrWhiteSpace(vmChangedUser.Surname) ||
+                      string.IsNullOrWhiteSpace(vmChangedUser.Name) ||
+                      string.IsNullOrWhiteSpace(vmChangedUser.RoleId.ToString())))
 
-                context.Users.Update(vmChangedUser);
+                    context.Users.Update(vmChangedUser);
+            }
+            context.SaveChanges();
         }
-        context.SaveChanges();
+        catch (Exception)
+        {
+            
+        }
+        
 
         
     }

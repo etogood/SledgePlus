@@ -14,26 +14,22 @@ namespace SledgePlus.WPF.Commands.InnerActions
 {
     internal class SignInCommand : Command
     {
-        private readonly IFactory<ViewModel> _viewModelFactory;
+        private readonly IHost _host;
         private readonly UsersService _userServices;
-        private readonly INavigationStore _navigationStore;
-        private readonly IMapper _mapper;
 
         public SignInCommand(IHost host, IMapper mapper)
         {
-            _mapper = mapper;
-            _viewModelFactory = host.Services.GetRequiredService<IFactory<ViewModel>>();
-            _navigationStore = host.Services.GetRequiredService<INavigationStore>();
+            _host = host;
             _userServices = (UsersService)host.Services.GetRequiredService<IDataServices<User>>();
         }
 
         public override bool CanExecute(object? parameter) =>
-            ((SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel))).CanExecute()
-            && Text.PasswordValidation(((SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel))).Password);
+            Text.PasswordValidation(_host.Services.GetRequiredService<SignInViewModel>().Password)
+            && _host.Services.GetRequiredService<SignInViewModel>().CanExecute();
 
         public override async void Execute(object? parameter)
         {
-            var viewModel = (SignInViewModel)_viewModelFactory.Get(typeof(SignInViewModel));
+            var viewModel = _host.Services.GetRequiredService<SignInViewModel>();
             try
             {
                 if (_userServices.GetByLogin(viewModel.Login) != null) throw new DuplicateException();
@@ -42,6 +38,8 @@ namespace SledgePlus.WPF.Commands.InnerActions
                 user.Password = password;
                 user.Login = viewModel.Login;
                 await _userServices.Update(user);
+                _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel =
+                    _host.Services.GetRequiredService<PersonalAccountViewModel>();
             }
             catch (DuplicateException)
             {

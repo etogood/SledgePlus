@@ -30,27 +30,27 @@
                     <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                        Header="Фамилия" 
                                                        MinWidth="50"
-                                                       Binding="{Binding Surname}" />
+                                                       Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" />
                     <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                        Header="Имя" 
                                                        MinWidth="50"
-                                                       Binding="{Binding Name}" />
+                                                       Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                     <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                        Header="Отчество" 
                                                        MinWidth="50"
-                                                       Binding="{Binding Patronymic}" />
+                                                       Binding="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" />
                     <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Groups}" 
                                                            IsEditable="True" 
                                                            Header="Группа" 
                                                            MinWidth="50"
-                                                           SelectedValueBinding="{Binding GroupId}" 
+                                                           SelectedValueBinding="{Binding GroupId, UpdateSourceTrigger=PropertyChanged}" 
                                                            SelectedValuePath="GroupId" 
                                                            DisplayMemberPath="GroupName"/>
                     <materialDesign:DataGridComboBoxColumn ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Roles}" 
                                                            IsEditable="True" 
                                                            Header="Роль" 
                                                            MinWidth="50"
-                                                           SelectedValueBinding="{Binding RoleId}" 
+                                                           SelectedValueBinding="{Binding RoleId, UpdateSourceTrigger=PropertyChanged}" 
                                                            SelectedValuePath="RoleId" 
                                                            DisplayMemberPath="RoleName"/>
                     <DataGridTemplateColumn Header="Авторизация" MinWidth="100">

@@ -2,6 +2,7 @@
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
+using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
@@ -15,7 +16,17 @@ public class RemoveUserRowCommand : Command
         _host = host;
     }
 
-    public override bool CanExecute(object? parameter) => true;
+    public override bool CanExecute(object? parameter) 
+    {
+        var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
+        if (parameter is not User user) return false;
+        if (string.IsNullOrEmpty(user.Surname) ||
+            string.IsNullOrEmpty(user.Name) ||
+            user.GroupId == 0 ||
+            user.RoleId == 0) return false;
+        var index = vm.Users.IndexOf(user);
+        return !(index <= -1 || index >= vm.Users.Count);
+    }
 
     public override void Execute(object? parameter)
     {
@@ -23,7 +34,6 @@ public class RemoveUserRowCommand : Command
         try
         {
             var index = vm.Users.IndexOf(parameter as User ?? throw new Exception());
-            if (index <= -1 || index >= vm.Users.Count) return;
             vm.Users.RemoveAt(index);
             var context = _host.Services.GetRequiredService<AppDbContext>();
             context.Users.Remove(parameter as User ?? throw new Exception());

@@ -39,8 +39,20 @@ namespace SledgePlus.WPF.ViewModels.UserControls
             set => Set(ref _currentUser, value);
         }
 
-        public string UserData => CurrentUser.Surname + ' ' + CurrentUser.Name + ' ' + CurrentUser.Patronymic + ' ' +
-                                  CurrentUser.Group.GroupName;
+        public string UserData {
+        get
+        {
+            if (string.IsNullOrEmpty(CurrentUser.Surname) ||
+                string.IsNullOrEmpty(CurrentUser.Name) ||
+                string.IsNullOrEmpty(CurrentUser.GroupId.ToString()) ||
+                string.IsNullOrEmpty(CurrentUser.RoleId.ToString())) 
+                return string.Empty;
+                    
+            var userData = CurrentUser.Surname + ' ' + CurrentUser.Name + ' ' + CurrentUser.Patronymic;
+            if (CurrentUser.Group != null) userData += ' ' + CurrentUser.Group.GroupName;
+            return userData;
+        }
+    }
 
         public MessageViewModel ErrorMessageViewModel { get; }
 
@@ -55,6 +67,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls
         {
             SignInCommand = host.Services.GetRequiredService<SignInCommand>();
             ErrorMessageViewModel = host.Services.GetRequiredService<MessageViewModel>();
+            Password = string.Empty;
         }
 
         public bool CanExecute()
