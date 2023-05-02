@@ -29,5 +29,10 @@ namespace SledgePlus.WPF.Views.UserControls.UserPanels
         {
             ScrollViewer.ScrollToVerticalOffset(ScrollViewer.ContentVerticalOffset - e.Delta);
         }
+
+        private void ToSignInButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            dataGrid.CancelEdit();
+        }
     }
 }

@@ -53,25 +53,6 @@ public class PersonalAccountViewModel : ViewModel
 
     public PersonalAccountViewModel(IHost host)
     {
-        var store = host.Services.GetRequiredService<ILoginStore>();
-        Surname = store.CurrentUser.Surname;
-        Name = store.CurrentUser.Name;
-        Patronymic = store.CurrentUser.Patronymic;
-        Group = store.CurrentUser.Group.GroupName;
-
-        var role = store.CurrentUser.Role.RolePreferences;
-        if (role.Contains('a') || role.Contains('A')) UserPanel = host.Services.GetRequiredService<AdminPanelViewModel>();
-        else if (role.Contains('m') || role.Contains('M')) UserPanel = host.Services.GetRequiredService<ModeratorPanelViewModel>();
-        else UserPanel = host.Services.GetRequiredService<StudentPanelViewModel>();
+        
     }
 }
-
-/*
- Preferences:
-
-    a - open admin panel for read
-    m - open moderator panel for read
-    A - open admin panel for write-read
-    M - open admin panel for write-read
-
- */

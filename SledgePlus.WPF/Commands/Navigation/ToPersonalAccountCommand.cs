@@ -3,6 +3,9 @@
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Xml.Linq;
 
 namespace SledgePlus.WPF.Commands.Navigation;
 
@@ -23,6 +26,17 @@ public class ToPersonalAccountCommand : Command
 
     public override void Execute(object? parameter)
     {
+        var vm = _host.Services.GetRequiredService<PersonalAccountViewModel>();
+        var store = _host.Services.GetRequiredService<ILoginStore>();
+        vm.Surname = store.CurrentUser.Surname;
+        vm.Name = store.CurrentUser.Name;
+        vm.Patronymic = store.CurrentUser.Patronymic;
+        vm.Group = store.CurrentUser.Group.GroupName;
+
+        var role = store.CurrentUser.Role.RolePreferences;
+        if (role.Contains('a') || role.Contains('A')) vm.UserPanel = _host.Services.GetRequiredService<AdminPanelViewModel>();
+        else if (role.Contains('m') || role.Contains('M')) vm.UserPanel = _host.Services.GetRequiredService<ModeratorPanelViewModel>();
+        else vm.UserPanel = _host.Services.GetRequiredService<StudentPanelViewModel>();
         _navigationStore.CurrentViewModel =
             _host.Services.GetRequiredService<PersonalAccountViewModel>();
     }

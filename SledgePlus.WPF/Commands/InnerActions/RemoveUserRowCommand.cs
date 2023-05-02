@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
+using MessageBox = System.Windows.MessageBox;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
@@ -30,6 +32,8 @@ public class RemoveUserRowCommand : Command
 
     public override void Execute(object? parameter)
     {
+        if (MessageBox.Show("Вы уверены что хотите удалить данного пользоваетля?\n\nПри нажатии на кнопку \"Сохранить\" вас спросят об этом ещё раз", "Подтверждение",
+                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.No) return;
         var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
         try
         {
@@ -37,7 +41,6 @@ public class RemoveUserRowCommand : Command
             vm.Users.RemoveAt(index);
             var context = _host.Services.GetRequiredService<AppDbContext>();
             context.Users.Remove(parameter as User ?? throw new Exception());
-            context.SaveChanges();
         }
         catch (Exception)
         {

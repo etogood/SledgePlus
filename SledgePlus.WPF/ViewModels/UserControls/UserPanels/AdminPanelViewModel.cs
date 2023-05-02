@@ -35,17 +35,17 @@ public class AdminPanelViewModel : ViewModel
         set => Set(ref _users, value);
     }
 
-    private ObservableCollection<GroupDTO> _groups;
+    private ObservableCollection<Group> _groups;
 
-    public ObservableCollection<GroupDTO> Groups
+    public ObservableCollection<Group> Groups
     {
         get => _groups;
         set => Set(ref _groups, value);
     }
 
-    private ObservableCollection<RoleDTO> _roles;
+    private ObservableCollection<Role> _roles;
 
-    public ObservableCollection<RoleDTO> Roles
+    public ObservableCollection<Role> Roles
     {
         get => _roles;
         set => Set(ref _roles, value);
@@ -82,7 +82,7 @@ public class AdminPanelViewModel : ViewModel
             .Include(x => x.Role)
             .Include(x => x.Group)
             .ToList());
-        Groups = new ObservableCollection<GroupDTO>(_mapper.Map<IEnumerable<Group>, IEnumerable<GroupDTO>>(_appDbContext.Groups).ToList());
-        Roles = new ObservableCollection<RoleDTO>(_mapper.Map<IEnumerable<Role>, IEnumerable<RoleDTO>>(_appDbContext.Roles).ToList());
+        Groups = new ObservableCollection<Group>(_appDbContext.Groups.ToList());
+        Roles = new ObservableCollection<Role>(_appDbContext.Roles.ToList());
     }
 }

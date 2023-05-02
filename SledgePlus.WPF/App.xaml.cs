@@ -66,7 +66,7 @@ public partial class App
                 services.AddScoped<AuthenticationViewModel>();
                 services.AddScoped<UserMenuViewModel>();
                 services.AddScoped<SignInViewModel>();
-                services.AddTransient<PersonalAccountViewModel>();
+                services.AddSingleton<PersonalAccountViewModel>();
                 services.AddScoped<IDEViewModel>();
                 services.AddScoped<WelcomeViewModel>();
                 services.AddScoped<LearningMenuViewModel>();

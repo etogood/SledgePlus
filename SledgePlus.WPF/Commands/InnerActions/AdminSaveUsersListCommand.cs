@@ -25,6 +25,12 @@ public class AdminSaveUsersListCommand : Command
     {
         var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
         var context = _host.Services.GetRequiredService<AppDbContext>();
+
+        if (MessageBox.Show(
+                "При нажатии, все удалённые или изменённые вами данные будут потеряны без возможности восстановления\n\nПродолжить?",
+                "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) ==
+            MessageBoxResult.No) return;
+
         try
         {
             foreach (var vmChangedUser in vm.ChangedUsers)
@@ -38,6 +44,10 @@ public class AdminSaveUsersListCommand : Command
                     context.Users.Update(vmChangedUser);
             }
             context.SaveChanges();
+            var uservm = _host.Services.GetRequiredService<AuthenticationViewModel>();
+            var user = _host.Services.GetRequiredService<IDataServices<User>>().LogIn(uservm.Login, uservm.Password);
+
+            _host.Services.GetRequiredService<ILoginStore>().CurrentUser = user;
         }
         catch (Exception)
         {

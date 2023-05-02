@@ -60,7 +60,7 @@ public class LearningMenuViewModel : ViewModel
                     Label = label,
                     BackgroundColor = GetItemColor(lesson),
                     Description = lesson.LessonDescription,
-                    Command = new OpenLessonDocument(host, lesson.LessonDocumentName)
+                    Command = new OpenLessonDocument(host, lesson.LessonDocumentName, lesson.IsPractice)
                 });
             }
 

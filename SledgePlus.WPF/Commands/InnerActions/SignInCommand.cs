@@ -7,6 +7,7 @@ using SledgePlus.WPF.Exceptions;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Text;
+using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
 
@@ -40,6 +41,7 @@ namespace SledgePlus.WPF.Commands.InnerActions
                 await _userServices.Update(user);
                 _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel =
                     _host.Services.GetRequiredService<PersonalAccountViewModel>();
+                
             }
             catch (DuplicateException)
             {
