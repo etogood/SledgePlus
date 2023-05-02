@@ -1,17 +1,17 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Text;
-
-using Microsoft.Extensions.DependencyInjection;
-
+﻿using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.ViewModels.UserControls;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
 public class CompileCodeCommand : Command
 {
     private readonly IFactory<ViewModel> _viewModelFactory;
+
+    private const string _programPath = @".\MinGW\bin\__temp_program.o";
 
     public CompileCodeCommand(IHost host)
     {
@@ -26,7 +26,7 @@ public class CompileCodeCommand : Command
 
         try
         {
-            File.Delete(Directory.GetCurrentDirectory() + @"\MinGW\bin\__temp_program.exe");
+            File.Delete(Directory.GetCurrentDirectory() + _programPath);
         }
         catch (Exception)
         {
