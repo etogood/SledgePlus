@@ -53,6 +53,7 @@ public partial class App
                 services.AddSingleton<ToSignInCommand>();
                 services.AddSingleton<ToIDECommand>();
                 services.AddSingleton<ToLearningMenuCommand>();
+                services.AddSingleton<ToWelcomeCommand>();
                 services.AddSingleton<ToPersonalAccountCommand>();
 
                 // Models

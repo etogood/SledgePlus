@@ -10,6 +10,30 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <StackPanel>
-        <TextBlock Text="Добро пожаловать в лучшее приложение в мире!" />
+        <TextBlock FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" Margin="20">
+            <Run Text="Добро пожаловать в"/>
+            <Run Text="&quot;SledgePlus&quot;" Foreground="#9400d3"/>
+            <Run Text="- приложение для изучения C++!"/>
+        </TextBlock>
+        <TextBlock FontSize="14" Margin="20 0 20 20" TextWrapping="Wrap">
+            <Run Text="Для перемещения по приложению используйте кнопки сверху приложения"/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="Раздел &quot;Обучение&quot; - в ней вы найдёте все лекционные материалы. К тому же, в ней вы можете следить за вашим прогрессом: просмотренные лекции будут отмечаться"/>
+            <Run Text="зелёным цветом" Foreground="#aeea00"/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="Раздел &quot;Практика&quot; - это встроенный редактор кода. Написанный код можно"/>
+            <Run Text="скомпилировать" Foreground="#9400d3"/>
+            <Run Text="и"/>
+            <Run Text="запустить" Foreground="#9400d3"/>
+            <Run Text="соответствующими кнопками"/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="В &quot;Личном кабинете&quot; вы можете просмотреть свои данные"/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="Приятной работы в среде &quot;SledgePlus&quot;!"/>
+        </TextBlock>
     </StackPanel>
 </UserControl>

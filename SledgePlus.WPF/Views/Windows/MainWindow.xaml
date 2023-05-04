@@ -53,6 +53,10 @@
                 </StackPanel>
             </DockPanel>
         </StackPanel>
+        <Button Grid.Row="0" HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Command="{Binding ToWelcomeCommand}">
+            <Image Source="../Resources/home_logo.png" Margin="3"/>
+        </Button>
+
         <Rectangle Grid.Row="1" Fill="Gray"/>
         <ContentControl Grid.Row="2" Content="{Binding CurrentViewModel}" Height="auto" />
     </Grid>
