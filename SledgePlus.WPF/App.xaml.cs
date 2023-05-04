@@ -45,6 +45,7 @@ public partial class App
                 services.AddSingleton<LogInCommand>();
                 services.AddSingleton<SignInCommand>();
                 services.AddSingleton<CompileCodeCommand>();
+                services.AddSingleton<RunCodeCommand>();
                 services.AddSingleton<SaveUsersListCommand>();
                 services.AddSingleton<AdminSaveUsersListCommand>();
                 services.AddSingleton<RemoveUserRowCommand>();

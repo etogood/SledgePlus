@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.IO;
+using System.Windows.Controls;
 
 namespace SledgePlus.WPF.Views.UserControls
 {
@@ -10,6 +11,11 @@ namespace SledgePlus.WPF.Views.UserControls
         public IDEUserControl()
         {
             InitializeComponent();
+        }
+
+        private void TextEditor_OnTextChanged(object? sender, EventArgs e)
+        {
+            TextEditor.Save(Directory.GetCurrentDirectory() + @"\__temp_code.cpp");
         }
     }
 }

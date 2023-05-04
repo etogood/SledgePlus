@@ -13,6 +13,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls;
 public class IDEViewModel : ViewModel
 {
     public ICommand CompileCodeCommand { get; }
+    public ICommand RunCodeCommand { get; }
 
     private TextDocument _codeDocument;
 
@@ -22,18 +23,18 @@ public class IDEViewModel : ViewModel
         set => Set(ref _codeDocument, value);
     }
 
-    private ObservableCollection<string?> _entries;
+    private string _code;
 
-    public ObservableCollection<string?> Entries
+    public string Code
     {
-        get => _entries;
-        set => Set(ref _entries, value);
+        get => _code;
+        set => Set(ref _code, value);
     }
 
     public IDEViewModel(IHost host)
     {
         CompileCodeCommand = host.Services.GetRequiredService<CompileCodeCommand>();
-        Entries = new ObservableCollection<string?>();
+        RunCodeCommand = host.Services.GetRequiredService<RunCodeCommand>();
         CodeDocument = new TextDocument
         {
             FileName = "temp_code",
