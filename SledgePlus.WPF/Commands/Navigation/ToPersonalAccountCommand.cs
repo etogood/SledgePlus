@@ -6,6 +6,7 @@ using SledgePlus.WPF.ViewModels.UserControls;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Xml.Linq;
+using SledgePlus.Data;
 
 namespace SledgePlus.WPF.Commands.Navigation;
 
@@ -34,8 +35,16 @@ public class ToPersonalAccountCommand : Command
         vm.Group = store.CurrentUser.Group.GroupName;
 
         var role = store.CurrentUser.Role.RolePreferences;
-        if (role.Contains('a') || role.Contains('A')) vm.UserPanel = _host.Services.GetRequiredService<AdminPanelViewModel>();
-        else if (role.Contains('m') || role.Contains('M')) vm.UserPanel = _host.Services.GetRequiredService<ModeratorPanelViewModel>();
+        if (role.Contains('a') || role.Contains('A'))
+        {
+            _host.Services.GetRequiredService<AdminPanelViewModel>().AppDbContext = new AppDbContext();
+            vm.UserPanel = _host.Services.GetRequiredService<AdminPanelViewModel>();
+        }
+        else if (role.Contains('m') || role.Contains('M'))
+        {
+            _host.Services.GetRequiredService<ModeratorPanelViewModel>().AppDbContext = new AppDbContext();
+            vm.UserPanel = _host.Services.GetRequiredService<ModeratorPanelViewModel>();
+        }
         else vm.UserPanel = _host.Services.GetRequiredService<StudentPanelViewModel>();
         _navigationStore.CurrentViewModel =
             _host.Services.GetRequiredService<PersonalAccountViewModel>();

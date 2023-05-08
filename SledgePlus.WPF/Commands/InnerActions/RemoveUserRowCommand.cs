@@ -32,8 +32,6 @@ public class RemoveUserRowCommand : Command
 
     public override void Execute(object? parameter)
     {
-        if (MessageBox.Show("Вы уверены что хотите удалить данного пользоваетля?\n\nПри нажатии на кнопку \"Сохранить\" вас спросят об этом ещё раз", "Подтверждение",
-                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.No) return;
         var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
         try
         {

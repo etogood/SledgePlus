@@ -1,26 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
-using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data.Models;
 using SledgePlus.Data;
 using SledgePlus.WPF.Commands.InnerActions;
-using SledgePlus.WPF.Models.DTOs;
-using Microsoft.EntityFrameworkCore;
+using SledgePlus.WPF.Commands.Navigation;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 public class ModeratorPanelViewModel : ViewModel
 {
-
-    private readonly AppDbContext _appDbContext;
-    private readonly IMapper _mapper;
+    public AppDbContext AppDbContext { get; set; }
 
     #region Properties
 
     public ICommand SaveUsersListCommand { get; set; }
+    public ICommand ToSignInCommand { get; set; }
+    public ICommand RemoveUserRowCommand { get; set; }
 
     private ObservableCollection<User> _users;
 
@@ -30,17 +29,17 @@ public class ModeratorPanelViewModel : ViewModel
         set => Set(ref _users, value);
     }
 
-    private ObservableCollection<GroupDTO> _groups;
+    private ObservableCollection<Group> _groups;
 
-    public ObservableCollection<GroupDTO> Groups
+    public ObservableCollection<Group> Groups
     {
         get => _groups;
         set => Set(ref _groups, value);
     }
 
-    private ObservableCollection<RoleDTO> _roles;
+    private ObservableCollection<Role> _roles;
 
-    public ObservableCollection<RoleDTO> Roles
+    public ObservableCollection<Role> Roles
     {
         get => _roles;
         set => Set(ref _roles, value);
@@ -66,15 +65,17 @@ public class ModeratorPanelViewModel : ViewModel
 
     public ModeratorPanelViewModel(IHost host)
     {
-        _appDbContext = host.Services.GetRequiredService<AppDbContext>();
-        _mapper = host.Services.GetRequiredService<IMapper>();
+        AppDbContext = host.Services.GetRequiredService<AppDbContext>();
 
-        SaveUsersListCommand = host.Services.GetRequiredService<SaveUsersListCommand>();
+        SaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
+        ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
+        RemoveUserRowCommand = host.Services.GetRequiredService<RemoveUserRowCommand>();
 
-        Users = new ObservableCollection<User>(_appDbContext.Users
+        Users = new ObservableCollection<User>(AppDbContext.Users
             .Include(x => x.Role)
-            .Include(x => x.Group));
-        Groups = new ObservableCollection<GroupDTO>(_mapper.Map<IEnumerable<Group>, IEnumerable<GroupDTO>>(_appDbContext.Groups));
-        Roles = new ObservableCollection<RoleDTO>(_mapper.Map<IEnumerable<Role>, IEnumerable<RoleDTO>>(_appDbContext.Roles));
+            .Include(x => x.Group)
+            .ToList());
+        Groups = new ObservableCollection<Group>(AppDbContext.Groups.ToList());
+        Roles = new ObservableCollection<Role>(AppDbContext.Roles.ToList());
     }
 }

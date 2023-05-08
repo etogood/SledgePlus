@@ -69,7 +69,7 @@ public partial class App
                 services.AddScoped<UserMenuViewModel>();
                 services.AddScoped<SignInViewModel>();
                 services.AddSingleton<PersonalAccountViewModel>();
-                services.AddScoped<IDEViewModel>();
+                services.AddSingleton<IDEViewModel>();
                 services.AddScoped<WelcomeViewModel>();
                 services.AddScoped<LearningMenuViewModel>();
 

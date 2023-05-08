@@ -18,8 +18,7 @@ namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 public class AdminPanelViewModel : ViewModel
 {
-    private readonly AppDbContext _appDbContext;
-    private readonly IMapper _mapper;
+    public AppDbContext AppDbContext { get; set; }
 
     #region Properties
 
@@ -71,18 +70,17 @@ public class AdminPanelViewModel : ViewModel
 
     public AdminPanelViewModel(IHost host)
     {
-        _appDbContext = host.Services.GetRequiredService<AppDbContext>();
-        _mapper = host.Services.GetRequiredService<IMapper>();
+        AppDbContext = host.Services.GetRequiredService<AppDbContext>();
 
         SaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
         ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
         RemoveUserRowCommand = host.Services.GetRequiredService<RemoveUserRowCommand>();
 
-        Users = new ObservableCollection<User>(_appDbContext.Users
+        Users = new ObservableCollection<User>(AppDbContext.Users
             .Include(x => x.Role)
             .Include(x => x.Group)
             .ToList());
-        Groups = new ObservableCollection<Group>(_appDbContext.Groups.ToList());
-        Roles = new ObservableCollection<Role>(_appDbContext.Roles.ToList());
+        Groups = new ObservableCollection<Group>(AppDbContext.Groups.ToList());
+        Roles = new ObservableCollection<Role>(AppDbContext.Roles.ToList());
     }
 }

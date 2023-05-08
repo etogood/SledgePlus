@@ -24,6 +24,6 @@ public class ToIDECommand : Command
     public override void Execute(object? parameter)
     {
         _navigationStore.CurrentViewModel =
-            _host.Services.CreateScope().ServiceProvider.GetRequiredService<IDEViewModel>();
+            _host.Services.GetRequiredService<IDEViewModel>();
     }
 }

@@ -15,8 +15,9 @@
         <TextBlock DataContext="{Binding ErrorMessageViewModel}" Text="{Binding Message}"
                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}"
                    Foreground="Red" TextAlignment="Center" HorizontalAlignment="Center" Width="auto" MinWidth="200" Height="auto" />
-        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Логин" Style="{StaticResource MaterialDesignTextBox}" Tag="Логин*" Width="auto" MaxWidth="200" />
-        <PasswordBox materialDesign:PasswordBoxAssist.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignRevealPasswordBox}" Width="auto" MaxWidth="200" Margin="0 10 0 0" />
+        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Логин" Style="{StaticResource MaterialDesignTextBox}" Tag="Логин*" Width="auto" MaxWidth="400" />
+        <PasswordBox materialDesign:PasswordBoxAssist.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignRevealPasswordBox}" Width="auto" MaxWidth="400" Margin="0 10 0 0" />
+        <TextBlock Foreground="GreenYellow" Text="Пароль должен содержать как минимум 8 символов, из которых 1 специальный и 1 заглавный" MaxWidth="400" TextWrapping="Wrap" TextAlignment="Center" FontSize="8" Margin="10"/>
         <Button Command="{Binding SignInCommand}" Height="30" HorizontalAlignment="Center" Content="Зарегистрироваться" Width="auto" MinWidth="200" Margin="0 10 0 0" />
     </StackPanel>
 </UserControl>

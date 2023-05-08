@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SledgePlus.WPF.ViewModels.UserControls"
         xmlns:v="clr-namespace:SledgePlus.WPF.Views.UserControls"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="{DynamicResource MaterialDesignDarkBackground}"
         mc:Ignorable="d"
         Title="SledgePlus" WindowStartupLocation="CenterScreen"
@@ -53,8 +52,8 @@
                 </StackPanel>
             </DockPanel>
         </StackPanel>
-        <Button Grid.Row="0" HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Command="{Binding ToWelcomeCommand}">
-            <Image Source="../Resources/home_logo.png" Margin="3"/>
+        <Button Grid.Row="0" HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignFlatButton}" Cursor="Hand" Command="{Binding ToWelcomeCommand}">
+            <Image Source="../Resources/home_logo.png"/>
         </Button>
 
         <Rectangle Grid.Row="1" Fill="Gray"/>

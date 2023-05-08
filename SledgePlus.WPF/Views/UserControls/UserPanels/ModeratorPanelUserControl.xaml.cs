@@ -24,5 +24,14 @@ namespace SledgePlus.WPF.Views.UserControls.UserPanels
         {
             InitializeComponent();
         }
+        private void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer.ScrollToVerticalOffset(ScrollViewer.ContentVerticalOffset - e.Delta);
+        }
+
+        private void ToSignInButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            dataGrid.CancelEdit();
+        }
     }
 }

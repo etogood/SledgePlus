@@ -24,6 +24,8 @@ namespace SledgePlus.WPF.Commands.Base
         public override void Execute(object? parameter)
         {
             _loginStore.CurrentUser = null;
+            _host.Services.GetRequiredService<AuthenticationViewModel>().Login = string.Empty;
+            _host.Services.GetRequiredService<AuthenticationViewModel>().Password = string.Empty;
             _navigationStore.CurrentViewModel = _host.Services.GetRequiredService<AuthenticationViewModel>();
         }
     }
