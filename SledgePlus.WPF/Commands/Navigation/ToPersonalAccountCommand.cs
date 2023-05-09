@@ -16,14 +16,17 @@ public class ToPersonalAccountCommand : Command
     private readonly INavigationStore _navigationStore;
     private readonly ILoginStore _loginStore;
 
+    public bool IsExecutable;
+
     public ToPersonalAccountCommand(IHost host)
     {
         _host = host;
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
+        IsExecutable = true;
     }
 
-    public override bool CanExecute(object? parameter) => _loginStore.IsLoggedIn;
+    public override bool CanExecute(object? parameter) => _loginStore.IsLoggedIn && IsExecutable;
 
     public override void Execute(object? parameter)
     {

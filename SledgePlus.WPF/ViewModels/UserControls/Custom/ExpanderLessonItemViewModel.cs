@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
 
@@ -22,6 +23,13 @@ public class ExpanderLessonItemViewModel : ViewModel
 
     public ExpanderLessonItemViewModel(IHost host)
     {
-        Header = "NO_HEADER";
+        Header = "Загрузка...";
+    }
+
+    public Task Build(string header, ObservableCollection<LessonItemViewModel> innerItems)
+    {
+        Header = header;
+        InnerItems = innerItems;
+        return Task.CompletedTask;
     }
 }

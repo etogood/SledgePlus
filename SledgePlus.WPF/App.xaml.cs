@@ -61,6 +61,7 @@ public partial class App
 
                 // Views
                 services.AddSingleton<MainWindow>();
+                services.AddSingleton<IndeterminateProgressBarWindow>();
 
                 // ViewModels
                 services.AddTransient<MessageViewModel>();

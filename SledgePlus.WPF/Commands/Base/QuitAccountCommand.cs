@@ -12,14 +12,17 @@ namespace SledgePlus.WPF.Commands.Base
         private readonly INavigationStore _navigationStore;
         private readonly IHost _host;
 
+        public bool IsExecutable;
+
         public QuitAccountCommand(IHost host)
         {
             _host = host;
             _loginStore = host.Services.GetRequiredService<ILoginStore>();
             _navigationStore = host.Services.GetRequiredService<INavigationStore>();
+            IsExecutable = true;
         }
 
-        public override bool CanExecute(object? parameter) => _loginStore.IsLoggedIn;
+        public override bool CanExecute(object? parameter) => _loginStore.IsLoggedIn && IsExecutable;
 
         public override void Execute(object? parameter)
         {

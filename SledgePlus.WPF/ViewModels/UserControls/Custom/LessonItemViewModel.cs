@@ -1,6 +1,10 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Extensions.DependencyInjection;
+
+using SledgePlus.Data.Models;
+using SledgePlus.WPF.Commands.InnerActions;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.Custom;
 
@@ -42,9 +46,20 @@ public class LessonItemViewModel : ViewModel
     
     public LessonItemViewModel(IHost host)
     {
-        Label = "NO_LABEL";
-        Description = "NO_DESCRIPTION";
+        Label = "Загрузка...";
+        Description = "Загрузка...";
         BackgroundColor = new SolidColorBrush(Color.FromRgb(255, 235, 59));
         Command = null;
+    }
+
+    public Task Build(int id, string label, string description, ICommand command, Brush backgroundColor)
+    {
+        Id = id;
+        Label = label;
+        BackgroundColor = backgroundColor;
+        Description = description;
+        Command = command;
+
+        return Task.CompletedTask;
     }
 }
