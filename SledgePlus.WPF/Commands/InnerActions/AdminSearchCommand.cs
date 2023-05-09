@@ -39,6 +39,11 @@ public class AdminSearchCommand : Command
         IsExecutable = false;
 
         var vm = _host.Services.GetRequiredService<AdminPanelViewModel>();
+        if (vm.SearchQuery == string.Empty)
+            vm.Users = new ObservableCollection<User>(await _host.Services.GetRequiredService<AppDbContext>().Users
+                .Include(x => x.Role)
+                .Include(x => x.Group)
+                .ToListAsync());
 
         vm.Users = new ObservableCollection<User>(await _host.Services.GetRequiredService<AppDbContext>().Users
             .Include(x => x.Role)
