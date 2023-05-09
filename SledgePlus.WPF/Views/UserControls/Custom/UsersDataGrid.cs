@@ -15,6 +15,7 @@ public class UsersDataGrid : DataGrid
 
     private void DataGridCustom_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (Items.SourceCollection == null) return;
         ItemsList = new ObservableCollection<User>((ObservableCollection<User>)Items.SourceCollection);
     }
 

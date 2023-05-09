@@ -6,7 +6,7 @@
              Background="{DynamicResource MaterialDesignDarkBackground}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d" 
-             Height="90" Width="300" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
+             Height="90" Width="300" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True">
     <Grid>
         <TextBlock Text="Идёт загрузка, пожалуйста ждите..." Margin="10 5"/>
         <ProgressBar Minimum="0" Maximum="100" IsIndeterminate="True" Height="30" Margin="10 10 10 0"/>

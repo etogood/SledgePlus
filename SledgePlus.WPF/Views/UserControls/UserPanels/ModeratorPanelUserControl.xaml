@@ -14,14 +14,47 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <custom:UsersDataGrid x:Name="dataGrid" VerticalScrollBarVisibility="Disabled" Height="auto" Width="auto" Style="{DynamicResource MaterialDesignDataGrid}" FontSize="14"
-                                  ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewMouseWheel="UIElement_OnPreviewMouseWheel"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Row="0"
+                 Grid.Column="0"
+                 materialDesign:HintAssist.Hint="Поиск" 
+                 materialDesign:TextFieldAssist.TextBoxViewMargin="15 0 0 0"
+                 Margin="0 0 5 0"
+                 Height="30" 
+                 FontSize="14"
+                 Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Content="Найти"
+                Command="{Binding SearchCommand}"
+                materialDesign:ButtonAssist.CornerRadius="0"
+                Cursor="Hand"
+                />
+        <ScrollViewer Grid.Row="1" 
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
+                      x:Name="ScrollViewer" 
+                      VerticalScrollBarVisibility="Auto"
+                      CanContentScroll="True">
+            <custom:UsersDataGrid x:Name="DataGrid" 
+                                  VerticalScrollBarVisibility="Disabled" 
+                                  Height="auto" Width="auto" FontSize="14"
+                                  Style="{DynamicResource MaterialDesignDataGrid}" 
+                                  ItemsList="{Binding ChangedUsers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  PreviewMouseWheel="UIElement_OnPreviewMouseWheel"
                                   ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
-                                  CanUserAddRows="True" CanUserDeleteRows="False" ColumnWidth="auto" AutoGenerateColumns="False">
+                                  CanUserAddRows="True" 
+                                  CanUserDeleteRows="False" 
+                                  ColumnWidth="auto" 
+                                  AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
                                                        Header="№"
@@ -63,7 +96,9 @@
                 </DataGrid.Columns>
             </custom:UsersDataGrid>
         </ScrollViewer>
-        <Button Grid.Row="1"
+        <Button Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Width="auto"
                 Content="Сохранить"
                 Command="{Binding SaveUsersListCommand}"

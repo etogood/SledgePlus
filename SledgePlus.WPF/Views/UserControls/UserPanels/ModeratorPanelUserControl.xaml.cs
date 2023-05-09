@@ -31,7 +31,7 @@ namespace SledgePlus.WPF.Views.UserControls.UserPanels
 
         private void ToSignInButton_OnClick(object sender, RoutedEventArgs e)
         {
-            dataGrid.CancelEdit();
+            DataGrid.CancelEdit();
         }
     }
 }

@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
-using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
-using SledgePlus.Data.Models;
-
 using SledgePlus.Data;
+using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Commands.Navigation;
-using SledgePlus.WPF.Models.DTOs;
-using Microsoft.EntityFrameworkCore;
 
 namespace SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
@@ -25,9 +20,16 @@ public class AdminPanelViewModel : ViewModel
     public ICommand SaveUsersListCommand { get; set; }
     public ICommand ToSignInCommand { get; set; }
     public ICommand RemoveUserRowCommand { get; set; }
+    public ICommand SearchCommand { get; set; }
+
+    private string _searchQuery;
+    public string SearchQuery
+    {
+        get => _searchQuery;
+        set => Set(ref _searchQuery, value);
+    }
 
     private ObservableCollection<User> _users;
-
     public ObservableCollection<User> Users
     {
         get => _users;
@@ -71,10 +73,10 @@ public class AdminPanelViewModel : ViewModel
     public AdminPanelViewModel(IHost host)
     {
         AppDbContext = host.Services.GetRequiredService<AppDbContext>();
-
         SaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
         ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
         RemoveUserRowCommand = host.Services.GetRequiredService<RemoveUserRowCommand>();
+        SearchCommand = host.Services.GetRequiredService<AdminSearchCommand>();
 
         Users = new ObservableCollection<User>(AppDbContext.Users
             .Include(x => x.Role)

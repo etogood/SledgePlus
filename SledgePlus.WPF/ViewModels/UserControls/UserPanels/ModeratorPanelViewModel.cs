@@ -20,6 +20,14 @@ public class ModeratorPanelViewModel : ViewModel
     public ICommand SaveUsersListCommand { get; set; }
     public ICommand ToSignInCommand { get; set; }
     public ICommand RemoveUserRowCommand { get; set; }
+    public ICommand SearchCommand { get; set; }
+
+    private string _searchQuery;
+    public string SearchQuery
+    {
+        get => _searchQuery;
+        set => Set(ref _searchQuery, value);
+    }
 
     private ObservableCollection<User> _users;
 
@@ -70,6 +78,7 @@ public class ModeratorPanelViewModel : ViewModel
         SaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
         ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
         RemoveUserRowCommand = host.Services.GetRequiredService<RemoveUserRowCommand>();
+        SearchCommand = host.Services.GetRequiredService<ModeratorSearchCommand>();
 
         Users = new ObservableCollection<User>(AppDbContext.Users
             .Include(x => x.Role)
