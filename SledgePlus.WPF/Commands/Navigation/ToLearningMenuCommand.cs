@@ -13,16 +13,16 @@ public class ToLearningMenuCommand : Command
     private readonly IHost _host;
     private readonly INavigationStore _navigationStore;
     private readonly ILoginStore _loginStore;
+    private readonly LearningMenuViewModel _vm;
 
-    private LearningMenuViewModel _vm;
-
-    public bool IsExecutable;
+    public bool IsExecutable { get; set; }
 
     public ToLearningMenuCommand(IHost host)
     {
         _host = host;
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
+        _vm = _host.Services.CreateAsyncScope().ServiceProvider.GetRequiredService<LearningMenuViewModel>();
         IsExecutable = true;
     }
 
@@ -32,7 +32,6 @@ public class ToLearningMenuCommand : Command
     {
         _host.Services.GetRequiredService<IndeterminateProgressBarWindow>().Show();
 
-        _vm = _host.Services.CreateAsyncScope().ServiceProvider.GetRequiredService<LearningMenuViewModel>();
         _navigationStore.CurrentViewModel = _vm;
         await Task.Run(Build);
 
@@ -43,12 +42,16 @@ public class ToLearningMenuCommand : Command
     {
         IsExecutable = false;
         _host.Services.GetRequiredService<ToPersonalAccountCommand>().IsExecutable = false;
+        _host.Services.GetRequiredService<ToWelcomeCommand>().IsExecutable = false;
+        _host.Services.GetRequiredService<ToIDECommand>().IsExecutable = false;
         _host.Services.GetRequiredService<QuitAccountCommand>().IsExecutable = false;
 
         await _vm.Build();
 
         IsExecutable = true;
         _host.Services.GetRequiredService<ToPersonalAccountCommand>().IsExecutable = true;
+        _host.Services.GetRequiredService<ToWelcomeCommand>().IsExecutable = true;
+        _host.Services.GetRequiredService<ToIDECommand>().IsExecutable = true;
         _host.Services.GetRequiredService<QuitAccountCommand>().IsExecutable = true;
     }
 }

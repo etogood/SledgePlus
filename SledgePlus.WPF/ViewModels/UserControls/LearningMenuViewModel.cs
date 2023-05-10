@@ -1,22 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Media;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Commands.InnerActions;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls.Custom;
-using SledgePlus.WPF.Views.Windows;
 
 namespace SledgePlus.WPF.ViewModels.UserControls;
-
-
 
 public class LearningMenuViewModel : ViewModel
 {
@@ -28,12 +25,23 @@ public class LearningMenuViewModel : ViewModel
     private static readonly SolidColorBrush LessonBrush = new(Color.FromRgb(255, 235, 59));
     private static readonly SolidColorBrush PracticeBrush = new(Color.FromRgb(255, 255, 114));
 
+    private object _sectionsLock;
+    private object _innerSectionsItemsLock;
+
     private ObservableCollection<ExpanderLessonItemViewModel> _sections;
 
     public ObservableCollection<ExpanderLessonItemViewModel> Sections
     {
         get => _sections;
         set => Set(ref _sections, value);
+    }
+
+    private ObservableCollection<LessonItemViewModel> _innerSectionsItems;
+
+    public ObservableCollection<LessonItemViewModel> InnerSectionsItems
+    {
+        get => _innerSectionsItems;
+        set => Set(ref _innerSectionsItems, value);
     }
 
     public MessageViewModel ErrorMessageViewModel { get; }
@@ -43,7 +51,6 @@ public class LearningMenuViewModel : ViewModel
         set => ErrorMessageViewModel.Message = value;
     }
 
-
     public LearningMenuViewModel(IHost host)
     {
         _host = host;
@@ -51,46 +58,55 @@ public class LearningMenuViewModel : ViewModel
         _loginStore = host.Services.GetRequiredService<ILoginStore>();
 
         ErrorMessageViewModel = host.Services.GetRequiredService<MessageViewModel>();
-        
+
+        Sections = new ObservableCollection<ExpanderLessonItemViewModel>();
+        InnerSectionsItems = new ObservableCollection<LessonItemViewModel>();
+
+        _sectionsLock = new object();
+        _innerSectionsItemsLock = new object();
+
+        BindingOperations.EnableCollectionSynchronization(Sections, _sectionsLock);
+        BindingOperations.EnableCollectionSynchronization(InnerSectionsItems, _innerSectionsItemsLock);
     }
 
     public async Task Build()
     {
-        Application.Current.Dispatcher.Invoke(() =>
+        if (Sections.Any()) Sections.Clear();
+
+        Label label = new();
+
+        var dbSections = await _appDbContext.Sections.ToListAsync();
+        var dbLessons = await _appDbContext.Lessons.ToListAsync();
+
+        foreach (var section in dbSections)
         {
-            Sections = new ObservableCollection<ExpanderLessonItemViewModel>();
-        });
+            InnerSectionsItems = new ObservableCollection<LessonItemViewModel>();
 
-        LabelBuilder labelBuilder = new();
+            label.FirstNumber += 1;
+            label.SecondNumber = 0;
 
-        foreach (var section in _appDbContext.Sections.ToList())
-        {
-            ObservableCollection<LessonItemViewModel> innerItems = new();
-
-            labelBuilder.FirstNumber += 1;
-            labelBuilder.SecondNumber = 0;
-
-            foreach (var lesson in _appDbContext.Lessons.Where(x => x.SectionId == section.SectionId).ToList())
+            foreach (var lesson in dbLessons.Where(x => x.SectionId == section.SectionId))
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                var newLabel = $"{label.FirstNumber}.{label.SecondNumber += 1} {GetLabelName(lesson)}";
+                var item1 = new LessonItemViewModel(_host);
+                await Task.Run(async () => item1.Build(lesson.LessonId, newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, lesson.LessonDocumentName, lesson.IsPractice), await GetItemColor(lesson)));
+                
+                lock (_innerSectionsItemsLock)
                 {
-                    var label = $"{labelBuilder.FirstNumber}.{labelBuilder.SecondNumber += 1} {GetLabelName(lesson)}";
-                    var item = new LessonItemViewModel(_host);
-                    Task.Run(() => item.Build(lesson.LessonId, label, lesson.LessonDescription, new OpenLessonDocument(_host, lesson.LessonDocumentName, lesson.IsPractice), Task.Run(() => GetItemColor(lesson)).Result));
-                    innerItems.Add(item);
-                });
+                    InnerSectionsItems.Add(item1);
+                }
             }
+            var item = new ExpanderLessonItemViewModel(_host);
+            await Task.Run(() => item.Build(section.SectionHeader, InnerSectionsItems));
 
-            Application.Current.Dispatcher.Invoke(() =>
+            lock (_sectionsLock)
             {
-                var item = new ExpanderLessonItemViewModel(_host);
-                Task.Run(() => item.Build(section.SectionHeader, innerItems));
                 Sections.Add(item);
-            });
+            }
         }
     }
 
-    private struct LabelBuilder
+    private struct Label
     {
         public int FirstNumber;
         public int SecondNumber;

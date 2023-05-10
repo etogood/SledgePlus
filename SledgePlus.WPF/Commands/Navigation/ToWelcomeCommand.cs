@@ -9,12 +9,17 @@ public class ToWelcomeCommand : Command
 {
     private readonly IHost _host;
 
+    public bool IsExecutable { get; set; }
+
     public ToWelcomeCommand(IHost host)
     {
         _host = host;
+
+        IsExecutable = true;
     }
 
-    public override bool CanExecute(object? parameter) => _host.Services.GetRequiredService<ILoginStore>().IsLoggedIn;
+
+    public override bool CanExecute(object? parameter) => _host.Services.GetRequiredService<ILoginStore>().IsLoggedIn && IsExecutable;
 
     public override void Execute(object? parameter)
     {

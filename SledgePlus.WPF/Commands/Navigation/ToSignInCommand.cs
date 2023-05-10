@@ -15,12 +15,15 @@ public class ToSignInCommand : Command
     private readonly IHost _host;
     private readonly INavigationStore _navigationStore;
 
+    public bool IsExecutable { get; set; }
+    
     public ToSignInCommand(IHost host)
     {
         _host = host;
         _navigationStore = host.Services.GetRequiredService<INavigationStore>();
         _appDbContext = host.Services.GetRequiredService<AppDbContext>();
 
+        IsExecutable = true;
     }
 
     public override bool CanExecute(object? parameter)
@@ -29,7 +32,8 @@ public class ToSignInCommand : Command
         return !string.IsNullOrEmpty(user.Surname) &&
                !string.IsNullOrEmpty(user.Name) &&
                user.GroupId != 0 &&
-               user.RoleId != 0;
+               user.RoleId != 0 && 
+               IsExecutable;
     }
 
     public override void Execute(object? parameter)

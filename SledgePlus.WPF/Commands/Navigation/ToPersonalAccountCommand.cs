@@ -16,7 +16,7 @@ public class ToPersonalAccountCommand : Command
     private readonly INavigationStore _navigationStore;
     private readonly ILoginStore _loginStore;
 
-    public bool IsExecutable;
+    public bool IsExecutable { get; set; }
 
     public ToPersonalAccountCommand(IHost host)
     {

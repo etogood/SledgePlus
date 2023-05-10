@@ -8,7 +8,7 @@
         Background="{DynamicResource MaterialDesignDarkBackground}"
         mc:Ignorable="d"
         Title="SledgePlus" WindowStartupLocation="CenterScreen"
-        MinHeight="500" MinWidth="910" Height="500" Width="910">
+        MinHeight="500" MinWidth="910" Height="500" Width="910" Closing="MainWindow_OnClosing">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:WelcomeViewModel}">
             <v:WelcomeUserControl />

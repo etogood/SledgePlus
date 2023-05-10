@@ -12,7 +12,7 @@ namespace SledgePlus.WPF.Commands.Base
         private readonly INavigationStore _navigationStore;
         private readonly IHost _host;
 
-        public bool IsExecutable;
+        public bool IsExecutable { get; set; }
 
         public QuitAccountCommand(IHost host)
         {
