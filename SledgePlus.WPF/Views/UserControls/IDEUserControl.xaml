@@ -31,7 +31,7 @@
                                SyntaxHighlighting="C++" 
                                FontFamily="Cascadia Code" 
                                FontSize="10pt" />
-        <Button Grid.Column="0" Grid.Row="1" Height="35" Content="Скомпилировать код" Command="{Binding CompileCodeCommand}" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="0"/>
-        <Button Grid.Column="1" Grid.Row="1" Height="35" Content="Запустить последнюю программу" Command="{Binding RunCodeCommand}" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="0"/>
+        <Button Grid.Column="0" Grid.Row="1" Height="auto" Content="Скомпилировать код" Command="{Binding CompileCodeCommand}" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="0"/>
+        <Button Grid.Column="1" Grid.Row="1" Height="auto" Content="Запустить последнюю программу" Command="{Binding RunCodeCommand}" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="0"/>
     </Grid>
 </UserControl>
