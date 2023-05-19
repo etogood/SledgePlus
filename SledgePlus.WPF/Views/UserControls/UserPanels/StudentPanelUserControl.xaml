@@ -9,6 +9,6 @@
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              d:DesignHeight="270" d:DesignWidth="780">
     <Grid>
-        <Label Content="studentp" />
+        
     </Grid>
 </UserControl>
