@@ -17,10 +17,12 @@ namespace SledgePlus.WPF.Commands.InnerActions
     {
         private readonly IHost _host;
         private readonly UsersService _userServices;
+        private readonly ILoginStore _loginStore;
 
         public SignInCommand(IHost host, IMapper mapper)
         {
             _host = host;
+            _loginStore = _host.Services.GetRequiredService<ILoginStore>();
             _userServices = (UsersService)host.Services.GetRequiredService<IDataServices<User>>();
         }
 
@@ -33,8 +35,9 @@ namespace SledgePlus.WPF.Commands.InnerActions
             var viewModel = _host.Services.GetRequiredService<SignInViewModel>();
             try
             {
+                if (_loginStore.CurrentUser == null) return;
                 var userLogin = _userServices.GetByLogin(viewModel.Login);
-                if (userLogin != null && userLogin.Login != viewModel.Login) throw new DuplicateException();
+                if (userLogin != null && viewModel.CurrentUser != _loginStore.CurrentUser) throw new DuplicateException();
 
                 var password = Cryptography.HashPassword(viewModel.Password);
                 var user = viewModel.CurrentUser;

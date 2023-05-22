@@ -98,20 +98,12 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Удалить" MinWidth="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Width="auto"
-                                        Height="auto"
-                                        Content="x"
-                                        Background="Red"
-                                        BorderBrush="Red"
-                                        Foreground="{DynamicResource MaterialDesignDarkForeground}"
-                                        Command="{Binding Path=DataContext.RemoveUserRowCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}"
-                                        CommandParameter="{Binding}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridCheckBoxColumn EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                            ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                            Header="Удалить" 
+                                            IsThreeState="False"
+                                            Binding="{Binding DeleteFlag, UpdateSourceTrigger=PropertyChanged}"
+                                            MinWidth="50"/>
                 </DataGrid.Columns>
             </custom:UsersDataGrid>
         </ScrollViewer>

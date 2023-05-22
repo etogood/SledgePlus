@@ -11,7 +11,7 @@ public static class Text
         var upperChars = new Regex(@"[A-Z]+");
 
         return hasNumber.IsMatch(password)
-               && upperChars.IsMatch(password) && password.Length > 8;
+               && upperChars.IsMatch(password) && password.Length >= 8;
     }
 
     public static string? ReadText()

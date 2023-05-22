@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.ObjectModel;
+using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
-using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Enumerators;
-using SledgePlus.WPF.Stores.Login;
-using SledgePlus.WPF.ViewModels.UserControls;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
@@ -31,10 +29,16 @@ public class AdminSaveUsersListCommand : Command
                 "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) ==
             MessageBoxResult.No) return;
 
-        try
-        {
+        
             foreach (var vmChangedUser in vm.ChangedUsers)
             {
+                if (vmChangedUser.DeleteFlag)
+                {
+                    try { context.Users.Remove(vmChangedUser); }
+                    catch (Exception) { MessageBox.Show($"Пользователя {vmChangedUser.Fullname} невозможно удалить, так как он существует исключительно локально"); }
+                    continue;
+                }
+
                 if (vmChangedUser.RoleId == 0) vmChangedUser.RoleId = (int)Roles.Student;
                 if (!(string.IsNullOrWhiteSpace(vmChangedUser.GroupId.ToString()) ||
                       string.IsNullOrWhiteSpace(vmChangedUser.Surname) ||
@@ -44,17 +48,8 @@ public class AdminSaveUsersListCommand : Command
                     context.Users.Update(vmChangedUser);
             }
             context.SaveChanges();
-            var uservm = _host.Services.GetRequiredService<AuthenticationViewModel>();
-            var user = _host.Services.GetRequiredService<IDataServices<User>>().LogIn(uservm.Login, uservm.Password);
 
-            _host.Services.GetRequiredService<ILoginStore>().CurrentUser = user;
-        }
-        catch (Exception)
-        {
-            
-        }
-        
+            vm.Users = new ObservableCollection<User>(context.Users);
 
-        
     }
 }

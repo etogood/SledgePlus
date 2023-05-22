@@ -23,5 +23,11 @@ namespace SledgePlus.Data
         {
             optionsBuilder.UseMySQL("server=de2000.iaasdns.com;user=ilya_SledgePlusUser;password=zkw6nvXWFzwejwaYiAcc;database=ilya_SledgePlus;Charset=utf8;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().Navigation(e => e.Role).AutoInclude();
+            modelBuilder.Entity<User>().Navigation(e => e.Group).AutoInclude();
+        }
     }
 }

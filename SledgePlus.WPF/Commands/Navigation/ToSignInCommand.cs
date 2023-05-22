@@ -32,20 +32,21 @@ public class ToSignInCommand : Command
     {
         if (_loginStore.CurrentUser == null) return false;
         if (parameter is not User user) return false;
-        return !string.IsNullOrEmpty(user.Surname) &&
+            return !string.IsNullOrEmpty(user.Surname) &&
                !string.IsNullOrEmpty(user.Name) &&
                user.GroupId != 0 &&
                user.RoleId != 0 &&
-               (!user.Role.RolePreferences.Contains("A") || _loginStore.CurrentUser.Role.RolePreferences.Contains("A")) &&
+               (user.RoleId != 1 || _loginStore.CurrentUser.Role.RolePreferences.Contains("A")) &&
                IsExecutable;
     }
 
     public override void Execute(object? parameter)
     {
+        if (parameter is not User user) return;
         var vm = _host.Services.GetRequiredService<SignInViewModel>();
         try
         {
-            _host.Services.GetRequiredService<SignInViewModel>().CurrentUser = parameter as User;
+            _host.Services.GetRequiredService<SignInViewModel>().CurrentUser = user;
             vm.ErrorMessage =
                 string.IsNullOrEmpty(_appDbContext.Users.ToList().FirstOrDefault(x => x == vm.CurrentUser)?.Password)
                     ? string.Empty

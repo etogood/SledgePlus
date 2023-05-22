@@ -17,6 +17,21 @@ public class User
 
     public string Fullname => Surname + ' ' + Name + ' ' + Patronymic;
 
+    [NotMapped]
+    private bool _deleteFlag;
+    [NotMapped]
+    public bool DeleteFlag {
+        get => _deleteFlag;
+        set
+        {
+            if (Name == string.Empty 
+                || Surname == string.Empty 
+                || RoleId == 0 
+                || GroupId == 0) return;
+            _deleteFlag = value;
+        }
+    }
+
     [ForeignKey("RoleId")]
     public Role Role { get; set; }
     [ForeignKey("GroupId")]

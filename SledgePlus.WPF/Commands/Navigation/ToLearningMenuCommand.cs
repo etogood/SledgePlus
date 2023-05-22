@@ -30,6 +30,12 @@ public class ToLearningMenuCommand : Command
 
     public override async void Execute(object? parameter)
     {
+        if (_vm.IsLoaded)
+        {
+            _navigationStore.CurrentViewModel = _vm;
+            return;
+        }
+
         _host.Services.GetRequiredService<IndeterminateProgressBarWindow>().Show();
 
         _navigationStore.CurrentViewModel = _vm;

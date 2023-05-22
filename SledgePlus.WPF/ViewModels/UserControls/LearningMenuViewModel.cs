@@ -28,6 +28,13 @@ public class LearningMenuViewModel : ViewModel
     private object _sectionsLock;
     private object _innerSectionsItemsLock;
 
+    private bool _isLoaded;
+    public bool IsLoaded
+    {
+        get => _isLoaded;
+        set => Set(ref _isLoaded, value);
+    }
+
     private ObservableCollection<ExpanderLessonItemViewModel> _sections;
 
     public ObservableCollection<ExpanderLessonItemViewModel> Sections
@@ -65,6 +72,8 @@ public class LearningMenuViewModel : ViewModel
         _sectionsLock = new object();
         _innerSectionsItemsLock = new object();
 
+        IsLoaded = false;
+
         BindingOperations.EnableCollectionSynchronization(Sections, _sectionsLock);
         BindingOperations.EnableCollectionSynchronization(InnerSectionsItems, _innerSectionsItemsLock);
     }
@@ -89,7 +98,7 @@ public class LearningMenuViewModel : ViewModel
             {
                 var newLabel = $"{label.FirstNumber}.{label.SecondNumber += 1} {GetLabelName(lesson)}";
                 var item1 = new LessonItemViewModel(_host);
-                await Task.Run(async () => item1.Build(lesson.LessonId, newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, lesson.LessonDocumentName, lesson.IsPractice), await GetItemColor(lesson)));
+                await Task.Run(async () => item1.Build(lesson.LessonId, newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, "./Vendor/LBase/" + lesson.LessonDocumentName, lesson.IsPractice), await GetItemColor(lesson)));
                 
                 lock (_innerSectionsItemsLock)
                 {
@@ -104,6 +113,8 @@ public class LearningMenuViewModel : ViewModel
                 Sections.Add(item);
             }
         }
+
+        IsLoaded = true;
     }
 
     private struct Label
