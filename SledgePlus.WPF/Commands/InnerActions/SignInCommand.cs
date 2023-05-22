@@ -35,10 +35,13 @@ namespace SledgePlus.WPF.Commands.InnerActions
             {
                 var userLogin = _userServices.GetByLogin(viewModel.Login);
                 if (userLogin != null && userLogin.Login != viewModel.Login) throw new DuplicateException();
+
                 var password = Cryptography.HashPassword(viewModel.Password);
                 var user = viewModel.CurrentUser;
+
                 user.Password = password;
                 user.Login = viewModel.Login;
+
                 await _userServices.Update(user);
                 _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel =
                     _host.Services.GetRequiredService<PersonalAccountViewModel>();

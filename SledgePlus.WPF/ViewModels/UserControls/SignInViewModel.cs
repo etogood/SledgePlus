@@ -67,7 +67,6 @@ namespace SledgePlus.WPF.ViewModels.UserControls
         {
             SignInCommand = host.Services.GetRequiredService<SignInCommand>();
             ErrorMessageViewModel = host.Services.GetRequiredService<MessageViewModel>();
-            Password = string.Empty;
         }
 
         public bool CanExecute()
