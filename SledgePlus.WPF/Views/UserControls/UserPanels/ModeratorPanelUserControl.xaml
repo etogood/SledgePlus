@@ -79,6 +79,18 @@
                                                            SelectedValueBinding="{Binding GroupId, UpdateSourceTrigger=PropertyChanged}"
                                                            SelectedValuePath="GroupId"
                                                            DisplayMemberPath="GroupName" />
+                    <DataGridTemplateColumn Header="Авторизация" MinWidth="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="auto"
+                                        Height="auto"
+                                        Content="+"
+                                        Click="ToSignInButton_OnClick"
+                                        Command="{Binding Path=DataContext.ToSignInCommand,RelativeSource={RelativeSource AncestorType={x:Type custom:UsersDataGrid}}}"
+                                        CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Удалить" MinWidth="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
