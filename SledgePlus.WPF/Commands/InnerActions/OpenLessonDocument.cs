@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
@@ -32,10 +33,13 @@ public class OpenLessonDocument : Command
         vm.ErrorMessage = string.Empty;
         try
         {
+            var path = Directory.GetCurrentDirectory() + _document;
+
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo(_document)
+                StartInfo = new ProcessStartInfo
                 {
+                    FileName = path,
                     UseShellExecute = true
                 }
             };

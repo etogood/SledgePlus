@@ -98,7 +98,7 @@ public class LearningMenuViewModel : ViewModel
             {
                 var newLabel = $"{label.FirstNumber}.{label.SecondNumber += 1} {GetLabelName(lesson)}";
                 var item1 = new LessonItemViewModel(_host);
-                await Task.Run(async () => item1.Build(lesson.LessonId, newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, "./Vendor/LBase/" + lesson.LessonDocumentName, lesson.IsPractice), await GetItemColor(lesson)));
+                await Task.Run(async () => item1.Build(lesson.LessonId, newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, @"\LBase\" + lesson.LessonDocumentName, lesson.IsPractice), await GetItemColor(lesson)));
                 
                 lock (_innerSectionsItemsLock)
                 {
