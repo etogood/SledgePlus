@@ -22,12 +22,14 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Simple.Wpf.Terminal" Version="2.3.53" />
+    <PackageReference Include="System.Management" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\Text\" />
     <Folder Include="Models\Converters\" />
     <Folder Include="Models\Enumerators\" />
+    <Folder Include="Models\Processes\" />
     <Folder Include="Stores\Navigation\" />
     <Folder Include="Stores\Login\" />
   </ItemGroup>

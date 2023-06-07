@@ -4,6 +4,8 @@ using SledgePlus.WPF.ViewModels.UserControls;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
+using SledgePlus.WPF.Models.Processes;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
 
@@ -26,8 +28,18 @@ public class CompileCodeCommand : Command
         var compiling = new Process();
         compiling.StartInfo.FileName = "cmd.exe";
         compiling.StartInfo.Arguments = "/K" + @"MinGW\bin\compile.bat";
-        //compiling.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-        //compiling.StartInfo.CreateNoWindow = true;
+        compiling.StartInfo.RedirectStandardError = true;
+        compiling.StartInfo.CreateNoWindow = true;
         compiling.Start();
+
+        Thread.Sleep(3000);
+
+        ProcessesManagement.KillProcessAndChildren(compiling.Id);
+
+        var error = compiling.StandardError.ReadToEnd();
+
+        MessageBox.Show(string.IsNullOrEmpty(error) ? "Компиляция завершена без ошибок!" : $"Компиляция завершена с ошибкой:\n\n{error}");
+
+
     }
 }

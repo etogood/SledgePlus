@@ -4,12 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Exceptions;
-using SledgePlus.WPF.Factories;
 using SledgePlus.WPF.Models.DataServices;
 using SledgePlus.WPF.Models.Text;
 using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.Stores.Navigation;
 using SledgePlus.WPF.ViewModels.UserControls;
+using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
+using System.Collections.ObjectModel;
+using SledgePlus.Data;
 
 namespace SledgePlus.WPF.Commands.InnerActions
 {
@@ -46,9 +48,17 @@ namespace SledgePlus.WPF.Commands.InnerActions
                 user.Login = viewModel.Login;
 
                 await _userServices.Update(user);
+
+                var context = _host.Services.GetRequiredService<AppDbContext>();
+                _host.Services.GetRequiredService<ModeratorPanelViewModel>().Users = 
+                    new ObservableCollection<User>(context.Users);
+                _host.Services.GetRequiredService<AdminPanelViewModel>().Users =
+                    new ObservableCollection<User>(context.Users);
+
                 _host.Services.GetRequiredService<INavigationStore>().CurrentViewModel =
                     _host.Services.GetRequiredService<PersonalAccountViewModel>();
-                
+
+                MessageBox.Show("Данные для входа успешно обновлены");
             }
             catch (DuplicateException)
             {
