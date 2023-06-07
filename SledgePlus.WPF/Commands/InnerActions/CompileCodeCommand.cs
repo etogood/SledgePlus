@@ -7,10 +7,11 @@ namespace SledgePlus.WPF.Commands.InnerActions;
 
 public class CompileCodeCommand : Command
 {
-    private const string _programPath = @".\MinGW\bin\__temp_program.o";
+    private const string ProgramPath = @".\MinGW\bin\__temp_program.o";
 
     public CompileCodeCommand(IHost host)
     {
+        File.Delete(ProgramPath);
     }
 
     public override bool CanExecute(object? parameter) => true;
@@ -33,6 +34,6 @@ public class CompileCodeCommand : Command
 
         MessageBox.Show(string.IsNullOrEmpty(error) ? "Компиляция завершена без ошибок!" : $"Компиляция завершена с ошибкой:\n\n{error}");
 
-        if (!string.IsNullOrEmpty(error)) File.Delete(@".\MinGW\bin\__temp_program.o");
+        if (!string.IsNullOrEmpty(error)) File.Delete(ProgramPath);
     }
 }
