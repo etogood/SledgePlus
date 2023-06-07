@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SledgePlus.WPF.Factories;
-using SledgePlus.WPF.ViewModels.UserControls;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Threading;
 using SledgePlus.WPF.Models.Processes;
 
@@ -11,13 +7,10 @@ namespace SledgePlus.WPF.Commands.InnerActions;
 
 public class CompileCodeCommand : Command
 {
-    private readonly IHost _host;
-
     private const string _programPath = @".\MinGW\bin\__temp_program.o";
 
     public CompileCodeCommand(IHost host)
     {
-        _host = host;
     }
 
     public override bool CanExecute(object? parameter) => true;
@@ -40,6 +33,6 @@ public class CompileCodeCommand : Command
 
         MessageBox.Show(string.IsNullOrEmpty(error) ? "Компиляция завершена без ошибок!" : $"Компиляция завершена с ошибкой:\n\n{error}");
 
-
+        if (!string.IsNullOrEmpty(error)) File.Delete(@".\MinGW\bin\__temp_program.o");
     }
 }
