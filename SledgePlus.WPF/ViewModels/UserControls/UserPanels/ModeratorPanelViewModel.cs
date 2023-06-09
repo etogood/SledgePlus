@@ -74,10 +74,10 @@ public class ModeratorPanelViewModel : ViewModel
     {
         AppDbContext = host.Services.GetRequiredService<AppDbContext>();
 
-        SaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
+        SaveUsersListCommand = host.Services.GetRequiredService<SaveUsersListCommand>();
         ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
         SearchCommand = host.Services.GetRequiredService<ModeratorSearchCommand>();
-
+        
         SearchQuery = string.Empty;
 
         Users = new ObservableCollection<User>(AppDbContext.Users

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Models.Enumerators;
+using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
@@ -32,7 +33,7 @@ public class SaveUsersListCommand : Command
 
         foreach (var vmChangedUser in vm.ChangedUsers)
         {
-            if (vmChangedUser.DeleteFlag)
+            if (vmChangedUser.DeleteFlag && vmChangedUser != _host.Services.GetRequiredService<ILoginStore>().CurrentUser)
             {
                 if (vmChangedUser.Role.RoleId == 1)
                 {

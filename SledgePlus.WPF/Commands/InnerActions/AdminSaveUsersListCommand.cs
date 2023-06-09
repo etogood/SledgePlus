@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SledgePlus.Data;
 using SledgePlus.Data.Models;
 using SledgePlus.WPF.Models.Enumerators;
+using SledgePlus.WPF.Stores.Login;
 using SledgePlus.WPF.ViewModels.UserControls.UserPanels;
 
 namespace SledgePlus.WPF.Commands.InnerActions;
@@ -32,7 +33,7 @@ public class AdminSaveUsersListCommand : Command
         
             foreach (var vmChangedUser in vm.ChangedUsers)
             {
-                if (vmChangedUser.DeleteFlag)
+                if (vmChangedUser.DeleteFlag && vmChangedUser != _host.Services.GetRequiredService<ILoginStore>().CurrentUser)
                 {
                     try { context.Users.Remove(vmChangedUser); }
                     catch (Exception) { MessageBox.Show($"Пользователя {vmChangedUser.Fullname} невозможно удалить, так как он существует исключительно локально"); }

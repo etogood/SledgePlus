@@ -17,7 +17,7 @@ public class AdminPanelViewModel : ViewModel
 
     #region Properties
 
-    public ICommand SaveUsersListCommand { get; set; }
+    public ICommand AdminSaveUsersListCommand { get; set; }
     public ICommand ToSignInCommand { get; set; }
     public ICommand SearchCommand { get; set; }
 
@@ -72,7 +72,7 @@ public class AdminPanelViewModel : ViewModel
     public AdminPanelViewModel(IHost host)
     {
         AppDbContext = host.Services.GetRequiredService<AppDbContext>();
-        SaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
+        AdminSaveUsersListCommand = host.Services.GetRequiredService<AdminSaveUsersListCommand>();
         ToSignInCommand = host.Services.GetRequiredService<ToSignInCommand>();
         SearchCommand = host.Services.GetRequiredService<AdminSearchCommand>();
 
@@ -82,6 +82,7 @@ public class AdminPanelViewModel : ViewModel
             .Include(x => x.Role)
             .Include(x => x.Group)
             .ToList());
+        ChangedUsers = Users;
         Groups = new ObservableCollection<Group>(AppDbContext.Groups.ToList());
         Roles = new ObservableCollection<Role>(AppDbContext.Roles.ToList());
     }

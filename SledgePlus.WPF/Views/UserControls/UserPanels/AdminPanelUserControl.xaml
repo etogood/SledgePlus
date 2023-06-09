@@ -30,7 +30,11 @@
                  Margin="0 0 5 0"
                  Height="30" 
                  FontSize="14"
-                 Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                 Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
+            </TextBox.InputBindings>
+        </TextBox>
         <Button Grid.Row="0"
                 Grid.Column="1"
                 Content="Найти"
@@ -112,7 +116,7 @@
                 Grid.ColumnSpan="2"
                 Width="auto"
                 Content="Сохранить"
-                Command="{Binding SaveUsersListCommand}"
+                Command="{Binding AdminSaveUsersListCommand}"
                 Cursor="Hand"
                 materialDesign:ButtonAssist.CornerRadius="0"/>
     </Grid>

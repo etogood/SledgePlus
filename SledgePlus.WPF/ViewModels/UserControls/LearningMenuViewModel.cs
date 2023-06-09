@@ -81,39 +81,31 @@ public class LearningMenuViewModel : ViewModel
     public async Task Build()
     {
         if (Sections.Any()) Sections.Clear();
-
         Label label = new();
-
         var dbSections = await _appDbContext.Sections.ToListAsync();
         var dbLessons = await _appDbContext.Lessons.ToListAsync();
-
         foreach (var section in dbSections)
         {
             InnerSectionsItems = new ObservableCollection<LessonItemViewModel>();
-
             label.FirstNumber += 1;
             label.SecondNumber = 0;
-
             foreach (var lesson in dbLessons.Where(x => x.SectionId == section.SectionId))
             {
                 var newLabel = $"{label.FirstNumber}.{label.SecondNumber += 1} {GetLabelName(lesson)}";
                 var item1 = new LessonItemViewModel(_host);
-                await Task.Run(async () => item1.Build(lesson.LessonId, newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, @"\LBase\" + lesson.LessonDocumentName, lesson.IsPractice), await GetItemColor(lesson)));
-                
+                await Task.Run(async () => item1.Build(lesson.LessonId,
+                    newLabel, lesson.LessonDescription, new OpenLessonDocument(_host, 
+                    @"\LBase\" + lesson.LessonDocumentName, 
+                    lesson.IsPractice), 
+                    await GetItemColor(lesson)));
                 lock (_innerSectionsItemsLock)
-                {
-                    InnerSectionsItems.Add(item1);
-                }
+                {InnerSectionsItems.Add(item1);}
             }
             var item = new ExpanderLessonItemViewModel(_host);
             await Task.Run(() => item.Build(section.SectionHeader, InnerSectionsItems));
-
             lock (_sectionsLock)
-            {
-                Sections.Add(item);
-            }
+            { Sections.Add(item);}
         }
-
         IsLoaded = true;
     }
 
